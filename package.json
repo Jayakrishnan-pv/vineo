@@ -34,6 +34,7 @@
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",
     "@logtail/pino": "^0.5.0",
+    "@mui/icons-material": "^6.1.2",
     "@mui/material": "^6.1.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@sentry/nextjs": "^8.29.0",

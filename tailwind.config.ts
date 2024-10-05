@@ -11,6 +11,9 @@ export default {
       backgroundSize: {
         'image-size': '600px',
       },
+      color: {
+        'custom-color': '#F78A79',
+      },
     },
   },
   plugins: [],
