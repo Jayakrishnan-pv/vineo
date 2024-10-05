@@ -1,16 +1,17 @@
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
+'use client';
 
-export default function CenteredLayout(props: { children: React.ReactNode }) {
-  const { userId } = auth();
+import { Provider } from 'react-redux';
 
-  if (userId) {
-    redirect('/dashboard');
-  }
+import store from '@/store/store';
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      {props.children}
-    </div>
+    <html lang="en">
+      <body>
+        <Provider store={store}>
+          {children}
+        </Provider>
+      </body>
+    </html>
   );
 }
