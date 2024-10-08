@@ -1,4 +1,5 @@
 'use client';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -8,7 +9,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { useLoginMutation } from '@/store/store';
+import { useLoginMutation } from '@/app/redux/apiSlice';
 
 type FormData = {
   email: string;
@@ -29,7 +30,10 @@ const LoginForm: React.FC = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await login(data).unwrap();
+      const result = await login(data).unwrap();
+      localStorage.setItem('accessToken', result.accessToken);
+      localStorage.setItem('refreshToken', result.refreshToken);
+      console.log('Login successful');
     } catch (err) {
       console.error('Login failed', err);
     }
@@ -42,7 +46,7 @@ const LoginForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-center justify-center">
       <div className="mb-8 w-full">
-        <label htmlFor="email" className="block capitalize text-gray-600">
+        <label htmlFor="email" className="block text-sm capitalize text-gray-600">
           Email
         </label>
         <input
@@ -55,9 +59,8 @@ const LoginForm: React.FC = () => {
           <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
         )}
       </div>
-
-      <div className="mb-8 w-full">
-        <label htmlFor="password" className="block capitalize text-gray-600">
+      <div className="mb-4 w-full">
+        <label htmlFor="password" className="block text-sm capitalize text-gray-600">
           Password
         </label>
         <div className="relative">
@@ -79,14 +82,11 @@ const LoginForm: React.FC = () => {
           <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
         )}
       </div>
-
       {error && <p className="mb-4 text-sm text-red-500">Login failed. Please try again.</p>}
-
-      <div className="mb-10 flex w-full justify-between font-normal text-blue-950">
+      <div className="mb-10 flex w-full justify-between text-sm text-blue-950">
         <Link href="#" className="hover:underline">Remember Me</Link>
         <Link href="#" className="hover:underline">Forgot Password?</Link>
       </div>
-
       <button
         type="submit"
         disabled={isLoading}
@@ -94,7 +94,6 @@ const LoginForm: React.FC = () => {
       >
         {isLoading ? 'Logging in...' : 'Login'}
       </button>
-
       <Image src="/flat-color-icons_google.png" alt="Google Logo" width={30} height={30} className="mt-10" />
     </form>
   );
