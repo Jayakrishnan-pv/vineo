@@ -13,8 +13,8 @@ const LoginPage: React.FC = () => {
       </div>
       <div className="mr-10 rounded-2xl bg-white/80 p-20 shadow-[0px_0px_13px_1px_rgba(0,0,0,0.15)] lg:w-1/3">
         <div className="mb-16 text-center">
-          <h1 className="mb-8 text-2xl font-semibold text-blue-950">Welcome to vineo</h1>
-          <h2 className="text-2xl font-normal text-gray-800">Login</h2>
+          <h1 className="mb-8 text-2xl font-semibold text-blue-950">Welcome to Vineo</h1>
+          <h2 className="text-xl font-normal text-gray-800">Login</h2>
         </div>
         <LoginForm />
       </div>
