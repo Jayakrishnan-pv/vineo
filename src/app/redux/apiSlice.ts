@@ -1,21 +1,18 @@
-// store/apiSlice.ts
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-type LoginResponse = {
-  accessToken: string;
-  refreshToken: string;
-};
-
-type LoginRequest = {
-  email: string;
-  password: string;
-};
-
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://vineoback-gh-qa.caprover2.innogenio.com/graphql' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://vineoback-gh-qa.caprover2.innogenio.com/graphql',
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: builder => ({
-    login: builder.mutation<LoginResponse, LoginRequest>({
+    login: builder.mutation({
       query: credentials => ({
         url: '',
         method: 'POST',
@@ -31,9 +28,63 @@ export const api = createApi({
           variables: { payload: credentials },
         },
       }),
-      transformResponse: (response: { data: { userLogin: LoginResponse } }) => response.data.userLogin,
+      transformResponse: response => response.data.userLogin,
+    }),
+    getBoxHistory: builder.query({
+      query: payload => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            query BoxHistory($payload: BoxHistoryDto!) {
+              getBoxHistory(payload: $payload) {
+                box_count
+                boxes {
+                  box_id
+                  date
+                  wines {
+                    wine_id
+                    wine_name
+                    image
+                    pair_with
+                    philosophy
+                    about
+                    rating
+                    is_reviewed
+                    score
+                    area
+                    store
+                  }
+                }
+              }
+            }
+          `,
+          variables: { payload },
+        },
+      }),
+      transformResponse: response => response.data.getBoxHistory,
+    }),
+    getSubscriptionStatus: builder.query({
+      query: () => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            mutation getSubscriptionStatus {
+              getSubscriptionStatus {
+                status
+              }
+            }
+          `,
+        },
+      }),
+      transformResponse: response => response.data.getSubscriptionStatus,
     }),
   }),
 });
 
-export const { useLoginMutation } = api;
+export const {
+  useLoginMutation,
+  useGetBoxHistoryQuery,
+  useGetSubscriptionStatusQuery,
+} = api;

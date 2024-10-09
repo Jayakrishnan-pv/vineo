@@ -9,7 +9,11 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { useLoginMutation } from '@/app/redux/apiSlice';
+import {
+  useGetBoxHistoryQuery,
+  useGetSubscriptionStatusQuery,
+  useLoginMutation,
+} from '@/app/redux/apiSlice';
 
 type FormData = {
   email: string;
@@ -27,12 +31,24 @@ const LoginForm: React.FC = () => {
     resolver: yupResolver(schema),
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const { data: boxHistoryData, error: boxHistoryError } = useGetBoxHistoryQuery(
+    { page: 1, limit: 10 },
+    { skip: !loggedIn },
+  );
+
+  const { data: subscriptionStatusData, error: subscriptionStatusError } = useGetSubscriptionStatusQuery(
+    undefined,
+    { skip: !loggedIn },
+  );
 
   const onSubmit = async (data: FormData) => {
     try {
       const result = await login(data).unwrap();
       localStorage.setItem('accessToken', result.accessToken);
       localStorage.setItem('refreshToken', result.refreshToken);
+      setLoggedIn(true);
       console.log('Login successful');
     } catch (err) {
       console.error('Login failed', err);
@@ -42,6 +58,17 @@ const LoginForm: React.FC = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      if (boxHistoryData) {
+        console.log('Box History Data:', boxHistoryData);
+      }
+      if (subscriptionStatusData) {
+        console.log('Subscription Status:', subscriptionStatusData);
+      }
+    }
+  }, [loggedIn, boxHistoryData, subscriptionStatusData]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-center justify-center">
