@@ -1,8 +1,10 @@
+// apiSlice
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://vineoback-gh-qa.caprover2.innogenio.com/graphql',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('accessToken');
       if (token) {

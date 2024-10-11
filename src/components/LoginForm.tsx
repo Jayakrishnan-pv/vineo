@@ -1,3 +1,4 @@
+// LoginForm.tsx login form
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -5,6 +6,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -32,6 +34,7 @@ const LoginForm: React.FC = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
 
   const { data: boxHistoryData, error: boxHistoryError } = useGetBoxHistoryQuery(
     { page: 1, limit: 10 },
@@ -50,6 +53,7 @@ const LoginForm: React.FC = () => {
       localStorage.setItem('refreshToken', result.refreshToken);
       setLoggedIn(true);
       console.log('Login successful');
+      router.push('/userdashboard');
     } catch (err) {
       console.error('Login failed', err);
     }

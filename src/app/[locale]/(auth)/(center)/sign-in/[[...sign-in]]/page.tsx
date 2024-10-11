@@ -1,3 +1,4 @@
+// page.tsx home page
 import '@/styles/global.css';
 
 import Image from 'next/image';

@@ -1,22 +1,9 @@
-import { getTranslations } from 'next-intl/server';
+// page.tsx user-dashboard
 
-import { Hello } from '@/components/Hello';
-
-export async function generateMetadata(props: { params: { locale: string } }) {
-  const t = await getTranslations({
-    locale: props.params.locale,
-    namespace: 'Dashboard',
-  });
-
-  return {
-    title: t('meta_title'),
-  };
-}
-
-const Dashboard = () => (
-  <div className="[&_p]:my-6">
-    <Hello />
-  </div>
-);
+const Dashboard: React.FC = () => {
+  return (
+    <div>hello world</div>
+  );
+};
 
 export default Dashboard;

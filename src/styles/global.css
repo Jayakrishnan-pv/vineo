@@ -18,3 +18,11 @@
 * {
   font-family: 'Inter', sans-serif;
 }
+
+.custom-rating .MuiRating-iconFilled {
+  color: '#8C88A0';
+}
+
+.custom-rating .MuiRating-iconHover {
+  color: '#F78A79';
+}

@@ -1,4 +1,4 @@
-// store/store.ts
+// store.ts
 
 import { configureStore } from '@reduxjs/toolkit';
 
