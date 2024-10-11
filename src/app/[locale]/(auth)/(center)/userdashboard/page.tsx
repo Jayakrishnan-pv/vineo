@@ -1,36 +1,57 @@
 // page.tsx user-dashboard
+'use client';
+
 import { Button, Rating } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useGetBoxHistoryQuery, useGetSubscriptionStatusQuery } from '@/app/redux/apiSlice';
+
+type Wine = {
+  wine_id: number;
+  wine_name: string;
+  image: string;
+  winery: string;
+  region: string;
+  rating: number;
+};
 
 const Dashboard: React.FC = () => {
-  const data = [
-    {
-      src: '/assets/images/piedra_negra_torrontés-3.svg',
-      alt: 'bottle-1',
-      name: 'Piedra Negra',
-      winery: 'Lurton',
-      region: 'Mendoza, Argentina',
-      rating: 0,
-    },
-    {
-      src: '/assets/images/artuke-removebg-preview-1.svg',
-      alt: 'bottle-2',
-      name: 'Artuke',
-      winery: 'Bodega Artuke',
-      region: 'Rioja, España',
-      rating: 4,
-    },
-    {
-      src: '/assets/images/casilla_del_guapo-3.svg',
-      alt: 'bottle-3',
-      name: 'Casilla Dei Guapo',
-      winery: 'Gran Feudo',
-      region: 'Navarra, España',
-      rating: 0,
-    },
-  ];
+  const [userData, setUserData] = useState({
+    name: 'User',
+    vineoCoins: 0,
+    subscriptionStatus: 0,
+  });
+  const [wineData, setWineData] = useState<Wine[]>([]);
+
+  const { data: boxHistoryData, error: boxHistoryError } = useGetBoxHistoryQuery({ page: 1, limit: 10 });
+  const { data: subscriptionStatusData, error: subscriptionStatusError } = useGetSubscriptionStatusQuery();
+
+  useEffect(() => {
+    if (boxHistoryData && subscriptionStatusData) {
+      setUserData(prevData => ({
+        ...prevData,
+        subscriptionStatus: subscriptionStatusData.status,
+      }));
+
+      if (boxHistoryData.boxes && boxHistoryData.boxes.length > 0) {
+        const latestBox = boxHistoryData.boxes[0];
+        setWineData(latestBox.wines.map((wine: Wine) => ({
+          wine_id: wine.wine_id,
+          wine_name: wine.wine_name,
+          image: wine.image,
+          winery: wine.winery || 'Unknown Winery',
+          region: wine.region || 'Unknown Region',
+          rating: wine.rating || 0,
+        })));
+      }
+    }
+  }, [boxHistoryData, subscriptionStatusData]);
+
+  if (boxHistoryError || subscriptionStatusError) {
+    return <div>Error loading data</div>;
+  }
 
   return (
     <div className="flex min-h-screen flex-row bg-gray-100 text-gray-800">
@@ -91,8 +112,11 @@ const Dashboard: React.FC = () => {
                   <Image src="/assets/images/logo/coin.svg" alt="home icon" width={25} height={25} className="" />
                 </div>
                 <div>
-                  <div className="ml-3 text-gray-600">Carios Bernabeu</div>
-                  <div className="ml-3 block text-xs text-gray-400">400 Vineo Coins</div>
+                  <div className="ml-3 text-gray-600">{userData.name}</div>
+                  <div className="ml-3 block text-xs text-gray-400">
+                    Subscription Status:
+                    {userData.subscriptionStatus}
+                  </div>
                 </div>
               </Link>
             </li>
@@ -112,19 +136,19 @@ const Dashboard: React.FC = () => {
               <div className="">
                 <div className="flex flex-col text-center md:flex-row">
                   <div className="m-5 flex grow flex-col rounded-xl py-4 shadow-2xl md:flex-row">
-                    {data.map(rec => (
-                      <div key={rec.alt} className="flex grow flex-col items-center">
+                    {wineData.map(wine => (
+                      <div key={wine.wine_id} className="flex grow flex-col items-center">
                         <Image
-                          src={rec.src}
-                          alt={rec.alt}
+                          src={wine.image}
+                          alt={`${wine.wine_name} bottle`}
                           width={100}
                           height={100}
                           className="size-48 object-contain"
                         />
-                        <div className="text-red-400">{rec.name}</div>
-                        <div className="mt-5 text-sm text-gray-400">{rec.winery}</div>
-                        <div className="mb-5 text-sm text-gray-400">{rec.region}</div>
-                        <Rating name="read-only" value={rec.rating} readOnly className="custom-rating " />
+                        <div className="text-red-400">{wine.wine_name}</div>
+                        <div className="mt-5 text-sm text-gray-400">{wine.winery}</div>
+                        <div className="mb-5 text-sm text-gray-400">{wine.region}</div>
+                        <Rating name="read-only" value={wine.rating} readOnly className="custom-rating" />
                       </div>
                     ))}
                   </div>
@@ -134,7 +158,7 @@ const Dashboard: React.FC = () => {
                       alt="graph"
                       width={300}
                       height={300}
-                      className=" object-contain"
+                      className="object-contain"
                     />
                   </div>
                 </div>
@@ -146,7 +170,6 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

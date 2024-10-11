@@ -27,6 +27,9 @@ export default withSentryConfig(
       experimental: {
         serverComponentsExternalPackages: ['@electric-sql/pglite'],
       },
+      images: {
+        domains: ['minio-api.srv.vineowines.com'],
+      },
     }),
   ),
   {
