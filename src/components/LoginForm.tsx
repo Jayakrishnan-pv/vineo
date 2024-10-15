@@ -16,6 +16,7 @@ import {
   useGetSubscriptionStatusQuery,
   useLoginMutation,
 } from '@/app/redux/apiSlice';
+import { IMAGES } from '@/constants/page';
 
 type FormData = {
   email: string;
@@ -37,7 +38,7 @@ const LoginForm: React.FC = () => {
   const router = useRouter();
 
   const { data: boxHistoryData, error: boxHistoryError } = useGetBoxHistoryQuery(
-    { page: 1, limit: 10 },
+    { page: 1, limit: 4 },
     { skip: !loggedIn },
   );
 
@@ -125,7 +126,7 @@ const LoginForm: React.FC = () => {
       >
         {isLoading ? 'Logging in...' : 'Login'}
       </button>
-      <Image src="/flat-color-icons_google.png" alt="Google Logo" width={30} height={30} className="mt-10" />
+      <Image src={IMAGES.google} alt="Google Logo" width={30} height={30} className="mt-10" />
     </form>
   );
 };

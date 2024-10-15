@@ -7,6 +7,7 @@ export default {
       backgroundImage: {
         'glass-bottle': 'url(\'/assets/images/glass-bottle.png\')',
         'vineo-logo': 'url(\'/assets/images/vineo-logo.svg\')',
+        'home-background': 'url(\'/Bannerr (3) 2.png\')',
       },
       backgroundSize: {
         'image-size': '600px',
