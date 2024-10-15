@@ -26,3 +26,7 @@
 .custom-rating .MuiRating-iconHover {
   color: '#F78A79';
 }
+
+.btn {
+  background: '#F78A79';
+}
