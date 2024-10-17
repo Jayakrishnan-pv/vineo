@@ -1,7 +1,10 @@
 // page.tsx user-dashboard
 'use client';
 
-import { Button, Rating } from '@mui/material';
+import '@/styles/global.css';
+
+import { Rating } from '@mui/material';
+import Lenis from '@studio-freight/lenis';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -70,6 +73,29 @@ const Dashboard: React.FC = () => {
     }
   }, [boxHistoryData, subscriptionStatusData]);
 
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 2,
+      easing: t => Math.min(1, 1.001 - 2 ** (-10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   const wineGroups = wineData.reduce((resultArray, item, index) => {
     const chunkIndex = Math.floor(index / 3);
     if (!resultArray[chunkIndex]) {
@@ -80,7 +106,8 @@ const Dashboard: React.FC = () => {
   }, [] as Wine[][]);
 
   return (
-    <div className="flex min-h-screen flex-row bg-gray-100 text-gray-800">
+    // Side Bar
+    <div className="flex min-h-screen flex-row scroll-smooth bg-gray-100 text-gray-800 transition-transform delay-75 duration-150 ease-in">
       <div className="fixed h-5/6 w-64 -translate-x-full rounded-2xl bg-white pb-3 transition-transform duration-150 ease-in md:m-10 md:translate-x-0 md:shadow-2xl">
         <div className="flex items-center justify-center py-4">
           <div className="mt-5 inline-flex">
@@ -197,7 +224,7 @@ const Dashboard: React.FC = () => {
                       </div>
                     </div>
                     <div className="mt-4 flex justify-center">
-                      <Button variant="contained" className="btn my-10 rounded-xl bg-red-400 px-10">Send this box home to me!</Button>
+                      <button type="submit" className="btn my-10 rounded-xl px-10 py-4 text-white">Send this box home to me!</button>
                     </div>
                   </div>
                 </div>

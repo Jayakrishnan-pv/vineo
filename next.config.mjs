@@ -28,7 +28,12 @@ export default withSentryConfig(
         serverComponentsExternalPackages: ['@electric-sql/pglite'],
       },
       images: {
-        domains: ['minio-api.srv.vineowines.com'],
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'minio-api.srv.vineowines.com',
+          },
+        ],
       },
     }),
   ),

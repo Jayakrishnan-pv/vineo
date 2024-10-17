@@ -20,13 +20,13 @@
 }
 
 .custom-rating .MuiRating-iconFilled {
-  color: '#8C88A0';
+  color: #f78a79;
 }
 
 .custom-rating .MuiRating-iconHover {
-  color: '#F78A79';
+  color: #f78a79;
 }
 
 .btn {
-  background: '#F78A79';
+  background-color: #f78a79;
 }

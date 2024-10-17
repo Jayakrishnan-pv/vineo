@@ -1,3 +1,5 @@
+import '@/styles/global.css';
+
 import { enUS, frFR } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
 

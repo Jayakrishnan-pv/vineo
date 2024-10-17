@@ -15,6 +15,9 @@ export default {
       color: {
         'custom-color': '#F78A79',
       },
+      // animationTimingFunction: {
+      //   'custom-ease': 'cubic-bezier(0.25, 0.8, 0.25, 1)',
+      // },
     },
   },
   plugins: [],

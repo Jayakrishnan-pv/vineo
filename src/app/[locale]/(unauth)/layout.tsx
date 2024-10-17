@@ -1,3 +1,5 @@
+import '@/styles/global.css';
+
 import { unstable_setRequestLocale } from 'next-intl/server';
 
 export default function Layout(props: {
