@@ -5,7 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 
 import LoginForm from '@/components/LoginForm';
-import { IMAGES } from '@/constants/page';
+import { IMAGES } from '@/constants/ImageConstants';
 
 const LoginPage: React.FC = () => {
   return (

@@ -16,7 +16,7 @@ import {
   useGetSubscriptionStatusQuery,
   useLoginMutation,
 } from '@/app/redux/apiSlice';
-import { IMAGES } from '@/constants/page';
+import { IMAGES } from '@/constants/ImageConstants';
 
 type FormData = {
   email: string;

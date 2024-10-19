@@ -30,3 +30,26 @@
 .btn {
   background-color: #f78a79;
 }
+
+body {
+  scrollbar-width: thin;
+  transition: padding-right 0.3s ease;
+}
+
+body.scrolling {
+  scrollbar-width: auto;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+body.scrolling::-webkit-scrollbar {
+  width: 5px;
+}
+
+body.scrolling::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}

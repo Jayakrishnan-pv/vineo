@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import { IMAGES } from '@/constants/page';
+import { IMAGES } from '@/constants/ImageConstants';
 
 const HomePage = () => {
   const router = useRouter();
