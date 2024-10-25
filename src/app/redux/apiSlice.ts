@@ -5,17 +5,12 @@ const baseQueryWithAuth = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('accessToken');
-    // const token = localStorage.setItem('accessToken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE0MSwiZW1haWwiOiJzaXlhZHJhaG1hbjVAZ21haWwuY29tIiwicm9sZUlkIjoxMCwidmVyc2lvbiI6MSwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3Mjk1OTU2NjksImV4cCI6MTcyOTU5OTI2OX0.K8q8YG6ihy_q4XkGwqW_Vz_0bKMy2DaOnBxSX6n6Ilo');
-    // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE0MSwiZW1haWwiOiJzaXlhZHJhaG1hbjVAZ21haWwuY29tIiwicm9sZUlkIjoxMCwidmVyc2lvbiI6MSwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3Mjk1OTU2NjksImV4cCI6MTcyOTU5OTI2OX0.K8q8YG6ihy_q4XkGwqW_Vz_0bKMy2DaOnBxSX6n6Ilo';
-    console.log('header token', token);
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
     return headers;
   },
 });
-
-// console.log('1.Current tokens:', 'accessToken:', localStorage.getItem('accessToken'));
 
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
@@ -25,18 +20,22 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQueryWithAuth(args, api, extraOptions);
   console.log('Initial API Response:', result);
 
-  const hasAuthError = result?.data?.errors?.some(
-    error => error?.extensions?.response?.statusCode === 401,
+  // Improved error detection
+  const hasAuthError = (
+    result.error?.status === 401 // Check for HTTP 401
+    || result?.data?.errors?.some(
+      (error: any) =>
+        error?.extensions?.response?.statusCode === 401
+        || error?.message?.includes('Unauthorized')
+        || error?.message?.includes('invalid token'),
+    )
   );
 
   if (hasAuthError) {
-    console.log('Detected 401 error, attempting token refresh');
+    console.log('Detected auth error, attempting token refresh');
 
     const accessToken = localStorage.getItem('accessToken');
-    // const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE0MSwiZW1haWwiOiJzaXlhZHJhaG1hbjVAZ21haWwuY29tIiwicm9sZUlkIjoxMCwidmVyc2lvbiI6MSwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3Mjk1OTU2NjksImV4cCI6MTcyOTU5OTI2OX0.K8q8YG6ihy_q4XkGwqW_Vz_0bKMy2DaOnBxSX6n6Ilo';
     const refreshToken = localStorage.getItem('refreshToken');
-
-    console.log('1.Current tokens:', 'accessToken:', accessToken, 'refreshToken:', refreshToken);
 
     if (accessToken && refreshToken) {
       try {
@@ -63,30 +62,54 @@ const baseQueryWithReauth: BaseQueryFn<
           extraOptions,
         );
 
-        console.log('2.Refresh token response:', refreshResult);
-        if (refreshResult.data?.data?.getAccessToken) {
-          const { accessToken: newAccessToken, refreshToken: newRefreshToken }
-            = refreshResult.data.data.getAccessToken;
+        console.log('Refresh token response:', refreshResult);
 
-          console.log('3.Received new tokens:', 'newaccessToken', newAccessToken, 'newrefreshToken', newRefreshToken);
+        // Improved response handling
+        const newTokens = refreshResult.data?.data?.getAccessToken;
 
-          localStorage.setItem('accessToken', newAccessToken);
-          localStorage.setItem('refreshToken', newRefreshToken);
+        if (newTokens?.accessToken && newTokens?.refreshToken) {
+          console.log('Received new tokens, updating storage');
 
-          console.log('new access token inside localstorage', localStorage.getItem(accessToken));
+          localStorage.setItem('accessToken', newTokens.accessToken);
+          localStorage.setItem('refreshToken', newTokens.refreshToken);
 
-          console.log('4.Retrying original request with new token');
-          result = await baseQueryWithAuth(args, api, extraOptions);
-          console.log('5.Retry result:', result);
+          // Update the authorization header for the retry
+          const newArgs = {
+            ...args,
+            headers: new Headers(args instanceof Object ? args.headers : undefined),
+          };
+          if (newArgs.headers instanceof Headers) {
+            newArgs.headers.set('authorization', `Bearer ${newTokens.accessToken}`);
+          }
+
+          console.log('Retrying original request with new token');
+          result = await baseQueryWithAuth(newArgs, api, extraOptions);
+
+          console.log('Retry result:', result);
+          return result;
         } else {
-          console.log('6.Failed to get new tokens from refresh response');
-          // localStorage.removeItem('accessToken');
-          // localStorage.removeItem('refreshToken');
+          console.log('Failed to get new tokens from refresh response');
+          // Clear tokens if refresh failed
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          return {
+            error: {
+              status: 401,
+              data: { message: 'Refresh token failed' },
+            },
+          };
         }
       } catch (error) {
         console.error('Error during token refresh:', error);
-        // localStorage.removeItem('accessToken');
-        // localStorage.removeItem('refreshToken');
+        // Clear tokens on error
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        return {
+          error: {
+            status: 401,
+            data: { message: 'Token refresh failed' },
+          },
+        };
       }
     }
   }
@@ -94,7 +117,7 @@ const baseQueryWithReauth: BaseQueryFn<
   return result;
 };
 
-// Create the API slice with the new base query
+// Rest of your API slice remains the same
 export const api = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({

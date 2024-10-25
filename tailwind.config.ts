@@ -18,6 +18,9 @@ export default {
       height: {
         '90p': '93%',
       },
+      width: {
+        '2k': '2000px',
+      },
       screens: {
         'lg-c': '1280px',
         'md-c': '860px',

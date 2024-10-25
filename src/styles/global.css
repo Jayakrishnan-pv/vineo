@@ -56,11 +56,22 @@ body.scrolling::-webkit-scrollbar-thumb {
 
 // swiper
 
-.swiper-pagination-bullet {
-  background: #ef4444 !important; /* matches text-red-400 */
+.wine-slider .slick-dots {
+  bottom: -20px;
+  margin-bottom: 10px;
 }
 
-.swiper-pagination {
-  position: relative !important;
-  margin-top: 20px !important;
+.wine-slider .slick-dots li button:before {
+  font-size: 8px;
+  color: #f87171; /* red-400 */
+}
+
+.wine-slider .slick-dots li.slick-active button:before {
+  color: #ef4444; /* red-500 */
+}
+
+/* Remove default arrows if you don't want them */
+.wine-slider .slick-prev,
+.wine-slider .slick-next {
+  display: none !important;
 }
