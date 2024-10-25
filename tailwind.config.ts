@@ -15,9 +15,14 @@ export default {
       color: {
         'custom-color': '#F78A79',
       },
-      // animationTimingFunction: {
-      //   'custom-ease': 'cubic-bezier(0.25, 0.8, 0.25, 1)',
-      // },
+      height: {
+        '90p': '93%',
+      },
+      screens: {
+        'lg-c': '1280px',
+        'md-c': '860px',
+        'sm-c': '300px',
+      },
     },
   },
   plugins: [],

@@ -1,4 +1,7 @@
-// app/user-dashboard/page.tsx
+// result?.data.errors[0]?.extensions?.response?.statusCode
+// access token
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE0MSwiZW1haWwiOiJzaXlhZHJhaG1hbjVAZ21haWwuY29tIiwicm9sZUlkIjoxMCwidmVyc2lvbiI6MSwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3Mjk1OTU2NjksImV4cCI6MTcyOTU5OTI2OX0.K8q8YG6ihy_q4XkGwqW_Vz_0bKMy2DaOnBxSX6n6Ilo
+// response {"errors":[{"message":"Unauthorized","extensions":{"code":"UNAUTHENTICATED","response":{"statusCode":401,"message":"Unauthorized"}}}],"data":null}
 'use client';
 
 import '@/styles/global.css';
@@ -28,46 +31,57 @@ const Dashboard: React.FC = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const { data: boxHistoryData, isFetching } = useGetBoxHistoryQuery({ page, limit: 4 });
+  const { data: boxHistoryData, isFetching: boxFetching } = useGetBoxHistoryQuery({ page, limit: 4 });
   const { data: subscriptionStatusData } = useGetSubscriptionStatusQuery();
 
   const observer = useRef<IntersectionObserver | null>(null);
   const lastWineElementRef = useCallback((node: HTMLDivElement | null) => {
-    if (isFetching) {
+    if (boxFetching) {
       return;
     }
     if (observer.current) {
       observer.current.disconnect();
     }
+
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && hasMore) {
         setPage(prevPage => prevPage + 1);
       }
     });
+
     if (node) {
       observer.current.observe(node);
     }
-  }, [isFetching, hasMore]);
+  }, [boxFetching, hasMore]);
 
   useEffect(() => {
-    if (boxHistoryData?.boxes && subscriptionStatusData) {
-      setUserData(prevData => ({
-        ...prevData,
-        subscriptionStatus: subscriptionStatusData.status,
-      }));
+    const fetchData = async () => {
+      try {
+        if (boxHistoryData?.boxes) {
+          console.log('value', boxHistoryData?.boxes);
+          const newWines = boxHistoryData.boxes.flatMap((box: any) =>
+            box.wines.map((wine: Wine) => ({
+              ...wine,
+              store: wine.store || 'Unknown Store',
+              area: wine.area || 'Unknown Area',
+              rating: wine.rating || 0,
+            })),
+          );
+          setWineData(prevWines => [...prevWines, ...newWines]);
+          setHasMore(newWines.length > 0);
+        }
+        if (subscriptionStatusData) {
+          setUserData(prevData => ({
+            ...prevData,
+            subscriptionStatus: subscriptionStatusData.status,
+          }));
+        }
+      } catch (error: any) {
+        console.log('An error occurred while fetching data:', error);
+      }
+    };
 
-      const newWines = boxHistoryData.boxes.flatMap((box: any) =>
-        box.wines.map((wine: Wine) => ({
-          ...wine,
-          store: wine.store || 'Unknown Store',
-          area: wine.area || 'Unknown Area',
-          rating: wine.rating || 0,
-        })),
-      );
-
-      setWineData(prevWines => [...prevWines, ...newWines]);
-      setHasMore(newWines.length > 0);
-    }
+    fetchData();
   }, [boxHistoryData, subscriptionStatusData]);
 
   const wineGroups = wineData.reduce((resultArray, item, index) => {
@@ -82,7 +96,6 @@ const Dashboard: React.FC = () => {
   return (
     <div className="flex min-h-screen flex-row scroll-smooth bg-gray-100 text-gray-800 transition-transform delay-75 duration-150 ease-in">
       <Sidebar name={userData.name} subscriptionStatus={userData.subscriptionStatus} />
-
       <div className="ml-72 w-full">
         <div className="-ml-64 flex grow flex-col transition-all duration-150 ease-in md:ml-0">
           <div className="flex grow flex-col p-4">
@@ -91,8 +104,8 @@ const Dashboard: React.FC = () => {
                 <WineBox wines={wineGroup} setNumber={groupIndex + 1} />
               </div>
             ))}
-            {isFetching && (
-              <div className="flex w-full items-center justify-center p-4">
+            {boxFetching && (
+              <div className="flex h-screen w-full items-center justify-center p-4">
                 <div className="size-8 animate-spin rounded-full border-b-2 border-gray-900"></div>
               </div>
             )}

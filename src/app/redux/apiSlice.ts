@@ -1,71 +1,100 @@
+import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const baseQuery = fetchBaseQuery({
+const baseQueryWithAuth = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('accessToken');
+    // const token = localStorage.setItem('accessToken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE0MSwiZW1haWwiOiJzaXlhZHJhaG1hbjVAZ21haWwuY29tIiwicm9sZUlkIjoxMCwidmVyc2lvbiI6MSwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3Mjk1OTU2NjksImV4cCI6MTcyOTU5OTI2OX0.K8q8YG6ihy_q4XkGwqW_Vz_0bKMy2DaOnBxSX6n6Ilo');
+    // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE0MSwiZW1haWwiOiJzaXlhZHJhaG1hbjVAZ21haWwuY29tIiwicm9sZUlkIjoxMCwidmVyc2lvbiI6MSwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3Mjk1OTU2NjksImV4cCI6MTcyOTU5OTI2OX0.K8q8YG6ihy_q4XkGwqW_Vz_0bKMy2DaOnBxSX6n6Ilo';
+    console.log('header token', token);
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
-      console.log('Using existing access token:', token);
-    } else {
-      console.log('No access token found in localStorage');
     }
     return headers;
   },
 });
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
-  // eslint-disable-next-line no-console
-  console.log('Access token expired or invalid. Attempting to refresh...', result?.error.status);
-  if (result.error && result.error.status === 401) {
-    console.log('Access token expired or invalid. Attempting to refresh...', result.error.status);
+// console.log('1.Current tokens:', 'accessToken:', localStorage.getItem('accessToken'));
 
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  let result = await baseQueryWithAuth(args, api, extraOptions);
+  console.log('Initial API Response:', result);
+
+  const hasAuthError = result?.data?.errors?.some(
+    error => error?.extensions?.response?.statusCode === 401,
+  );
+
+  if (hasAuthError) {
+    console.log('Detected 401 error, attempting token refresh');
+
+    const accessToken = localStorage.getItem('accessToken');
+    // const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE0MSwiZW1haWwiOiJzaXlhZHJhaG1hbjVAZ21haWwuY29tIiwicm9sZUlkIjoxMCwidmVyc2lvbiI6MSwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3Mjk1OTU2NjksImV4cCI6MTcyOTU5OTI2OX0.K8q8YG6ihy_q4XkGwqW_Vz_0bKMy2DaOnBxSX6n6Ilo';
     const refreshToken = localStorage.getItem('refreshToken');
-    if (!refreshToken) {
-      console.log('No refresh token available, unable to re-authenticate.');
-      return result;
-    }
 
-    const refreshResult = await baseQuery(
-      {
-        url: '',
-        method: 'POST',
-        body: {
-          query: `
-            query getAccessTokenFromRefresh($refresh: String!) {
-              getAccessToken(refreshToken: $refresh) {
-                accessToken
-                refreshToken
-              }
-            }
-          `,
-          variables: { refresh: refreshToken },
-        },
-      },
-      api,
-      extraOptions,
-    );
+    console.log('1.Current tokens:', 'accessToken:', accessToken, 'refreshToken:', refreshToken);
 
-    if (refreshResult.data) {
-      const newAccessToken = refreshResult.data.data.getAccessToken.accessToken;
-      const newRefreshToken = refreshResult.data.data.getAccessToken.refreshToken;
+    if (accessToken && refreshToken) {
+      try {
+        const refreshResult = await baseQueryWithAuth(
+          {
+            url: '',
+            method: 'POST',
+            body: {
+              query: `
+                query getAccessTokenFromRefresh($access: String!, $refresh: String!) {
+                  getAccessToken(accessToken: $access, refreshToken: $refresh) {
+                    accessToken
+                    refreshToken
+                  }
+                }
+              `,
+              variables: {
+                access: accessToken,
+                refresh: refreshToken,
+              },
+            },
+          },
+          api,
+          extraOptions,
+        );
 
-      console.log('New access token generated:', newAccessToken);
-      console.log('New refresh token generated:', newRefreshToken);
+        console.log('2.Refresh token response:', refreshResult);
+        if (refreshResult.data?.data?.getAccessToken) {
+          const { accessToken: newAccessToken, refreshToken: newRefreshToken }
+            = refreshResult.data.data.getAccessToken;
 
-      localStorage.setItem('accessToken', newAccessToken);
-      localStorage.setItem('refreshToken', newRefreshToken);
+          console.log('3.Received new tokens:', 'newaccessToken', newAccessToken, 'newrefreshToken', newRefreshToken);
 
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      console.log('Unable to generate new access token.');
+          localStorage.setItem('accessToken', newAccessToken);
+          localStorage.setItem('refreshToken', newRefreshToken);
+
+          console.log('new access token inside localstorage', localStorage.getItem(accessToken));
+
+          console.log('4.Retrying original request with new token');
+          result = await baseQueryWithAuth(args, api, extraOptions);
+          console.log('5.Retry result:', result);
+        } else {
+          console.log('6.Failed to get new tokens from refresh response');
+          // localStorage.removeItem('accessToken');
+          // localStorage.removeItem('refreshToken');
+        }
+      } catch (error) {
+        console.error('Error during token refresh:', error);
+        // localStorage.removeItem('accessToken');
+        // localStorage.removeItem('refreshToken');
+      }
     }
   }
 
   return result;
 };
 
+// Create the API slice with the new base query
 export const api = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({

@@ -13,23 +13,22 @@ type Wine = {
   area: string;
   rating: number;
 };
-
 type WineBoxProps = {
   wines: Wine[];
   setNumber: number;
 };
-
 const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
   return (
     <div className="m-5 rounded-2xl border-2 bg-white p-4 shadow-2xl md:m-2">
       <div>
         <div className="m-5 text-xl">
           Your recommendations - Set
+          {' '}
           {setNumber}
         </div>
         <div className="">
-          <div className="flex flex-col text-center md:flex-row">
-            <div className="m-5 flex grow flex-col rounded-xl py-4 shadow-2xl md:flex-row">
+          <div className="flex flex-col text-center lg-c:flex-row">
+            <div id="wine" className="m-5 flex grow flex-col rounded-xl py-4 shadow-2xl sm-c:flex-row">
               {wines.map(wine => (
                 <div key={wine.wine_id} className="flex grow flex-col items-center">
                   <Image
@@ -46,7 +45,7 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
                 </div>
               ))}
             </div>
-            <div className="my-5 flex grow flex-col rounded-xl shadow-2xl">
+            <div className="my-5 flex grow justify-center rounded-xl shadow-2xl">
               <Image
                 src={IMAGES.graph}
                 alt="graph"
@@ -66,5 +65,4 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
     </div>
   );
 };
-
 export default WineBox;

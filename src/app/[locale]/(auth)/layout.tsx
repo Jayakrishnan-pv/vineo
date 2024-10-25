@@ -6,8 +6,11 @@ import { enUS, frFR } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
 import Lenis from '@studio-freight/lenis';
 import { useEffect } from 'react';
+import { register } from 'swiper/element/bundle';
 
 import { AppConfig } from '@/utils/AppConfig';
+
+register();
 
 export default function AuthLayout(props: {
   children: React.ReactNode;
