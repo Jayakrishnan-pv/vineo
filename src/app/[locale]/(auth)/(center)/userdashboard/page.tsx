@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
 
   const { data: boxHistoryData, isFetching: boxFetching } = useGetBoxHistoryQuery({ page, limit: 4 });
   const { data: subscriptionStatusData } = useGetSubscriptionStatusQuery();
-
+  console.log('box history data', boxHistoryData);
   const observer = useRef<IntersectionObserver | null>(null);
   const lastWineElementRef = useCallback((node: HTMLDivElement | null) => {
     if (boxFetching) {
@@ -94,11 +94,11 @@ const Dashboard: React.FC = () => {
   }, [] as Wine[][]);
 
   return (
-    <div className="flex flex-row scroll-smooth bg-gray-100 text-gray-800 transition-transform delay-75 duration-150 ease-in">
+    <div className="flex flex-row scroll-smooth bg-gray-100 text-gray-800 transition-transform delay-75 duration-150 ease-in ">
       <Sidebar name={userData.name} subscriptionStatus={userData.subscriptionStatus} />
       <div className="ml-72 w-full">
-        <div className="-ml-64 flex flex-col transition-all duration-150 ease-in md:ml-0">
-          <div className="flex w-full flex-col p-4">
+        <div className="-ml-64 flex flex-col transition-all duration-150 ease-in md:ml-0 md:mt-5">
+          <div className="flex w-full flex-col px-4">
             {wineGroups.map((wineGroup, groupIndex) => (
               <div key={groupIndex} ref={groupIndex === wineGroups.length - 1 ? lastWineElementRef : null}>
                 <WineBox wines={wineGroup} setNumber={groupIndex + 1} />

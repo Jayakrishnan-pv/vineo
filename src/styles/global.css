@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @font-face {
   font-family: 'Inter';
   src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
@@ -17,8 +18,10 @@
 
 * {
   font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
 }
 
+/* Rating styles */
 .custom-rating .MuiRating-iconFilled {
   color: #f78a79;
 }
@@ -27,10 +30,12 @@
   color: #f78a79;
 }
 
+/* Button styles */
 .btn {
   background-color: #f78a79;
 }
 
+/* Scrollbar styles */
 body {
   scrollbar-width: thin;
   transition: padding-right 0.3s ease;
@@ -52,26 +57,4 @@ body.scrolling::-webkit-scrollbar {
 body.scrolling::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
-}
-
-// swiper
-
-.wine-slider .slick-dots {
-  bottom: -20px;
-  margin-bottom: 10px;
-}
-
-.wine-slider .slick-dots li button:before {
-  font-size: 8px;
-  color: #f87171; /* red-400 */
-}
-
-.wine-slider .slick-dots li.slick-active button:before {
-  color: #ef4444; /* red-500 */
-}
-
-/* Remove default arrows if you don't want them */
-.wine-slider .slick-prev,
-.wine-slider .slick-next {
-  display: none !important;
 }

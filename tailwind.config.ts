@@ -20,6 +20,8 @@ export default {
       },
       width: {
         '2k': '2000px',
+        'tab': '1000px',
+
       },
       screens: {
         'lg-c': '1280px',

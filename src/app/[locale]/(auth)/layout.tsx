@@ -71,14 +71,16 @@ export default function AuthLayout(props: {
   }, []);
 
   return (
-    <ClerkProvider
-      localization={clerkLocale}
-      signInUrl={signInUrl}
-      signUpUrl={signUpUrl}
-      signInFallbackRedirectUrl={dashboardUrl}
-      signUpFallbackRedirectUrl={dashboardUrl}
-    >
-      {props.children}
-    </ClerkProvider>
+    <div>
+      <ClerkProvider
+        localization={clerkLocale}
+        signInUrl={signInUrl}
+        signUpUrl={signUpUrl}
+        signInFallbackRedirectUrl={dashboardUrl}
+        signUpFallbackRedirectUrl={dashboardUrl}
+      >
+        {props.children}
+      </ClerkProvider>
+    </div>
   );
 }
