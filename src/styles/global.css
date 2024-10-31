@@ -58,3 +58,16 @@ body.scrolling::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
+
+.custom-swiper .swiper-pagination-bullet {
+  background-color: #f78a79;
+  margin-bottom: -10px;
+}
+
+.custom-swiper .swiper-pagination-bullet-active {
+  background-color: #f78a79;
+}
+
+.swiper-pagination-bullets {
+  margin-bottom: -10px;
+}

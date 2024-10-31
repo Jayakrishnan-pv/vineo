@@ -17,9 +17,9 @@ const HomePage = () => {
 
   const Btnstyle = {
     backgroundColor: '#f87171',
-    marginY: '30px', // Equivalent to `my-10`
-    borderRadius: '10px', // Equivalent to `rounded-xl`
-    paddingLeft: '40px', // Equivalent to `px-10`
+    marginY: '30px',
+    borderRadius: '10px',
+    paddingLeft: '40px',
     paddingRight: '40px',
   };
   return (

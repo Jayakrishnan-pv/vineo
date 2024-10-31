@@ -26,7 +26,7 @@ export default {
       screens: {
         'lg-c': '1280px',
         'md-c': '860px',
-        'sm-c': '300px',
+        'sm-c': '500px',
       },
     },
   },

@@ -20,9 +20,8 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQueryWithAuth(args, api, extraOptions);
   console.log('Initial API Response:', result);
 
-  // Improved error detection
   const hasAuthError = (
-    result.error?.status === 401 // Check for HTTP 401
+    result.error?.status === 401
     || result?.data?.errors?.some(
       (error: any) =>
         error?.extensions?.response?.statusCode === 401
@@ -64,7 +63,6 @@ const baseQueryWithReauth: BaseQueryFn<
 
         console.log('Refresh token response:', refreshResult);
 
-        // Improved response handling
         const newTokens = refreshResult.data?.data?.getAccessToken;
 
         if (newTokens?.accessToken && newTokens?.refreshToken) {
@@ -73,7 +71,6 @@ const baseQueryWithReauth: BaseQueryFn<
           localStorage.setItem('accessToken', newTokens.accessToken);
           localStorage.setItem('refreshToken', newTokens.refreshToken);
 
-          // Update the authorization header for the retry
           const newArgs = {
             ...args,
             headers: new Headers(args instanceof Object ? args.headers : undefined),
@@ -89,7 +86,6 @@ const baseQueryWithReauth: BaseQueryFn<
           return result;
         } else {
           console.log('Failed to get new tokens from refresh response');
-          // Clear tokens if refresh failed
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
           return {
@@ -101,7 +97,6 @@ const baseQueryWithReauth: BaseQueryFn<
         }
       } catch (error) {
         console.error('Error during token refresh:', error);
-        // Clear tokens on error
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         return {
@@ -117,7 +112,38 @@ const baseQueryWithReauth: BaseQueryFn<
   return result;
 };
 
-// Rest of your API slice remains the same
+type BoxWine = {
+  id: string;
+  name: string;
+  box_count: number;
+};
+
+type UserInfo = {
+  id: string;
+  email: string;
+  name: string;
+  phone: string;
+  house: string;
+  city: string;
+  country: string;
+  zipcode: string;
+};
+
+type AdminBox = {
+  id: string;
+  user: UserInfo;
+  created_at: string;
+  delivery_date: string;
+  status: string;
+  box_type: string;
+  box_wines: BoxWine[];
+};
+
+type BoxHistoryAdminResponse = {
+  total: number;
+  boxes: AdminBox[];
+};
+
 export const api = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
@@ -173,6 +199,50 @@ export const api = createApi({
       }),
       transformResponse: response => response.data.getBoxHistory,
     }),
+    getBoxHistoryAdmin: builder.query({
+      query: ({ searchString, page, pageSize }) => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            query getBoxHistoryAdmin($searchString: String!, $page: Float!, $pageSize: Float!) {
+              getBoxHistoryAdmin(
+                searchString: $searchString
+                page: $page
+                pageSize: $pageSize
+              ) {
+                total
+                boxes {
+                  _id
+                  user {
+                    _id
+                    email
+                    name
+                    phone
+                    house
+                    city
+                    country
+                    zipcode
+                  }
+                  created_at
+                  delivery_date
+                  status
+                  box_type
+                  box_wines {
+                    _id
+                    name
+                    box_count
+                  }
+                }
+              }
+            }
+          `,
+          variables: { searchString, page, pageSize },
+        },
+      }),
+      transformResponse: (response: { data: { getBoxHistoryAdmin: BoxHistoryAdminResponse } }) =>
+        response.data.getBoxHistoryAdmin,
+    }),
     getSubscriptionStatus: builder.query({
       query: () => ({
         url: '',
@@ -195,5 +265,6 @@ export const api = createApi({
 export const {
   useLoginMutation,
   useGetBoxHistoryQuery,
+  useGetBoxHistoryAdminQuery,
   useGetSubscriptionStatusQuery,
 } = api;
