@@ -30,14 +30,15 @@ const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
         <div className="mb-5 flex flex-col justify-between">
           <div>
             {[
-              { icon: IMAGES.home, text: SIDEBAR_TEXTS.home },
-              { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.virtualWarehouse },
-              { icon: IMAGES.star, text: SIDEBAR_TEXTS.subscription },
-              { icon: IMAGES.settings, text: SIDEBAR_TEXTS.settings },
+              { icon: IMAGES.home, text: SIDEBAR_TEXTS.home, href: '/userdashboard' },
+              { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.virtualWarehouse, href: '/' },
+              { icon: IMAGES.star, text: SIDEBAR_TEXTS.subscription, href: '/' },
+              { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.history, href: '/admindashboard' },
+              { icon: IMAGES.settings, text: SIDEBAR_TEXTS.settings, href: '/' },
             ].map((item, index) => (
               <div key={index} className="mb-4">
                 <Link
-                  href="/admindashboard"
+                  href={item.href}
                   className="flex h-10 flex-row items-center rounded-lg px-3 text-gray-300 hover:bg-gray-100 hover:text-gray-700"
                 >
                   <div className="flex items-center justify-center text-lg text-gray-400">

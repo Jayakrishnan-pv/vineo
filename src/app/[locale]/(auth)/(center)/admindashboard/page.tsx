@@ -1,218 +1,375 @@
 'use client';
 
-import React, { useState } from 'react';
+import { debounce } from 'lodash';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { BsDownload } from 'react-icons/bs';
 import { FaCheck, FaEdit, FaEye, FaTimes, FaTruck } from 'react-icons/fa';
+import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
-import { useGetBoxHistoryAdminQuery } from '@/app/redux/apiSlice';
+import { useGetBoxHistoryAdminQuery, useGetBoxWinePrintCardQuery } from '@/app/redux/apiSlice';
+import ClientDetails from '@/components/boxdetails';
+import Sidebar from '@/components/Sidebar';
+
+type BoxWine = {
+  _id: string;
+  name: string;
+  box_count: number;
+};
+
+type User = {
+  name: string;
+  phone: string;
+  email?: string;
+  address?: string;
+  country?: string;
+  zipCode?: string;
+  city?: string;
+};
+
+type Box = {
+  _id: string;
+  user: User;
+  box_wines: BoxWine[];
+  created_at: string;
+  delivery_date: string;
+  status: string;
+  box_type: string;
+};
+
+type ApiResponse = {
+  boxes: Box[];
+  total: number;
+};
 
 const HistoryPage: React.FC = () => {
+  // Search and pagination state
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const {
-    data: boxHistoryData,
-    isLoading,
-    error,
-  } = useGetBoxHistoryAdminQuery({
-    searchString: searchTerm,
-    page: currentPage,
+  // Dialog state
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedCustomer, setSelectedCustomer] = useState<Box | null>(null);
+
+  // Create the debounced function using useMemo
+  const debouncedSetSearch = useMemo(
+    () =>
+      debounce((value: string) => {
+        setDebouncedSearchTerm(value);
+      }, 500),
+    [],
+  );
+
+  // Handler for search changes
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    if (!value.trim()) {
+      debouncedSetSearch.cancel();
+      setDebouncedSearchTerm('');
+    } else {
+      debouncedSetSearch(value);
+    }
+  }, [debouncedSetSearch]);
+
+  // Clear search handler
+  const handleClearSearch = useCallback(() => {
+    setSearchTerm('');
+    debouncedSetSearch.cancel();
+    setDebouncedSearchTerm('');
+  }, [debouncedSetSearch]);
+
+  // Dialog handlers
+  const handleOpenDialog = (customer: Box) => {
+    setSelectedCustomer(customer);
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setSelectedCustomer(null);
+  };
+
+  const [boxIdToDownload, setBoxIdToDownload] = useState<string | null>(null);
+
+  // Conditionally call the API query based on boxIdToDownload state
+  const { data: pdfData, error, refetch } = useGetBoxWinePrintCardQuery(boxIdToDownload!);
+  console.log('pdf data', pdfData);
+
+  // useEffect to handle the download when `pdfData` becomes available
+  useEffect(() => {
+    if (pdfData && boxIdToDownload) {
+      const downloadPDF = async () => {
+        try {
+          // Assuming pdfData is a URL or base64 string; modify if necessary
+          const response = await fetch(pdfData);
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `Box_${boxIdToDownload}_Details.pdf`;
+          a.click();
+          window.URL.revokeObjectURL(url);
+        } catch (downloadError) {
+          console.error('Error downloading PDF:', downloadError);
+        } finally {
+          setBoxIdToDownload(null); // Reset after download
+        }
+      };
+
+      downloadPDF();
+    }
+  }, [pdfData, boxIdToDownload]);
+
+  // Handler to set the box ID and initiate the download
+  const handleDownloadClick = (boxId: string) => {
+    setBoxIdToDownload(boxId);
+    refetch(); // Trigger the refetch to get the latest data
+  };
+
+  // API query
+  const { data, isLoading } = useGetBoxHistoryAdminQuery({
+    searchString: debouncedSearchTerm.trim() || '',
+    page,
     pageSize,
   });
 
-  if (isLoading) {
+  if (isLoading && !data) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-lg">Loading...</div>
+      <div className="min-h-screen w-screen bg-gray-100 p-4">
+        <div className="flex h-screen w-full items-center justify-center rounded-lg bg-white p-4 shadow-md">
+          <div className="size-8 animate-spin rounded-full border-b-2 border-blue-500"></div>
+        </div>
       </div>
     );
   }
 
-  console.log(error);
-
-  if (error) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-lg text-red-500">Error loading data</div>
-      </div>
-    );
-  }
-
-  const totalPages = Math.ceil((boxHistoryData?.total ?? 0) / pageSize);
-  const pagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handlePageSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newPageSize = Number.parseInt(event.target.value);
-    setPageSize(newPageSize);
-    setCurrentPage(1); // Reset to first page when changing page size
-  };
+  const totalPages = Math.ceil((data?.total || 0) / pageSize);
 
   return (
-    <div className="min-h-screen w-screen bg-gray-100 p-4">
-      <div className="max-w-screen rounded-lg bg-white p-4 shadow-md">
-        {/* Search Bar */}
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Search by name, email, or phone..."
-            className="w-70 rounded border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-          />
-        </div>
-
-        {/* Responsive Grid Header */}
-        <div className="hidden grid-cols-8 bg-gray-200 p-2 font-semibold md:grid lg:grid-cols-8">
-          <div>Client</div>
-          <div>Wines</div>
-          <div>Count</div>
-          <div>Created Date</div>
-          <div>Delivery Date</div>
-          <div>Status</div>
-          <div>Box Type</div>
-          <div>Actions</div>
-        </div>
-
-        {/* Grid Body */}
-        {boxHistoryData?.boxes.map(item => (
-          <div
-            key={item.id}
-            className="grid grid-cols-1 items-center gap-2 border-b p-2 md:grid-cols-8 md:gap-2"
-          >
-            {/* Client */}
-            <div className="flex items-center space-x-2">
-              <div className="flex size-8 items-center justify-center rounded-full bg-blue-500 text-white">
-                {item.user.name.charAt(0)}
-              </div>
-              <div>
-                <p className="font-bold">{item.user.name}</p>
-                <p className="text-sm text-gray-600">{item.user.phone}</p>
-              </div>
-            </div>
-
-            {/* Wines */}
-            <div className="col-span-2 max-w-xs overflow-hidden md:col-span-1 md:block">
-              {item.box_wines.map(wine => (
-                <p key={wine.id} className="truncate text-sm text-gray-700">
-                  {wine.name}
-                </p>
-              ))}
-            </div>
-
-            {/* Count */}
-            <div className="text-sm">
-              <span className="rounded border border-green-500 px-2 py-1 text-green-500">
-                {item.box_wines.reduce((acc, wine) => acc + wine.box_count, 0)}
-                {' '}
-                units
-              </span>
-            </div>
-
-            {/* Created Date */}
-            <div className="text-sm text-gray-600">
-              {new Date(item.created_at).toLocaleDateString()}
-            </div>
-
-            {/* Delivery Date */}
-            <div className="text-sm text-gray-600">
-              {new Date(item.delivery_date).toLocaleDateString()}
-            </div>
-
-            {/* Status */}
-            <div>
-              <span className={`rounded px-2 py-1 ${
-                item.status === 'DELIVERED' ? 'text-green-500' : 'text-red-500'
-              }`}
+    <>
+      <div className="min-h-screen bg-gray-100 p-4">
+        <Sidebar />
+        <div className="my-6 ml-24 rounded-lg bg-white p-4 shadow-md md:ml-80">
+          {/* Search Bar with Loading Indicator */}
+          <div className="relative mb-4">
+            <input
+              type="text"
+              placeholder="Search by name, phone, or wine"
+              className="w-1/4 rounded border p-2 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+            {searchTerm && (
+              <button
+                type="submit"
+                onClick={handleClearSearch}
+                className="-ml-10 mt-6 text-gray-500 hover:text-gray-700"
               >
-                {item.status}
-              </span>
-            </div>
-
-            {/* Box Type */}
-            <div className="text-sm text-gray-600">{item.box_type}</div>
-
-            {/* Actions */}
-            <div className="flex space-x-1">
-              <button className="rounded-full bg-purple-500 p-2 text-white">
-                <BsDownload />
-              </button>
-              <button className="rounded-full bg-orange-500 p-2 text-white">
-                <FaEye />
-              </button>
-              <button className="rounded-full bg-green-500 p-2 text-white">
-                <AiOutlineWhatsApp />
-              </button>
-              <button className="rounded-full bg-gray-200 p-2 text-gray-400">
-                <FaCheck />
-              </button>
-              <button className="rounded-full bg-gray-200 p-2 text-gray-400">
                 <FaTimes />
               </button>
-              <button className="rounded-full bg-gray-200 p-2 text-gray-400">
-                <FaEdit />
-              </button>
-              <button className="rounded-full bg-gray-200 p-2 text-gray-400">
-                <FaTruck />
-              </button>
-            </div>
+            )}
+            {isLoading && (
+              <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                <div className="min-h-8 min-w-8 animate-spin rounded-full border-b-2 border-blue-500"></div>
+              </div>
+            )}
           </div>
-        ))}
 
-        {/* Pagination */}
-        <div className="mt-4 flex items-center justify-between">
-          <div className="text-sm text-gray-700">
-            {boxHistoryData?.total ?? 0}
-            {' '}
-            Clientes
+          {/* Responsive Grid Header */}
+          <div className="hidden grid-cols-8 bg-gray-200 p-2 font-semibold md:grid lg:grid-cols-8">
+            <div>Client</div>
+            <div>Wines</div>
+            <div>Count</div>
+            <div>Created Date</div>
+            <div>Delivery Date</div>
+            <div>Status</div>
+            <div>Box Type</div>
+            <div>Actions</div>
           </div>
-          <div className="flex space-x-2">
-            {pagesArray.length > 0 && (
-              <>
-                {pagesArray.slice(0, 3).map(page => (
+          {/* Grid Body */}
+          {data?.boxes.map(item => (
+            <div
+              key={item._id}
+              className="grid grid-cols-1 items-center gap-2 border-b p-2 hover:bg-gray-50 md:grid-cols-8 md:gap-2"
+            >
+              {/* Client */}
+              <div className="flex items-center space-x-2">
+                <div className="flex size-8 items-center justify-center rounded-full bg-blue-500 text-white">
+                  {item.user.name.charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <p className="font-bold">{item.user.name}</p>
+                  <p className="text-sm text-gray-600">{item.user.phone}</p>
+                </div>
+              </div>
+
+              {/* Wines */}
+              <div className="col-span-2 max-w-xs overflow-hidden md:col-span-1 md:block">
+                {item.box_wines.map(wine => (
+                  <p key={wine._id} className="truncate text-sm text-gray-700">
+                    {wine.name}
+                  </p>
+                ))}
+              </div>
+
+              {/* Count */}
+              <div className="text-sm">
+                <span className="rounded border border-green-500 px-2 py-1 text-green-500">
+                  {item.box_wines.reduce((acc, wine) => acc + wine.box_count, 0)}
+                  {' '}
+                  boxes
+                </span>
+              </div>
+
+              {/* Created Date */}
+              <div className="text-sm text-gray-600">
+                {new Date(item.created_at).toLocaleDateString()}
+              </div>
+
+              {/* Delivery Date */}
+              <div className="text-sm text-gray-600">
+                {new Date(item.delivery_date).toLocaleDateString()}
+              </div>
+
+              {/* Status */}
+              <div>
+                <span
+                  className={`rounded px-2 py-1 ${
+                    item.status === 'DELIVERED' ? 'text-green-500' : 'text-red-500'
+                  }`}
+                >
+                  {item.status}
+                </span>
+              </div>
+
+              {/* Box Type */}
+              <div className="text-sm text-gray-600">{item.box_type}</div>
+
+              {/* Actions */}
+              <div className="flex space-x-1">
+                <button
+                  type="button"
+                  className="rounded-full bg-purple-500 p-2 text-white transition-colors hover:bg-purple-600"
+                  onClick={() => handleDownloadClick(item._id)}
+                >
+                  <BsDownload />
+                </button>
+                <button
+                  type="submit"
+                  className="rounded-full bg-orange-500 p-2 text-white transition-colors hover:bg-orange-600"
+                  onClick={() => handleOpenDialog(item)}
+                >
+                  <FaEye />
+                </button>
+                <button
+                  type="submit"
+                  className="rounded-full bg-green-500 p-2 text-white transition-colors hover:bg-green-600"
+                  onClick={() => window.open(`https://wa.me/${item.user.phone}`, '_blank')}
+                >
+                  <AiOutlineWhatsApp />
+                </button>
+                <button type="submit" className="rounded-full bg-gray-200 p-2 text-gray-400 transition-colors hover:bg-gray-300">
+                  <FaCheck />
+                </button>
+                <button type="submit" className="rounded-full bg-gray-200 p-2 text-gray-400 transition-colors hover:bg-gray-300">
+                  <FaTimes />
+                </button>
+                <button type="submit" className="rounded-full bg-gray-200 p-2 text-gray-400 transition-colors hover:bg-gray-300">
+                  <FaEdit />
+                </button>
+                <button type="submit" className="rounded-full bg-gray-200 p-2 text-gray-400 transition-colors hover:bg-gray-300">
+                  <FaTruck />
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* Pagination */}
+          {data?.total > 0 && (
+            <div className="mt-4 flex items-center justify-between">
+              <div className="text-sm text-gray-700">
+                {data?.total || 0}
+                {' '}
+                Clientes
+              </div>
+              <div className="flex space-x-2">
+                <button
+                  type="submit"
+                  className={`rounded border px-3 py-1 ${
+                    page === 1 ? 'cursor-not-allowed bg-gray-100' : 'hover:bg-gray-100'
+                  }`}
+                  onClick={() => setPage(Math.max(1, page - 1))}
+                  disabled={page === 1 || isLoading}
+                >
+                  <GrFormPrevious />
+                </button>
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => (
                   <button
-                    key={page}
+                    type="submit"
+                    key={i + 1}
                     className={`rounded border px-3 py-1 ${
-                      currentPage === page ? 'bg-blue-500 text-white' : ''
+                      page === i + 1 ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
                     }`}
-                    onClick={() => handlePageChange(page)}
+                    onClick={() => setPage(i + 1)}
+                    disabled={isLoading}
                   >
-                    {page}
+                    {i + 1}
                   </button>
                 ))}
-                {totalPages > 3 && <span>...</span>}
-                {totalPages > 3 && (
+                {totalPages > 5 && <span>...</span>}
+                {totalPages > 5 && (
                   <button
+                    type="submit"
                     className={`rounded border px-3 py-1 ${
-                      currentPage === totalPages ? 'bg-blue-500 text-white' : ''
+                      page === totalPages ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
                     }`}
-                    onClick={() => handlePageChange(totalPages)}
+                    onClick={() => setPage(totalPages)}
+                    disabled={isLoading}
                   >
                     {totalPages}
                   </button>
                 )}
-              </>
-            )}
-          </div>
-          <div className="text-sm">
-            <select
-              className="rounded border p-1"
-              value={pageSize}
-              onChange={handlePageSizeChange}
-            >
-              <option value={10}>10 / page</option>
-              <option value={20}>20 / page</option>
-              <option value={50}>50 / page</option>
-            </select>
-          </div>
+                <button
+                  type="submit"
+                  className={`rounded border px-3 py-1 ${
+                    page === totalPages ? 'cursor-not-allowed bg-gray-100' : 'hover:bg-gray-100'
+                  }`}
+                  onClick={() => setPage(Math.min(totalPages, page + 1))}
+                  disabled={page === totalPages || isLoading}
+                >
+                  <GrFormNext />
+                </button>
+              </div>
+              <div className="text-sm">
+                <select
+                  className="rounded border p-1 hover:bg-gray-50"
+                  value={pageSize}
+                  onChange={(e) => {
+                    setPageSize(Number(e.target.value));
+                    setPage(1);
+                  }}
+                  disabled={isLoading}
+                >
+                  <option value={10}>10 / page</option>
+                  <option value={20}>20 / page</option>
+                  <option value={50}>50 / page</option>
+                </select>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+
+      {/* Client Details Dialog */}
+      <ClientDetails
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        customerData={selectedCustomer}
+      />
+    </>
   );
 };
 

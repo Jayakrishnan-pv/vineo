@@ -259,6 +259,22 @@ export const api = createApi({
       }),
       transformResponse: response => response.data.getSubscriptionStatus,
     }),
+    getBoxWinePrintCard: builder.query<string, string>({
+      query: boxId => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            query getBoxWinePrintCard($box: String!) {
+              getBoxWinePrintCard(box: $box)
+            }
+          `,
+          variables: { box: boxId },
+        },
+      }),
+      transformResponse: (response: { data: { getBoxWinePrintCard: string } }) =>
+        response.data.getBoxWinePrintCard,
+    }),
   }),
 });
 
@@ -267,4 +283,5 @@ export const {
   useGetBoxHistoryQuery,
   useGetBoxHistoryAdminQuery,
   useGetSubscriptionStatusQuery,
+  useGetBoxWinePrintCardQuery,
 } = api;

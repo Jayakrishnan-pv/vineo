@@ -6,4 +6,5 @@ export const SIDEBAR_TEXTS = {
   settings: 'Settings',
   logout: 'Logout',
   subscriptionStatus: 'Subscription Status:',
+  history: 'History',
 };
