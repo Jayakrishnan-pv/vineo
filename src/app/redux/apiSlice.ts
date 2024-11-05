@@ -271,6 +271,7 @@ export const api = createApi({
           `,
           variables: { box: boxId },
         },
+        operationName: 'getBoxWinePrintCard',
       }),
       transformResponse: (response: { data: { getBoxWinePrintCard: string } }) =>
         response.data.getBoxWinePrintCard,

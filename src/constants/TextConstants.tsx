@@ -7,4 +7,6 @@ export const SIDEBAR_TEXTS = {
   logout: 'Logout',
   subscriptionStatus: 'Subscription Status:',
   history: 'History',
+  userdashboard: '/userdashboard',
+  admindashboard: '/admindashboard',
 };

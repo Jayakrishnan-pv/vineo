@@ -150,8 +150,8 @@ const HistoryPage: React.FC = () => {
 
   return (
     <>
+      <Sidebar />
       <div className="min-h-screen bg-gray-100 p-4">
-        <Sidebar />
         <div className="my-6 ml-24 rounded-lg bg-white p-4 shadow-md md:ml-80">
           {/* Search Bar with Loading Indicator */}
           <div className="relative mb-4">

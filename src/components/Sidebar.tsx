@@ -30,11 +30,11 @@ const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
         <div className="mb-5 flex flex-col justify-between">
           <div>
             {[
-              { icon: IMAGES.home, text: SIDEBAR_TEXTS.home, href: '/userdashboard' },
-              { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.virtualWarehouse, href: '/' },
-              { icon: IMAGES.star, text: SIDEBAR_TEXTS.subscription, href: '/' },
-              { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.history, href: '/admindashboard' },
-              { icon: IMAGES.settings, text: SIDEBAR_TEXTS.settings, href: '/' },
+              { icon: IMAGES.home, text: SIDEBAR_TEXTS.home, href: SIDEBAR_TEXTS.userdashboard },
+              { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.virtualWarehouse, href: '' },
+              { icon: IMAGES.star, text: SIDEBAR_TEXTS.subscription, href: '' },
+              { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.history, href: SIDEBAR_TEXTS.admindashboard },
+              { icon: IMAGES.settings, text: SIDEBAR_TEXTS.settings, href: '' },
             ].map((item, index) => (
               <div key={index} className="mb-4">
                 <Link

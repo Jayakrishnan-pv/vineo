@@ -14,6 +14,12 @@ const HomePage = () => {
   const handleSignIn = () => {
     router.push('/sign-in');
   };
+  const userdashboard = () => {
+    router.push('/admindashboard');
+  };
+  const history = () => {
+    router.push('/userdashboard');
+  };
 
   const Btnstyle = {
     backgroundColor: '#f87171',
@@ -22,6 +28,7 @@ const HomePage = () => {
     paddingLeft: '40px',
     paddingRight: '40px',
   };
+
   return (
     <div className="relative h-screen w-screen">
       <div
@@ -41,6 +48,8 @@ const HomePage = () => {
         <p className="mb-8 text-2xl text-blue-950 sm:w-full md:w-full lg:w-1/4">Únete a Vineo, haz match con vinos que encajan con tus gustos gracias a nuestras recomendaciones personalizadas</p>
         <p className="text-2xl text-blue-950 sm:w-full md:w-full lg:w-1/4">Sorpréndete con nuevos sabores y experiencias inolvidables</p>
         <Button variant="contained" sx={Btnstyle} onClick={handleSignIn}>Login</Button>
+        <Button variant="contained" sx={Btnstyle} onClick={userdashboard}>user</Button>
+        <Button variant="contained" sx={Btnstyle} onClick={history}>admin</Button>
       </div>
     </div>
   );

@@ -71,3 +71,11 @@ body.scrolling::-webkit-scrollbar-thumb {
 .swiper-pagination-bullets {
   margin-bottom: -10px;
 }
+
+.Btnstyle {
+  backgroundcolor: #f87171;
+  marginy: 30px;
+  borderradius: 10px;
+  paddingleft: 40px;
+  paddingright: 40px;
+}
