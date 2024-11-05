@@ -7,7 +7,7 @@ import { BsDownload } from 'react-icons/bs';
 import { FaCheck, FaEdit, FaEye, FaTimes, FaTruck } from 'react-icons/fa';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
-import { useGetBoxHistoryAdminQuery, useGetBoxWinePrintCardQuery } from '@/app/redux/apiSlice';
+import { useGetBoxHistoryAdminQuery, useGetBoxWinePrintCardMutation } from '@/app/redux/apiSlice';
 import ClientDetails from '@/components/boxdetails';
 import Sidebar from '@/components/Sidebar';
 
@@ -92,25 +92,23 @@ const HistoryPage: React.FC = () => {
     setSelectedCustomer(null);
   };
 
-  // useEffect to handle the download when `pdfData` becomes available
-  const HandleDownload = async (boxId: string) => {
+  // Download function
+  const [downloadBoxWinePrintCard] = useGetBoxWinePrintCardMutation();
+
+  const handleDownload = async (boxId: string) => {
     try {
-      const response = await useGetBoxWinePrintCardQuery({ boxId: String(boxId) }).unwrap();
-      const base64Data = response.data.getBoxWinePrintCard;
-      const normalizedBase64 = base64Data.replace(/-/g, '+').replace(/_/g, '/');
-      const binaryString = window.atob(normalizedBase64);
-      const bytes = new Uint8Array(binaryString.length);
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-      }
-      const blob = new Blob([bytes], { type: 'application/pdf' });
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = `box_${boxId}.pdf`;
-      downloadLink.click();
-      URL.revokeObjectURL(downloadLink.href);
+      const pdfBlob = await downloadBoxWinePrintCard({ boxId: String(boxId) });
+      // You can now use the pdfBlob to download the file
+      // For example, you can create a temporary URL and trigger a download
+      const url = URL.createObjectURL(pdfBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'box-wine-print-card.pdf');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     } catch (error) {
-      console.error('Error fetching download data:', error);
+      console.error('Error downloading PDF:', error);
     }
   };
 
@@ -238,7 +236,7 @@ const HistoryPage: React.FC = () => {
                 <button
                   type="button"
                   className="rounded-full bg-purple-500 p-2 text-white transition-colors hover:bg-purple-600"
-                  onClick={() => HandleDownload(item._id)}
+                  onClick={() => handleDownload(item._id)}
                 >
                   <BsDownload />
                 </button>

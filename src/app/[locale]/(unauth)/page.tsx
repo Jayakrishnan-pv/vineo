@@ -48,8 +48,6 @@ const HomePage = () => {
         <p className="mb-8 text-2xl text-blue-950 sm:w-full md:w-full lg:w-1/4">Únete a Vineo, haz match con vinos que encajan con tus gustos gracias a nuestras recomendaciones personalizadas</p>
         <p className="text-2xl text-blue-950 sm:w-full md:w-full lg:w-1/4">Sorpréndete con nuevos sabores y experiencias inolvidables</p>
         <Button variant="contained" sx={Btnstyle} onClick={handleSignIn}>Login</Button>
-        <Button variant="contained" sx={Btnstyle} onClick={userdashboard}>user</Button>
-        <Button variant="contained" sx={Btnstyle} onClick={history}>admin</Button>
       </div>
     </div>
   );

@@ -1,0 +1,38 @@
+{
+  "historypage": {
+    "searchPlaceholder": "Buscar por nombre, teléfono o vino",
+    "clearSearch": "Limpiar búsqueda",
+    "client": "Cliente",
+    "wines": "Vinos",
+    "boxes": "Cajas",
+    "createdDate": "Fecha de creación",
+    "deliveryDate": "Fecha de entrega",
+    "status": "Estado",
+    "boxType": "Tipo de caja",
+    "download": "Descargar",
+    "view": "Ver",
+    "whatsapp": "WhatsApp",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "dispatch": "Despachar",
+    "clients": "Clientes",
+    "loading": "Cargando...",
+    "pdfTitle": "Detalles de la caja",
+    "pdfError": "Error al generar el PDF:",
+    "actions": "Acción"
+  },
+  "pagination": {
+    "showing": "Mostrando",
+    "to": "a",
+    "of": "de",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "page": "Página"
+  },
+  "pageOptions": {
+    "tenPerPage": "10 / página",
+    "twentyPerPage": "20 / página",
+    "fiftyPerPage": "50 / página"
+  }
+}

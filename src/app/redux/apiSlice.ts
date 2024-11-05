@@ -13,7 +13,7 @@ const baseQueryWithAuth = fetchBaseQuery({
 });
 
 const baseQueryWithReauth: BaseQueryFn<
-  string | FetchArgs,
+    string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
@@ -259,8 +259,8 @@ export const api = createApi({
       }),
       transformResponse: response => response.data.getSubscriptionStatus,
     }),
-    getBoxWinePrintCard: builder.query<string, string>({
-      query: boxId => ({
+    getBoxWinePrintCard: builder.mutation<Blob, { boxId: string }>({
+      query: ({ boxId }) => ({
         url: '',
         method: 'POST',
         body: {
@@ -271,10 +271,11 @@ export const api = createApi({
           `,
           variables: { box: boxId },
         },
-        operationName: 'getBoxWinePrintCard',
+        responseHandler: async (response) => {
+          const data = await response.blob();
+          return data;
+        },
       }),
-      // transformResponse: (response: { data: { getBoxWinePrintCard: string } }) =>
-      //   response.data.getBoxWinePrintCard,
     }),
   }),
 });
@@ -284,5 +285,5 @@ export const {
   useGetBoxHistoryQuery,
   useGetBoxHistoryAdminQuery,
   useGetSubscriptionStatusQuery,
-  useGetBoxWinePrintCardQuery,
+  useGetBoxWinePrintCardMutation,
 } = api;
