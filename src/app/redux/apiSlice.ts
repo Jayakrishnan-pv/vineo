@@ -273,8 +273,8 @@ export const api = createApi({
         },
         operationName: 'getBoxWinePrintCard',
       }),
-      transformResponse: (response: { data: { getBoxWinePrintCard: string } }) =>
-        response.data.getBoxWinePrintCard,
+      // transformResponse: (response: { data: { getBoxWinePrintCard: string } }) =>
+      //   response.data.getBoxWinePrintCard,
     }),
   }),
 });

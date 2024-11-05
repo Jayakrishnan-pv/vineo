@@ -1,7 +1,7 @@
 'use client';
 
 import { debounce } from 'lodash';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { BsDownload } from 'react-icons/bs';
 import { FaCheck, FaEdit, FaEye, FaTimes, FaTruck } from 'react-icons/fa';
@@ -92,41 +92,26 @@ const HistoryPage: React.FC = () => {
     setSelectedCustomer(null);
   };
 
-  const [boxIdToDownload, setBoxIdToDownload] = useState<string | null>(null);
-
-  // Conditionally call the API query based on boxIdToDownload state
-  const { data: pdfData, error, refetch } = useGetBoxWinePrintCardQuery(boxIdToDownload!);
-  console.log('pdf data', pdfData);
-
   // useEffect to handle the download when `pdfData` becomes available
-  useEffect(() => {
-    if (pdfData && boxIdToDownload) {
-      const downloadPDF = async () => {
-        try {
-          // Assuming pdfData is a URL or base64 string; modify if necessary
-          const response = await fetch(pdfData);
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `Box_${boxIdToDownload}_Details.pdf`;
-          a.click();
-          window.URL.revokeObjectURL(url);
-        } catch (downloadError) {
-          console.error('Error downloading PDF:', downloadError);
-        } finally {
-          setBoxIdToDownload(null); // Reset after download
-        }
-      };
-
-      downloadPDF();
+  const HandleDownload = async (boxId: string) => {
+    try {
+      const response = await useGetBoxWinePrintCardQuery({ boxId: String(boxId) }).unwrap();
+      const base64Data = response.data.getBoxWinePrintCard;
+      const normalizedBase64 = base64Data.replace(/-/g, '+').replace(/_/g, '/');
+      const binaryString = window.atob(normalizedBase64);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = `box_${boxId}.pdf`;
+      downloadLink.click();
+      URL.revokeObjectURL(downloadLink.href);
+    } catch (error) {
+      console.error('Error fetching download data:', error);
     }
-  }, [pdfData, boxIdToDownload]);
-
-  // Handler to set the box ID and initiate the download
-  const handleDownloadClick = (boxId: string) => {
-    setBoxIdToDownload(boxId);
-    refetch(); // Trigger the refetch to get the latest data
   };
 
   // API query
@@ -253,7 +238,7 @@ const HistoryPage: React.FC = () => {
                 <button
                   type="button"
                   className="rounded-full bg-purple-500 p-2 text-white transition-colors hover:bg-purple-600"
-                  onClick={() => handleDownloadClick(item._id)}
+                  onClick={() => HandleDownload(item._id)}
                 >
                   <BsDownload />
                 </button>
