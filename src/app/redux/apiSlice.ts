@@ -259,21 +259,17 @@ export const api = createApi({
       }),
       transformResponse: response => response.data.getSubscriptionStatus,
     }),
-    getBoxWinePrintCard: builder.mutation<Blob, { boxId: string }>({
+    getBoxWinePrintCard: builder.mutation<string, { boxId: string }>({
       query: ({ boxId }) => ({
         url: '',
         method: 'POST',
         body: {
           query: `
-            query getBoxWinePrintCard($box: String!) {
-              getBoxWinePrintCard(box: $box)
-            }
-          `,
-          variables: { box: boxId },
-        },
-        responseHandler: async (response) => {
-          const data = await response.blob();
-          return data;
+        query getBoxWinePrintCard($box: String!) {
+          getBoxWinePrintCard(box: $box)
+        }
+      `,
+          variables: { box: boxId }, // Pass boxId as `box`
         },
       }),
     }),
