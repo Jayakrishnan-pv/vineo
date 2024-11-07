@@ -9,4 +9,5 @@ export const SIDEBAR_TEXTS = {
   history: 'History',
   userdashboard: '/userdashboard',
   admindashboard: '/admindashboard',
+  subscriptionCard: '/subscription',
 };

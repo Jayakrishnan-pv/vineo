@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
             {[
               { icon: IMAGES.home, text: SIDEBAR_TEXTS.home, href: SIDEBAR_TEXTS.userdashboard },
               { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.virtualWarehouse, href: '' },
-              { icon: IMAGES.star, text: SIDEBAR_TEXTS.subscription, href: '' },
+              { icon: IMAGES.star, text: SIDEBAR_TEXTS.subscription, href: SIDEBAR_TEXTS.subscriptionCard },
               { icon: IMAGES.inbox, text: SIDEBAR_TEXTS.history, href: SIDEBAR_TEXTS.admindashboard },
               { icon: IMAGES.settings, text: SIDEBAR_TEXTS.settings, href: '' },
             ].map((item, index) => (

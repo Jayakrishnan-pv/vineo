@@ -7,7 +7,7 @@ export default {
       backgroundImage: {
         'glass-bottle': 'url(\'/assets/images/glass-bottle.png\')',
         'vineo-logo': 'url(\'/assets/images/vineo-logo.svg\')',
-        'home-background': 'url(\'/Bannerr (3) 2.png\')',
+        'home-background': 'url(\'/assets/images/homebg.png\')',
       },
       backgroundSize: {
         'image-size': '600px',
@@ -21,12 +21,12 @@ export default {
       width: {
         '2k': '2000px',
         'tab': '1000px',
-
+        '90p': '50%',
       },
       screens: {
         'lg-c': '1280px',
-        'md-c': '860px',
-        'sm-c': '500px',
+        'md-c': '560px',
+        'sm-c': '300px',
       },
     },
   },

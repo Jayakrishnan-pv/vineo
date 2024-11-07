@@ -1,9 +1,11 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
+import '@/styles/global.css';
 
 import { Rating } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { IMAGES } from '@/constants/ImageConstants';
@@ -23,7 +25,7 @@ type WineBoxProps = {
 };
 
 const WineCard = ({ wine }: { wine: Wine }) => (
-  <div className="flex grow flex-col items-center p-4">
+  <div className="flex flex-col items-center p-4">
     <Image
       src={wine.image}
       alt={`${wine.wine_name} bottle`}
@@ -40,7 +42,7 @@ const WineCard = ({ wine }: { wine: Wine }) => (
 
 const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
   return (
-    <div className="m-5 rounded-2xl border-2 bg-white p-4 shadow-2xl md:m-2">
+    <div className="m-5 max-w-screen-sm-c rounded-2xl border-2 bg-white p-4 shadow-2xl sm:max-w-screen-md-c md:m-2 lg:max-w-screen-lg-c ">
       <div className="flex flex-col">
         <div className="m-5 text-xl">
           Your recommendations - Set
@@ -48,7 +50,7 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
           {setNumber}
         </div>
         <div className="flex flex-col lg:flex-row">
-          <div className="m-5 grow rounded-xl py-4 shadow-2xl">
+          <div className="m-5 max-w-full grow overflow-hidden rounded-xl py-4 shadow-2xl">
             {/* Desktop View (lg and above) */}
             <div className="hidden lg:flex lg:flex-row">
               {wines.map(wine => (
@@ -57,22 +59,30 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
             </div>
 
             {/* Tablet/Mobile View (below lg) */}
-            <div className="lg:hidden">
+            <div className="max-w-full lg:hidden">
               <Swiper
-                spaceBetween={1}
+                modules={[Navigation, Pagination]}
+                spaceBetween={20}
+                navigation
                 pagination={{ clickable: true }}
-                className="custom-swiper max-w-screen-sm-c"
                 breakpoints={{
-                  0: {
-                    slidesPerView: 2, // Default: 2 slides on small screens
+                  540: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
                   },
-                  650: {
-                    slidesPerView: 3, // Show 3 slides from 650px width and up
+                  640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
                   },
                 }}
+                className="max-w-full"
               >
                 {wines.map(wine => (
-                  <SwiperSlide key={wine.wine_id}>
+                  <SwiperSlide key={wine.wine_id} className="flex justify-center">
                     <WineCard wine={wine} />
                   </SwiperSlide>
                 ))}

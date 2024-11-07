@@ -13,7 +13,7 @@ const baseQueryWithAuth = fetchBaseQuery({
 });
 
 const baseQueryWithReauth: BaseQueryFn<
-    string | FetchArgs,
+  string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
@@ -142,6 +142,26 @@ type AdminBox = {
 type BoxHistoryAdminResponse = {
   total: number;
   boxes: AdminBox[];
+};
+
+type Subscription = {
+  id: string;
+  title: string;
+  subtitle: string;
+  amount: string;
+  description: string;
+  is_early_adaptor: boolean;
+  display_order: number;
+  payment_link: string;
+  product_id: string;
+  duration: number;
+  type: number;
+  status: string;
+  is_current: boolean;
+};
+
+type SubscriptionListResponse = {
+  loadSubscriptionListForUser: Subscription[];
 };
 
 export const api = createApi({
@@ -273,6 +293,35 @@ export const api = createApi({
         },
       }),
     }),
+    getSubscriptionList: builder.query<SubscriptionListResponse, { type: number[]; email: string }>({
+      query: ({ type, email }) => ({
+        url: '',
+        method: 'POST',
+        body: {
+          query: `
+            query loadSubscriptionListForUser($type: [Float!]!) {
+  loadSubscriptionListForUser(type: $type) {
+    _id
+    title
+    sub_title
+    amount
+    description
+    is_early_adaptor
+    display_order
+    payment_link
+    product_id
+    duration
+    type
+    status
+    is_current
+  }
+}
+          `,
+          variables: { type },
+        },
+      }),
+      transformResponse: (response: { data: SubscriptionListResponse }) => response.data,
+    }),
   }),
 });
 
@@ -282,4 +331,5 @@ export const {
   useGetBoxHistoryAdminQuery,
   useGetSubscriptionStatusQuery,
   useGetBoxWinePrintCardMutation,
+  useGetSubscriptionListQuery,
 } = api;

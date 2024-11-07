@@ -1,4 +1,18 @@
 {
+  "homePage": {
+    "title": "Discover the perfect wine for you",
+    "firstLine": "Únete a Vineo, haz match con vinos que encajan con tus gustos gracias a nuestras recomendaciones personalizadas",
+    "secondLine": "Sorpréndete con nuevos sabores y experiencias inolvidables",
+    "login": "acceso"
+  },
+  "loginPage": {
+    "title": "Bienvenido a Vineo",
+    "login": "Acceso",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "rememberMe": "Recuérdame",
+    "forgottenPassword": "¿Olvidaste tu contraseña?"
+  },
   "historypage": {
     "searchPlaceholder": "Buscar por nombre, teléfono o vino",
     "clearSearch": "Limpiar búsqueda",
