@@ -145,9 +145,9 @@ type BoxHistoryAdminResponse = {
 };
 
 type Subscription = {
-  id: string;
+  _id: string;
   title: string;
-  subtitle: string;
+  sub_title: string;
   amount: string;
   description: string;
   is_early_adaptor: boolean;
@@ -272,6 +272,13 @@ export const api = createApi({
             mutation getSubscriptionStatus {
               getSubscriptionStatus {
                 status
+                subscription_id
+                type
+                start_date
+                end_date
+                credit_balance
+                number_of_boxes
+                is_recommended_polling
               }
             }
           `,
@@ -289,12 +296,12 @@ export const api = createApi({
           getBoxWinePrintCard(box: $box)
         }
       `,
-          variables: { box: boxId }, // Pass boxId as `box`
+          variables: { box: boxId },
         },
       }),
     }),
-    getSubscriptionList: builder.query<SubscriptionListResponse, { type: number[]; email: string }>({
-      query: ({ type, email }) => ({
+    getSubscriptionList: builder.query<Subscription[], number[]>({
+      query: types => ({
         url: '',
         method: 'POST',
         body: {
@@ -317,10 +324,11 @@ export const api = createApi({
               }
             }
           `,
-          variables: { type },
+          variables: { type: types },
         },
       }),
-      transformResponse: (response: { data: SubscriptionListResponse }) => response.data,
+      transformResponse: (response: { data: SubscriptionListResponse }) =>
+        response.data.loadSubscriptionListForUser,
     }),
   }),
 });
@@ -329,7 +337,7 @@ export const {
   useLoginMutation,
   useGetBoxHistoryQuery,
   useGetBoxHistoryAdminQuery,
-  useGetSubscriptionStatusQuery,
   useGetBoxWinePrintCardMutation,
+  useGetSubscriptionStatusQuery,
   useGetSubscriptionListQuery,
 } = api;

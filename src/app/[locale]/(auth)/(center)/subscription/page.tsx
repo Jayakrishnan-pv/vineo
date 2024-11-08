@@ -5,9 +5,15 @@ import 'swiper/css/pagination';
 
 import React from 'react';
 
+import { useGetSubscriptionListQuery, useGetSubscriptionStatusQuery } from '@/app/redux/apiSlice';
 import Sidebar from '@/components/Sidebar';
 
 const SubscriptionPage = () => {
+  const { data: subscriptionStatusData } = useGetSubscriptionStatusQuery();
+  const { data: subscriptions, isLoading } = useGetSubscriptionListQuery([10]); // Pass the types you want to filter by
+
+  console.log('sub', subscriptionStatusData);
+  console.log('subList', subscriptions);
   return (
     <div className="flex flex-row text-gray-800 transition-transform delay-75 duration-150 ease-in ">
       <Sidebar />
