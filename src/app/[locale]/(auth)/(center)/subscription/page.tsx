@@ -5,88 +5,76 @@ import 'swiper/css/pagination';
 
 import React from 'react';
 
-import { useGetSubscriptionListQuery } from '@/app/redux/apiSlice';
 import Sidebar from '@/components/Sidebar';
 
 const SubscriptionPage = () => {
-  const { data, isLoading, error } = useGetSubscriptionListQuery({ type: [10, 30, 40], email: 'testuser23@gmail.com' });
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen w-screen bg-gray-100 p-4">
-        <div className="flex h-screen w-full items-center justify-center rounded-lg bg-white p-4 shadow-md">
-          <div className="size-8 animate-spin rounded-full border-b-2 border-blue-500"></div>
-        </div>
-      </div>
-    );
-  }
-
-  console.log('error msg', error);
-
-  const subscriptions = data?.loadSubscriptionListForUser || [];
-
   return (
-    <>
+    <div className="flex flex-row text-gray-800 transition-transform delay-75 duration-150 ease-in ">
       <Sidebar />
-      <div className="ml-72 flex flex-col items-center">
-        <div className="m-2 mt-5 p-10 shadow-lg">
-          <h1 className="mb-8 text-3xl font-semibold">Gestiona tu suscripción</h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {subscriptions.map(subscription => (
-              <div
-                key={subscription.id}
-                className={`my-10 rounded-lg border-gray-400 py-6 shadow-2xl ${subscription.is_current ? 'btn text-white' : 'bg-white text-gray-700'}`}
-              >
-                <h2 className={`mb-4 py-6 text-center text-xl font-bold ${subscription.is_current ? 'w-full bg-black' : ''}`}>
-                  {subscription.title}
-                </h2>
-                <p className="mb-2 px-6 text-2xl font-semibold">
-                  {subscription.amount}
-                  €
-                </p>
-                <p className="mb-4 px-6">{subscription.description}</p>
-                <ul className="mb-4 space-y-2 px-6">
-                  {subscription.is_early_adaptor && (
-                    <li className="flex items-center space-x-2">
-                      <span className="text-red-500">✓</span>
-                      <span>Early Adaptor</span>
-                    </li>
-                  )}
-                  {subscription.duration && (
-                    <li className="flex items-center space-x-2">
-                      <span className="text-red-500">✓</span>
-                      <span>
-                        {subscription.duration}
-                        {' '}
-                        months
-                      </span>
-                    </li>
-                  )}
-                </ul>
-                {subscription.payment_link && (
-                  <div className="flex items-center justify-center">
-                    <button
-                      type="submit"
-                      className={`my-6 rounded px-4 py-2 ${subscription.is_current ? 'bg-red-500' : 'bg-gray-800 text-white'} transition hover:bg-gray-700`}
-                    >
-                      Go to Payment
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
+      <div className="ml-24 mr-5 mt-6 flex w-full flex-col items-center rounded-2xl bg-white px-12 shadow-2xl md:ml-74">
+        <h1 className="left-0 my-12 w-full text-3xl font-semibold">Gestiona tu suscripción</h1>
+        <div className="flex w-full flex-row px-12">
+          {/* first card */}
+          <div className="mx-10 w-72 rounded-lg bg-custom-gradient py-6 text-gray-800 shadow-xl">
+            <h2 className="w-full bg-gray-800 p-2 text-center text-xl font-bold text-white">Vineo Regalo</h2>
+            <div className="px-10">
+              <p className="my-4 text-3xl font-bold">0€</p>
+              <p className="mb-4 w-full">Vineo 6 meses</p>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <span className="text-xl text-white">✓</span>
+                  {' '}
+                  Perfilado a medida
+                </li>
+                <li>
+                  <span className="text-xl text-white">✓</span>
+                  {' '}
+                  1 caja de 3 vinos al mes según tus gustos
+                </li>
+                <li>
+                  <span className="text-xl text-white">✓</span>
+                  {' '}
+                  Cancelación gratuita en cualquier momento
+                </li>
+              </ul>
+              <p className="mt-4 text-xs text-gray-500">Renueva el 27/04/2024</p>
+            </div>
           </div>
-          <div className="flex w-full flex-row-reverse">
-            <button
-              type="submit"
-              className="mt-8 rounded bg-red-100 px-6 py-2 text-red-500 shadow transition hover:bg-red-200"
-            >
-              Cancelar suscripción
-            </button>
+          {/* second card */}
+          <div className="w-72 rounded-lg border-2 bg-white px-10 py-6 text-gray-800 shadow-xl">
+            <h2 className="text-center text-xl font-bold">Vineo IA</h2>
+            <p className="my-4 text-3xl font-bold">5€/mes</p>
+            <p className="mb-4">Suscripción a la IA de Vineo</p>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <span className="text-xl text-red-500">✓</span>
+                {' '}
+                Perfilado a medida
+              </li>
+              <li>
+                <span className="text-xl text-red-500">✓</span>
+                {' '}
+                1 recomendación de 3 vinos al mes según tus gustos
+              </li>
+              <li>
+                <span className="text-xl text-red-500">✓</span>
+                {' '}
+                Cancelación gratuita en cualquier momento
+              </li>
+            </ul>
+            <button type="submit" className="mt-4 w-full rounded bg-gray-800 py-2 text-white">Cambiar</button>
           </div>
         </div>
+        <div className="m-12 flex w-full flex-row-reverse">
+          <button
+            type="submit"
+            className="mt-8 rounded bg-red-100 px-6 py-2 text-red-600 shadow transition hover:bg-red-200"
+          >
+            Cancelar suscripción
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

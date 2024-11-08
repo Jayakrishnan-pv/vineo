@@ -25,7 +25,7 @@ type WineBoxProps = {
 };
 
 const WineCard = ({ wine }: { wine: Wine }) => (
-  <div className="flex flex-col items-center p-4">
+  <div className="flex grow flex-col items-center p-4">
     <Image
       src={wine.image}
       alt={`${wine.wine_name} bottle`}
@@ -42,7 +42,7 @@ const WineCard = ({ wine }: { wine: Wine }) => (
 
 const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
   return (
-    <div className="m-5 max-w-screen-sm-c rounded-2xl border-2 bg-white p-4 shadow-2xl sm:max-w-screen-md-c md:m-2 lg:max-w-screen-lg-c ">
+    <div className="m-5 ml-14 max-w-screen-sm-c rounded-2xl border-2 bg-white p-4 shadow-2xl sm:max-w-screen-md-c md:m-2 lg:max-w-screen-lg-c">
       <div className="flex flex-col">
         <div className="m-5 text-xl">
           Your recommendations - Set

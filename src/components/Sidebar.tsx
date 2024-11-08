@@ -1,9 +1,11 @@
 'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
+import { api } from '@/app/redux/apiSlice'; // Update this path based on your project structure
 import { IMAGES } from '@/constants/ImageConstants';
 import { SIDEBAR_TEXTS } from '@/constants/TextConstants';
 
@@ -13,8 +15,22 @@ type SidebarProps = {
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    try {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      dispatch(api.util.resetApiState());
+      router.push('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   return (
-    <div className="fixed my-5 h-90p w-16 rounded-2xl bg-white shadow-2xl transition-all duration-150 ease-in md:m-7 md:w-64">
+    <div className="fixed mx-4 my-5 mr-5 h-90p w-16 rounded-2xl bg-white shadow-2xl transition-all duration-150 ease-in md:m-7 md:w-64">
       <div className="flex items-center justify-center py-4">
         <div className="mt-5 inline-flex">
           <Image
@@ -56,8 +72,9 @@ const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
           </div>
         </div>
         <div className="">
-          <Link
-            href="#"
+          <button
+            type="submit"
+            onClick={handleLogout}
             className="flex h-10 flex-row items-center rounded-lg px-3 text-gray-300 hover:bg-gray-100 hover:text-gray-700"
           >
             <div className="flex items-center justify-center text-lg text-gray-400">
@@ -69,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
               />
             </div>
             <div className="ml-3 hidden text-gray-600 md:block">{SIDEBAR_TEXTS.logout}</div>
-          </Link>
+          </button>
         </div>
         <div className="">
           <Link

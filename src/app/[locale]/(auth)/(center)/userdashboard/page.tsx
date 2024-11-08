@@ -98,7 +98,7 @@ const Dashboard: React.FC = () => {
       <Sidebar name={userData.name} subscriptionStatus={userData.subscriptionStatus} />
       <div className="ml-72 w-full">
         <div className="-ml-64 flex flex-col transition-all duration-150 ease-in md:ml-0 md:mt-5">
-          <div className="flex w-full flex-col px-4">
+          <div className="flex w-full flex-col">
             {wineGroups.map((wineGroup, groupIndex) => (
               <div key={groupIndex} ref={groupIndex === wineGroups.length - 1 ? lastWineElementRef : null}>
                 <WineBox wines={wineGroup} setNumber={groupIndex + 1} />

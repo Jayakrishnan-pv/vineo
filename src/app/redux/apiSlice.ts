@@ -300,22 +300,22 @@ export const api = createApi({
         body: {
           query: `
             query loadSubscriptionListForUser($type: [Float!]!) {
-  loadSubscriptionListForUser(type: $type) {
-    _id
-    title
-    sub_title
-    amount
-    description
-    is_early_adaptor
-    display_order
-    payment_link
-    product_id
-    duration
-    type
-    status
-    is_current
-  }
-}
+              loadSubscriptionListForUser(type: $type) {
+                _id
+                title
+                sub_title
+                amount
+                description
+                is_early_adaptor
+                display_order
+                payment_link
+                product_id
+                duration
+                type
+                status
+                is_current
+              }
+            }
           `,
           variables: { type },
         },

@@ -9,4 +9,7 @@ export const IMAGES = {
   inbox: '/assets/images/logo/inbox-Regular.svg',
   home: '/assets/images/logo/home.svg',
   google: '/assets/images/logo/flat-color-icons_google.png',
+  vineo_ilustracian: '/assets/images/homepage/VINEO_ILUSTRACIàN.png',
+  answer2: '/assets/images/homepage/answer2.png',
+  bottle2: '/assets/images/homepage/bottle2.png',
 };

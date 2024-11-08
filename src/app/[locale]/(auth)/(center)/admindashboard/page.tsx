@@ -9,7 +9,6 @@ import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
 import { useGetBoxHistoryAdminQuery, useGetBoxWinePrintCardMutation } from '@/app/redux/apiSlice';
 import ClientDetails from '@/components/boxdetails';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Sidebar from '@/components/Sidebar';
 
 type BoxWine = {
