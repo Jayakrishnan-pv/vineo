@@ -7,13 +7,27 @@ import React from 'react';
 
 import { useGetSubscriptionListQuery, useGetSubscriptionStatusQuery } from '@/app/redux/apiSlice';
 import Sidebar from '@/components/Sidebar';
+import SubscriptionCard from '@/components/SubscriptionCard';
 
 const SubscriptionPage = () => {
   const { data: subscriptionStatusData } = useGetSubscriptionStatusQuery();
-  const { data: subscriptions, isLoading } = useGetSubscriptionListQuery([10]); // Pass the types you want to filter by
+  const { data: subscriptions, isLoading } = useGetSubscriptionListQuery([10, 30, 40]);
 
-  console.log('sub', subscriptionStatusData);
   console.log('subList', subscriptions);
+  console.log('subData', subscriptionStatusData);
+
+  const secondCardData = {
+    title: 'Vineo IA',
+    price: '5€/mes',
+    description: 'Suscripción a la IA de Vineo',
+    features: [
+      'Perfilado a medida',
+      '1 recomendación de 3 vinos al mes según tus gustos',
+      'Cancelación gratuita en cualquier momento',
+    ],
+    buttonText: 'Cambiar',
+  };
+
   return (
     <div className="flex flex-row text-gray-800 transition-transform delay-75 duration-150 ease-in ">
       <Sidebar />
@@ -47,29 +61,7 @@ const SubscriptionPage = () => {
             </div>
           </div>
           {/* second card */}
-          <div className="w-72 rounded-lg border-2 bg-white px-10 py-6 text-gray-800 shadow-xl">
-            <h2 className="text-center text-xl font-bold">Vineo IA</h2>
-            <p className="my-4 text-3xl font-bold">5€/mes</p>
-            <p className="mb-4">Suscripción a la IA de Vineo</p>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <span className="text-xl text-red-500">✓</span>
-                {' '}
-                Perfilado a medida
-              </li>
-              <li>
-                <span className="text-xl text-red-500">✓</span>
-                {' '}
-                1 recomendación de 3 vinos al mes según tus gustos
-              </li>
-              <li>
-                <span className="text-xl text-red-500">✓</span>
-                {' '}
-                Cancelación gratuita en cualquier momento
-              </li>
-            </ul>
-            <button type="submit" className="mt-4 w-full rounded bg-gray-800 py-2 text-white">Cambiar</button>
-          </div>
+          <SubscriptionCard {...secondCardData} />
         </div>
         <div className="m-12 flex w-full flex-row-reverse">
           <button
