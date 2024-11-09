@@ -5,7 +5,7 @@ import '@/styles/global.css';
 import { Rating } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { IMAGES } from '@/constants/ImageConstants';
@@ -61,9 +61,8 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
             {/* Tablet/Mobile View (below lg) */}
             <div className="max-w-full lg:hidden">
               <Swiper
-                modules={[Navigation, Pagination]}
+                modules={[Pagination]}
                 spaceBetween={20}
-                navigation
                 pagination={{ clickable: true }}
                 breakpoints={{
                   540: {

@@ -31,6 +31,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-semibold">Customer Details</h2>
           <button
+            type="submit"
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
           >
@@ -44,7 +45,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
               type="text"
               value={customerData.user.name || ''}
               readOnly
-              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-50 p-2"
+              className="mt-1 w-full cursor-not-allowed rounded-md border border-gray-300 bg-gray-50 p-2"
             />
           </div>
           <div>
@@ -53,7 +54,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
               type="text"
               value={customerData.user.address || ''}
               readOnly
-              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-50 p-2"
+              className="mt-1 w-full cursor-not-allowed rounded-md border border-gray-300 bg-gray-50 p-2"
             />
           </div>
           <div>
@@ -62,7 +63,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
               type="email"
               value={customerData.user.email || ''}
               readOnly
-              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-50 p-2"
+              className="mt-1 w-full cursor-not-allowed rounded-md border border-gray-300 bg-gray-50 p-2"
             />
           </div>
           <div>
@@ -71,7 +72,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
               type="text"
               value={customerData.user.country || ''}
               readOnly
-              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-50 p-2"
+              className="mt-1 w-full cursor-not-allowed rounded-md border border-gray-300 bg-gray-50 p-2"
             />
           </div>
           <div>
@@ -80,7 +81,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
               type="password"
               value={customerData.user.password || ''}
               readOnly
-              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-50 p-2"
+              className="mt-1 w-full cursor-not-allowed rounded-md border border-gray-300 bg-gray-50 p-2"
             />
           </div>
           <div>
@@ -89,7 +90,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
               type="text"
               value={customerData.user.zipCode || ''}
               readOnly
-              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-50 p-2"
+              className="mt-1 w-full cursor-not-allowed rounded-md border border-gray-300 bg-gray-50 p-2"
             />
           </div>
           <div>
@@ -98,7 +99,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
               type="text"
               value={customerData.user.phone || ''}
               readOnly
-              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-50 p-2"
+              className="mt-1 w-full cursor-not-allowed rounded-md border border-gray-300 bg-gray-50 p-2"
             />
           </div>
           <div>
@@ -107,7 +108,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
               type="text"
               value={customerData.user.city || ''}
               readOnly
-              className="mt-1 w-full rounded-md border border-gray-300 bg-gray-50 p-2"
+              className="mt-1 w-full cursor-not-allowed rounded-md border border-gray-300 bg-gray-50 p-2"
             />
           </div>
         </div>

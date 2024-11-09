@@ -1,7 +1,3 @@
-// result?.data.errors[0]?.extensions?.response?.statusCode
-// access token
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE0MSwiZW1haWwiOiJzaXlhZHJhaG1hbjVAZ21haWwuY29tIiwicm9sZUlkIjoxMCwidmVyc2lvbiI6MSwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3Mjk1OTU2NjksImV4cCI6MTcyOTU5OTI2OX0.K8q8YG6ihy_q4XkGwqW_Vz_0bKMy2DaOnBxSX6n6Ilo
-// response {"errors":[{"message":"Unauthorized","extensions":{"code":"UNAUTHENTICATED","response":{"statusCode":401,"message":"Unauthorized"}}}],"data":null}
 'use client';
 
 import '@/styles/global.css';

@@ -3,7 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
+import { api } from '@/app/redux/apiSlice';
 // Update this path based on your project structure
 import { IMAGES } from '@/constants/ImageConstants';
 import { SIDEBAR_TEXTS } from '@/constants/TextConstants';
@@ -15,13 +17,13 @@ type SidebarProps = {
 
 const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
   const router = useRouter();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     try {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      // dispatch(api.util.resetApiState());
+      dispatch(api.util.resetApiState());
       router.push('/');
     } catch (error) {
       console.error('Logout error:', error);

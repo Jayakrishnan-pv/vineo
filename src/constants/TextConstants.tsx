@@ -8,6 +8,6 @@ export const SIDEBAR_TEXTS = {
   subscriptionStatus: 'Subscription Status:',
   history: 'History',
   userdashboard: '/userdashboard',
-  admindashboard: '/admindashboard',
+  admindashboard: '/historypage',
   subscriptionCard: '/subscription',
 };

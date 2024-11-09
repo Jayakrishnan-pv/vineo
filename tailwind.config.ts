@@ -26,7 +26,7 @@ export default {
       width: {
         '2k': '2000px',
         'tab': '1000px',
-        '90p': '50%',
+        '90p': '90%',
       },
       screens: {
         'lg-c': '1280px',
