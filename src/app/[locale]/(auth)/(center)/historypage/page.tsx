@@ -10,37 +10,7 @@ import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import { useGetBoxHistoryAdminQuery, useGetBoxWinePrintCardMutation } from '@/app/redux/apiSlice';
 import ClientDetails from '@/components/boxdetails';
 import Sidebar from '@/components/Sidebar';
-
-type BoxWine = {
-  _id: string;
-  name: string;
-  box_count: number;
-};
-
-type User = {
-  name: string;
-  phone: string;
-  email?: string;
-  address?: string;
-  country?: string;
-  zipCode?: string;
-  city?: string;
-};
-
-type Box = {
-  _id: string;
-  user: User;
-  box_wines: BoxWine[];
-  created_at: string;
-  delivery_date: string;
-  status: string;
-  box_type: string;
-};
-
-type ApiResponse = {
-  boxes: Box[];
-  total: number;
-};
+import type { Box } from '@/types/main';
 
 const HistoryPage: React.FC = () => {
   // Search and pagination state

@@ -12,4 +12,9 @@ export const IMAGES = {
   vineo_ilustracian: '/assets/images/homepage/VINEO_ILUSTRACIàN.png',
   answer2: '/assets/images/homepage/answer2.png',
   bottle2: '/assets/images/homepage/bottle2.png',
+  graphGif: '/assets/images/homepage/graphGIf1.png',
+  hand: '/assets/images/homepage/hand.png',
+  graphDetail: '/assets/images/homepage/graphDetail.png',
+  bottleImage: '/assets/images/homepage/bottleImage1.png',
+  fifthBg: '/assets/images/homepage/fifthBg.png',
 };

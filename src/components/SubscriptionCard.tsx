@@ -13,7 +13,7 @@ type SubCardProps = {
   renewalDate: string;
 };
 
-const SecondCard: React.FC<SubCardProps> = ({
+const SubscriptionCard: React.FC<SubCardProps> = ({
   title,
   subTitle,
   amount,
@@ -32,7 +32,7 @@ const SecondCard: React.FC<SubCardProps> = ({
         €/mes
       </p>
       <p className="mb-4">{subTitle}</p>
-      <ul className="space-y-2 text-sm">
+      <ul className="text-sm">
         {description.map((feature, index) => (
           <li key={index}>
             <span className="text-xl text-red-500">✓</span>
@@ -52,11 +52,11 @@ const SecondCard: React.FC<SubCardProps> = ({
     {showButton && (
       <div className="mt-4">
         <a href={paymentLink} target="_blank" rel="noopener noreferrer">
-          <button type="submit" className="ml-6 w-5/6 rounded bg-gray-800 py-2 text-white">Cambiar</button>
+          <button type="submit" className="btn mx-auto w-5/6 rounded-xl bg-gray-800 py-2 text-white">Cambiar</button>
         </a>
       </div>
     )}
   </div>
 );
 
-export default SecondCard;
+export default SubscriptionCard;

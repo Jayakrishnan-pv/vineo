@@ -6,7 +6,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { api } from '@/app/redux/apiSlice';
-// Update this path based on your project structure
 import { IMAGES } from '@/constants/ImageConstants';
 import { SIDEBAR_TEXTS } from '@/constants/TextConstants';
 

@@ -1,58 +1,6 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-type BoxWine = {
-  id: string;
-  name: string;
-  box_count: number;
-};
-
-type UserInfo = {
-  id: string;
-  email: string;
-  name: string;
-  phone: string;
-  house: string;
-  city: string;
-  country: string;
-  zipcode: string;
-};
-
-type AdminBox = {
-  id: string;
-  user: UserInfo;
-  created_at: string;
-  delivery_date: string;
-  status: string;
-  box_type: string;
-  box_wines: BoxWine[];
-};
-
-type BoxHistoryAdminResponse = {
-  total: number;
-  boxes: AdminBox[];
-};
-
-type Subscription = {
-  _id: string;
-  title: string;
-  sub_title: string;
-  amount: string;
-  description: string;
-  is_early_adaptor: boolean;
-  display_order: number;
-  payment_link: string;
-  product_id: string;
-  duration: number;
-  type: number;
-  status: string;
-  is_current: boolean;
-};
-
-type SubscriptionListResponse = {
-  loadSubscriptionListForUser: Subscription[];
-};
-
 const baseQueryWithAuth = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   prepareHeaders: (headers) => {
@@ -162,6 +110,58 @@ const baseQueryWithReauth: BaseQueryFn<
   }
 
   return result;
+};
+
+type BoxWine = {
+  id: string;
+  name: string;
+  box_count: number;
+};
+
+type UserInfo = {
+  id: string;
+  email: string;
+  name: string;
+  phone: string;
+  house: string;
+  city: string;
+  country: string;
+  zipcode: string;
+};
+
+type AdminBox = {
+  id: string;
+  user: UserInfo;
+  created_at: string;
+  delivery_date: string;
+  status: string;
+  box_type: string;
+  box_wines: BoxWine[];
+};
+
+type BoxHistoryAdminResponse = {
+  total: number;
+  boxes: AdminBox[];
+};
+
+type SubscriptionList = {
+  _id: string;
+  title: string;
+  sub_title: string;
+  amount: string;
+  description: string;
+  is_early_adaptor: boolean;
+  display_order: number;
+  payment_link: string;
+  product_id: string;
+  duration: number;
+  type: number;
+  status: string;
+  is_current: boolean;
+};
+
+type SubscriptionListResponse = {
+  loadSubscriptionListForUser: SubscriptionList[];
 };
 
 export const api = createApi({
@@ -300,7 +300,7 @@ export const api = createApi({
         },
       }),
     }),
-    getSubscriptionList: builder.query<Subscription[], number[]>({
+    getSubscriptionList: builder.query<SubscriptionList[], number[]>({
       query: types => ({
         url: '',
         method: 'POST',

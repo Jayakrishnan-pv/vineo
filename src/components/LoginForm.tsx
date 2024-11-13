@@ -25,7 +25,7 @@ type FormData = {
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
-  password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+  password: yup.string().required('Password is required'),
 });
 
 const LoginForm: React.FC = () => {
@@ -56,7 +56,7 @@ const LoginForm: React.FC = () => {
       console.log('Login successful');
       router.push('/userdashboard');
     } catch (err) {
-      console.error('Login failed', err);
+      console.log('1st Login failed', err);
     }
   };
 
@@ -114,7 +114,13 @@ const LoginForm: React.FC = () => {
           <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
         )}
       </div>
-      {error && <p className="mb-4 text-sm text-red-500">Login failed. Please try again.</p>}
+      {error && (
+        <p className="mb-4 text-sm text-red-500">
+          {/* {error.message}
+          {' '} */}
+          Please try again.
+        </p>
+      )}
       <div className="mb-10 flex w-full justify-between text-sm text-blue-950">
         <Link href="#" className="hover:underline">Remember Me</Link>
         <Link href="#" className="hover:underline">Forgot Password?</Link>

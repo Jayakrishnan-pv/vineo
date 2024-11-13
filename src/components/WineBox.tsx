@@ -57,7 +57,6 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
                 <WineCard key={wine.wine_id} wine={wine} />
               ))}
             </div>
-
             {/* Tablet/Mobile View (below lg) */}
             <div className="max-w-full lg:hidden">
               <Swiper

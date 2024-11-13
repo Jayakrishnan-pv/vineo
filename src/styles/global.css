@@ -3,21 +3,14 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-family: 'Domine';
+  src: url('/fonts/Domine-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: italic;
-}
-
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Domine', sans-serif;
   box-sizing: border-box;
 }
 
@@ -42,7 +35,7 @@ body {
 }
 
 body.scrolling {
-  scrollbar-width: auto;
+  scrollbar-width: 1px;
 }
 
 ::-webkit-scrollbar {
@@ -65,6 +58,10 @@ body.scrolling::-webkit-scrollbar-thumb {
 }
 
 .custom-swiper .swiper-pagination-bullet-active {
+  background-color: #f78a79;
+}
+
+.swiper-theme-color {
   background-color: #f78a79;
 }
 
