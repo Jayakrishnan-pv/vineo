@@ -17,4 +17,5 @@ export const IMAGES = {
   graphDetail: '/assets/images/homepage/graphDetail.png',
   bottleImage: '/assets/images/homepage/bottleImage1.png',
   fifthBg: '/assets/images/homepage/fifthBg.png',
+  whatsapp: '/assets/icons/icons8-whatsapp-480.png',
 };

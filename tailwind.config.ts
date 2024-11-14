@@ -43,6 +43,7 @@ export default {
         custom: '1000px',
         50: '400px',
         60: '600px',
+        70: '800px',
       },
       maxHeight: {
         50: '700px',

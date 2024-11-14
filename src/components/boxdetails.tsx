@@ -1,6 +1,6 @@
+// dialog box
 import React from 'react';
 
-// Define interface for the customer data
 type CustomerData = {
   user: {
     name: string;
@@ -26,7 +26,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg md:max-w-2xl">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-semibold">Customer Details</h2>
@@ -103,8 +103,9 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">City</label>
+            <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
             <input
+              id="city"
               type="text"
               value={customerData.user.city || ''}
               readOnly

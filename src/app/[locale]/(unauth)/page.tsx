@@ -32,9 +32,9 @@ const HomePage = () => {
 
   return (
     <div>
+      <NavBar />
       <div className="h-screen w-full bg-home-background bg-bottom bg-no-repeat">
         <div className="ml-2 mt-10 p-20 ">
-          <NavBar />
           <h1 className="mb-8 text-4xl font-bold text-blue-950 md:w-full">Descubre el vino perfecto para ti</h1>
           <p className="mb-8 text-2xl text-blue-950 sm:w-full md:w-4/12">Únete a Vineo, haz match con vinos que encajan con tus gustos gracias a nuestras recomendaciones personalizadas</p>
           <p className="text-2xl text-blue-950 sm:w-full md:w-4/12">Sorpréndete con nuevos sabores y experiencias inolvidables</p>
