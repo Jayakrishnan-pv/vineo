@@ -1,6 +1,6 @@
 // utils.ts
 
-import { useGetBoxWinePrintCardMutation } from '@/app/redux/apiSlice';
+import { useGetBoxWinePrintCardMutation } from '@/app/redux/endPoints/boxEndpoints';
 
 export const useDownloadBoxWinePrintCard = () => {
   const [getBoxWinePrintCard] = useGetBoxWinePrintCardMutation();

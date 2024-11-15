@@ -1,13 +1,12 @@
+// sidebar
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
-import { api } from '@/app/redux/apiSlice';
 import { IMAGES } from '@/constants/ImageConstants';
 import { SIDEBAR_TEXTS } from '@/constants/TextConstants';
+import { useLogout } from '@/utils/LogOut';
 
 type SidebarProps = {
   name: string;
@@ -15,19 +14,7 @@ type SidebarProps = {
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      dispatch(api.util.resetApiState());
-      router.push('/');
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
+  const logout = useLogout();
 
   return (
     <div className="fixed mx-4 my-5 mr-5 h-90p w-16 rounded-2xl bg-white shadow-2xl transition-all duration-150 ease-in md:m-7 md:w-64">
@@ -74,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
         <div className="">
           <button
             type="submit"
-            onClick={handleLogout}
+            onClick={logout}
             className="flex h-10 flex-row items-center rounded-lg px-3 text-gray-300 hover:bg-gray-100 hover:text-gray-700"
           >
             <div className="flex items-center justify-center text-lg text-gray-400">

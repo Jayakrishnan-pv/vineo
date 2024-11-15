@@ -1,4 +1,3 @@
-// LoginForm.tsx login form
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,11 +10,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import {
-  useGetBoxHistoryQuery,
-  useGetSubscriptionStatusQuery,
-  useLoginMutation,
-} from '@/app/redux/apiSlice';
+// Import the specific hooks from the respective endpoint files
+import { useLoginMutation } from '@/app/redux/endPoints/authEndpoints';
+import { useGetBoxHistoryQuery } from '@/app/redux/endPoints/boxEndpoints';
+import { useGetSubscriptionStatusQuery } from '@/app/redux/endPoints/subscriptionEndpoints';
 import { IMAGES } from '@/constants/ImageConstants';
 
 type FormData = {

@@ -58,7 +58,9 @@ export default {
         74: '250px',
         22: '70px',
         30: '800px',
-
+      },
+      backdropBlur: {
+        xs: '1px',
       },
     },
   },

@@ -4,9 +4,10 @@ import '@/styles/global.css';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useGetBoxHistoryQuery, useGetSubscriptionStatusQuery } from '@/app/redux/apiSlice';
-import Sidebar from '@/components/Sidebar';
-import WineBox from '@/components/WineBox';
+import { useGetBoxHistoryQuery } from '@/app/redux/endPoints/boxEndpoints';
+import { useGetSubscriptionStatusQuery } from '@/app/redux/endPoints/subscriptionEndpoints';
+import Sidebar from '@/components/reuse/Sidebar';
+import WineBox from '@/components/reuse/WineBox';
 
 type Wine = {
   wine_id: number;

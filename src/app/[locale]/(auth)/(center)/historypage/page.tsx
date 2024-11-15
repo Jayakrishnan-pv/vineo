@@ -2,14 +2,15 @@
 
 import React from 'react';
 
-import { useGetBoxHistoryAdminQuery } from '@/app/redux/apiSlice';
-import ClientDetails from '@/components/boxdetails';
+// Import the specific hook from the boxEndpoints file
+import { useGetBoxHistoryAdminQuery } from '@/app/redux/endPoints/boxEndpoints';
+import ClientDetails from '@/components/historyPage/boxdetails';
 import GridHeader from '@/components/historyPage/GridHeader';
 import GridItem from '@/components/historyPage/GridItem';
 import Pagination from '@/components/historyPage/Pagination';
 import SearchBar from '@/components/historyPage/SearchBar';
 import LoadingSpinner from '@/components/reuse/LoadingSpinner';
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '@/components/reuse/Sidebar';
 import { useDialogHandler } from '@/utils/DialogHandler';
 import { useDownloadBoxWinePrintCard } from '@/utils/DownloadHandler';
 import { usePaginationHandler } from '@/utils/PaginationHandler';

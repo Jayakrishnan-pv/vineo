@@ -12,7 +12,7 @@ import SeventhSection from '@/components/homePage/seventhSection';
 import SixthSection from '@/components/homePage/sixthSection';
 import SmallCard from '@/components/homePage/smallCards';
 import ThirdSection from '@/components/homePage/thirdSection';
-import NavBar from '@/components/navBar';
+import NavBar from '@/components/reuse/navBar';
 import { secondPage } from '@/constants/TextConstants';
 
 const HomePage = () => {
@@ -32,7 +32,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar showElements={true} />
       <div className="h-screen w-full bg-home-background bg-bottom bg-no-repeat">
         <div className="ml-2 mt-10 p-20 ">
           <h1 className="mb-8 text-4xl font-bold text-blue-950 md:w-full">Descubre el vino perfecto para ti</h1>

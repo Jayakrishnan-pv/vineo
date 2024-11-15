@@ -1,7 +1,7 @@
 import React from 'react';
 
+import SubscriptionCard from '../reuse/SubscriptionCard';
 import TextBox from '../reuse/textBox';
-import SubscriptionCard from '../SubscriptionCard';
 
 const SixthSection = () => {
   const activeSubscription = {

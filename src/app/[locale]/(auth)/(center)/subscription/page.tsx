@@ -9,9 +9,9 @@ import React from 'react';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { useGetSubscriptionListQuery, useGetSubscriptionStatusQuery } from '@/app/redux/apiSlice';
-import Sidebar from '@/components/Sidebar';
-import SubscriptionCard from '@/components/SubscriptionCard';
+import { useGetSubscriptionListQuery, useGetSubscriptionStatusQuery } from '@/app/redux/endPoints/subscriptionEndpoints';
+import Sidebar from '@/components/reuse/Sidebar';
+import SubscriptionCard from '@/components/reuse/SubscriptionCard';
 
 const SubscriptionPage = () => {
   const { data: subscriptionStatusData } = useGetSubscriptionStatusQuery();
