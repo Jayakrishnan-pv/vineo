@@ -1,6 +1,8 @@
 // src/components/SecondCard.tsx
 
+import Link from 'next/link';
 import React from 'react';
+import { MdOutlineDone } from 'react-icons/md';
 
 type SubCardProps = {
   title: string;
@@ -23,8 +25,8 @@ const SubscriptionCard: React.FC<SubCardProps> = ({
   renewalDate,
   showButton,
 }) => (
-  <div className={`mx-2 flex h-full w-72 flex-col rounded-lg border-2 py-6 text-gray-800 shadow-xl ${isActive ? 'bg-custom-gradient' : 'bg-white'}`}>
-    <h2 className={`text-center text-xl font-bold ${isActive ? 'w-full bg-gray-800 px-5 text-white' : 'bg-white'}`}>{title}</h2>
+  <div className={`mx-2 flex h-full w-72 flex-col rounded-2xl border-2 py-6 text-gray-800 shadow-xl ${isActive ? 'bg-card-bg text-white' : 'bg-white'}`}>
+    <h2 className={`text-center text-xl font-bold ${isActive ? 'w-full bg-gray-700 px-5 text-white' : 'bg-white'}`}>{title}</h2>
     <div className="grow overflow-y-auto px-10">
       <p className="my-4 text-3xl font-bold">
         {amount}
@@ -34,8 +36,8 @@ const SubscriptionCard: React.FC<SubCardProps> = ({
       <p className="mb-4">{subTitle}</p>
       <ul className="text-sm">
         {description.map((feature, index) => (
-          <li key={index}>
-            <span className="text-xl text-red-500">✓</span>
+          <li key={index} className="mb-2 flex">
+            <span className="mr-2 text-xl text-red-500"><MdOutlineDone /></span>
             {' '}
             {feature}
           </li>
@@ -50,10 +52,10 @@ const SubscriptionCard: React.FC<SubCardProps> = ({
       </p>
     )}
     {showButton && (
-      <div className="mt-4">
-        <a href={paymentLink} target="_blank" rel="noopener noreferrer">
-          <button type="submit" className="btn mx-auto w-5/6 rounded-xl bg-gray-800 py-2 text-white">Cambiar</button>
-        </a>
+      <div className="mt-4 flex items-center justify-center">
+        <Link href={paymentLink} target="_blank" rel="noopener noreferrer">
+          <button type="submit" className=" rounded-xl bg-gray-800 px-10 py-2 text-white">Cambiar</button>
+        </Link>
       </div>
     )}
   </div>

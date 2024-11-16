@@ -29,43 +29,47 @@ const HistoryPage: React.FC = () => {
     pageSize,
   });
 
-  if (isLoading && !data) {
-    return <LoadingSpinner />;
-  }
-
   const totalPages = Math.ceil((data?.total || 0) / pageSize);
 
   return (
     <>
       <Sidebar />
-      <div className="min-h-screen bg-gray-100 p-4">
-        <div className="my-6 ml-24 rounded-lg bg-white p-4 shadow-md md:ml-80">
-          <SearchBar
-            searchTerm={searchTerm}
-            isLoading={isLoading}
-            onSearchChange={handleSearchChange}
-            onClearSearch={handleClearSearch}
-          />
-          <GridHeader />
-          {data?.boxes.map(item => (
-            <GridItem
-              key={item._id}
-              item={item}
-              onDownload={handleDownload}
-              onOpenDialog={handleOpenDialog}
-            />
-          ))}
-          {data?.total > 0 && (
-            <Pagination
-              page={page}
-              pageSize={pageSize}
-              totalPages={totalPages}
-              isLoading={isLoading}
-              onPageChange={setPage}
-              onPageSizeChange={setPageSize}
-            />
-          )}
-        </div>
+      <div className="h-screen bg-gray-100 p-4">
+        {isLoading
+          ? (
+              <div className="flex h-full items-center justify-center">
+                <LoadingSpinner />
+              </div>
+            )
+          : (
+              <div className="my-6 ml-24 rounded-lg bg-white p-4 shadow-md md:ml-80">
+                <SearchBar
+                  searchTerm={searchTerm}
+                  isLoading={isLoading}
+                  onSearchChange={handleSearchChange}
+                  onClearSearch={handleClearSearch}
+                />
+                <GridHeader />
+                {data?.boxes.map(item => (
+                  <GridItem
+                    key={item._id}
+                    item={item}
+                    onDownload={handleDownload}
+                    onOpenDialog={handleOpenDialog}
+                  />
+                ))}
+                {data?.total > 0 && (
+                  <Pagination
+                    page={page}
+                    pageSize={pageSize}
+                    totalPages={totalPages}
+                    isLoading={isLoading}
+                    onPageChange={setPage}
+                    onPageSizeChange={setPageSize}
+                  />
+                )}
+              </div>
+            )}
       </div>
       <ClientDetails
         isOpen={isDialogOpen}

@@ -1,49 +1,31 @@
+import Image from 'next/image';
 import React from 'react';
 
-import SubscriptionCard from '../reuse/SubscriptionCard';
+import { IMAGES } from '@/constants/ImageConstants';
+
 import TextBox from '../reuse/textBox';
 
 const SixthSection = () => {
-  const activeSubscription = {
-    title: 'VINEO IA',
-    subTitle: 'Suscripción a la IA de Vineo',
-    amount: '5',
-    description: [
-      'Perfilado a medida',
-      '1 recomendación de 3 vinos al mes según tus gustos',
-      'Cancelación gratuita en cualquier momento',
-    ],
-    paymentLink: '',
-    isActive: true,
-    showButton: false,
-    renewalDate: '2024-12-01',
-  };
-  const inactiveSubscription = {
-    title: 'VINEO BOX',
-    subTitle: 'Suscripción con caja mensual',
-    amount: '55',
-    description: [
-      'Perfilado a medida',
-      '1 caja de 3 vinos al mes según tus gustos',
-      'Cancelación gratuita en cualquier momento',
-    ],
-    paymentLink: '',
-    isActive: false,
-    showButton: true,
-    renewalDate: '',
-  };
-
   return (
-    <div className=" flex h-screen w-full flex-col bg-secondBg bg-no-repeat py-24 text-center">
-      <TextBox
-        title="Elige el servicio que mejor se adapta a ti"
-        subtitle="Vineo a tu medida"
-        paragraphs={[]}
-        showButton={false}
-      />
-      <div className="mx-auto flex flex-row">
-        <SubscriptionCard {...activeSubscription} />
-        <SubscriptionCard {...inactiveSubscription} />
+    <div>
+      <div className="my-20 flex flex-col items-center justify-around md:flex-row">
+        <Image src={IMAGES.bottleImage} alt="vineo-logo" width={100} height={50} className="h-200p w-100p p-5"></Image>
+        <div className="my-auto max-w-60">
+          <TextBox
+            title="Tu Aprendizaje"
+            subtitle="Aprende sobre vinos con cada caja"
+            paragraphs={['Nuestro objetivo es ofrecerte una selección variada de vinos, incluyendo una amplia gama de tipos, sabores y regiones.', 'Cada caja es una oportunidad para explorar y descubrir nuevas experiencias en el maravilloso mundo del vino. ¡Aprende y disfruta al mismo tiempo!']}
+            showButton={false}
+          />
+        </div>
+      </div>
+      <div className="my-20 flex h-52 flex-col items-center justify-center bg-gray-100 text-center">
+        <TextBox
+          title="Sube de nivel con cada caja"
+          subtitle=""
+          paragraphs={['Invita a amigos, valora tus vinos y accede a descuentos y ventajas únicas con tus Vineo Coins']}
+          showButton={false}
+        />
       </div>
     </div>
   );

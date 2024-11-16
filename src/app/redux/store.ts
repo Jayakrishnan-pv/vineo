@@ -1,3 +1,4 @@
+// src/app/redux/store.ts
 import { configureStore } from '@reduxjs/toolkit';
 
 import { authEndpoints } from './endPoints/authEndpoints';

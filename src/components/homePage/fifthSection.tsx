@@ -1,23 +1,23 @@
+import Image from 'next/image';
 import React from 'react';
+
+import { IMAGES } from '@/constants/ImageConstants';
 
 import TextBox from '../reuse/textBox';
 
 const FifthSection = () => {
   return (
-    <div className="h-screen w-full bg-fifthBg bg-contain bg-right bg-no-repeat">
-      <div className="ml-auto h-full max-w-60">
-        <div className="absolute mr-52">
-          <TextBox
-            title="Tus Beneficios"
-            subtitle="Vineo Coins"
-            paragraphs={[
-              'Las Vineo Coins te permitirán acceder a descuentos exclusivos, vinos premium y experiencias únicas',
-            ]}
-            buttonText="Comienza"
-            showButton={true}
-          />
-        </div>
+    <div className="my-20 flex w-full flex-col items-center justify-around md:flex-row">
+      <div className="mt-10 max-w-50">
+        <TextBox
+          title="El Algoritmo"
+          subtitle="Cada vez que valoras un vino, mejora el algoritmo"
+          paragraphs={['Nuestro algoritmo aprende con con cada vino que valoras. Cuanto más valores, más precisas serán nuestras recomendaciones.']}
+          buttonText="Comienza"
+          showButton={true}
+        />
       </div>
+      <Image src={IMAGES.graphDetail} alt="graphDetail" width={100} height={50} className="h-200p w-96 p-5"></Image>
     </div>
   );
 };

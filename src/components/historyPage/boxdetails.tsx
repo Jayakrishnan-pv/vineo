@@ -40,7 +40,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Full name</label>
+            <label htmlFor="name"className="block text-sm font-medium text-gray-700">Full name</label>
             <input
               type="text"
               value={customerData.user.name || ''}
@@ -49,7 +49,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Full address</label>
+            <label htmlFor="address" className="block text-sm font-medium text-gray-700">Full address</label>
             <input
               type="text"
               value={customerData.user.address || ''}
@@ -58,7 +58,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
               value={customerData.user.email || ''}
@@ -67,7 +67,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Country</label>
+            <label htmlFor="country" className="block text-sm font-medium text-gray-700">Country</label>
             <input
               type="text"
               value={customerData.user.country || ''}
@@ -76,7 +76,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label htmlFor="Password" className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
               value={customerData.user.password || ''}
@@ -85,7 +85,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Zip code</label>
+            <label htmlFor="Zip" className="block text-sm font-medium text-gray-700">Zip code</label>
             <input
               type="text"
               value={customerData.user.zipCode || ''}
@@ -94,7 +94,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customer
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Telephone</label>
+            <label htmlFor="Telephone"className="block text-sm font-medium text-gray-700">Telephone</label>
             <input
               type="text"
               value={customerData.user.phone || ''}

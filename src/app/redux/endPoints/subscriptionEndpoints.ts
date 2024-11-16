@@ -1,3 +1,5 @@
+// src/app/redux/endPoints/subscriptionEndpoints.ts
+
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQueryWithReauth } from '../baseQuery';

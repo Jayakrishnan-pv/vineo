@@ -1,20 +1,23 @@
 import React from 'react';
 
 import TextBox from '../reuse/textBox';
-import FAQDropdown from './faqDrop';
 
 const SeventhSection = () => {
   return (
-    <div className="mx-auto h-screen w-7/12 py-24 text-center">
-      <TextBox
-        title="Preguntas frecuentes"
-        subtitle="Aquí te resolvemos tus dudas, pero si aún tienes alguna que no se soluciona con esta sección, no dudes en ponerte en contacto con nosotros a través del Whatsapp"
-        paragraphs={[
-        ]}
-        buttonText=""
-        showButton={false}
-      />
-      <FAQDropdown />
+    <div className="h-screen w-full bg-fifthBg bg-contain bg-right bg-no-repeat">
+      <div className="ml-auto h-full max-w-60">
+        <div className="absolute mr-52 mt-48">
+          <TextBox
+            title="Tus Beneficios"
+            subtitle="Vineo Coins"
+            paragraphs={[
+              'Las Vineo Coins te permitirán acceder a descuentos exclusivos, vinos premium y experiencias únicas',
+            ]}
+            buttonText="Comienza"
+            showButton={true}
+          />
+        </div>
+      </div>
     </div>
   );
 };

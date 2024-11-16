@@ -2,7 +2,7 @@ import React from 'react';
 
 const GridHeader: React.FC = () => {
   return (
-    <div className="hidden grid-cols-8 bg-gray-200 p-2 font-semibold md:grid lg:grid-cols-8">
+    <div className="hidden grid-cols-8 gap-3 bg-gray-200 p-2 font-semibold md:grid lg:grid-cols-8">
       <div>Client</div>
       <div>Wines</div>
       <div>Count</div>

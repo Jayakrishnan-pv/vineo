@@ -52,26 +52,45 @@ body.scrolling::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-.custom-swiper .swiper-pagination-bullet {
+/* .custom-swiper .swiper-pagination-bullet {
   background-color: #f78a79;
   margin-bottom: -10px;
 }
 
 .custom-swiper .swiper-pagination-bullet-active {
   background-color: #f78a79;
-}
+} */
 
-.swiper-theme-color {
+/* .swiper-theme-color {
   background-color: #f78a79;
-}
+} */
 
 .swiper-pagination-bullets {
   margin-bottom: -10px;
 }
+
+/* .swiper-pagination-bullet .swiper-pagination-bullet-active {
+  background-color: #f78a79;
+} */
+
 .swiper-pagination-bullet {
-  background-color: red;
+  background-color: #f78a70;
 }
 
-.swiper-pagination-bullet .swiper-pagination-bullet-active {
+.swiper-pagination-bullet-active {
   background-color: #f78a79;
+}
+
+.swiper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Override the default display property of swiper-slide */
+.swiper-slide {
+  display: flex; /* Change this to 'flex' or any other value you prefer */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
 }
