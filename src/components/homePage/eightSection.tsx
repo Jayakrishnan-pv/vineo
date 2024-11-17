@@ -4,8 +4,6 @@ import 'swiper/css/pagination';
 import '@/styles/global.css';
 
 import React from 'react';
-import { Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 import SubscriptionCard from '../reuse/SubscriptionCard';
 import TextBox from '../reuse/textBox';
@@ -57,42 +55,17 @@ const EigthSection = () => {
   const subscriptions = [freeSubscription, activeSubscription, inactiveSubscription];
 
   return (
-    <div className="flex h-screen w-full flex-col bg-secondBg bg-no-repeat py-24 text-center">
+    <div className="flex h-screen w-full flex-col items-center justify-center bg-secondBg bg-no-repeat py-24">
       <TextBox
         title="Elige el servicio que mejor se adapta a ti"
         subtitle="Vineo a tu medida"
         paragraphs={[]}
         showButton={false}
       />
-      <div className="w-full sm:mx-32 md:mx-44">
-        <div className="swiper-container w-full">
-          <Swiper
-            modules={[Pagination]}
-            spaceBetween={0}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              540: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 10,
-              },
-            }}
-            className="max-w-full"
-          >
-            {subscriptions.map((subscription, index) => (
-              <SwiperSlide key={index} className="swiper-slide flex items-center justify-center">
-                <SubscriptionCard {...subscription} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+      <div className="flex w-full items-center justify-center">
+        {subscriptions.map((subscription, index) => (
+          <SubscriptionCard key={index} {...subscription} />
+        ))}
       </div>
     </div>
   );

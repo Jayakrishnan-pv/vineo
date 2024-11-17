@@ -4,9 +4,9 @@ import TextBox from '../reuse/textBox';
 
 const SeventhSection = () => {
   return (
-    <div className="h-screen w-full bg-fifthBg bg-contain bg-right bg-no-repeat">
-      <div className="ml-auto h-full max-w-60">
-        <div className="absolute mr-52 mt-48">
+    <div className="h-full bg-fifthBg bg-contain bg-right bg-no-repeat">
+      <div className="">
+        <div className="pt-32">
           <TextBox
             title="Tus Beneficios"
             subtitle="Vineo Coins"
