@@ -14,10 +14,10 @@ const TextBox: React.FC<TextBoxProps> = ({
   buttonClass = '',
 }) => {
   return (
-    <div className="p-6 text-gray-500">
-      <h2 className={`my-5 text-3xl font-semibold ${h2Class}`}>{title}</h2>
-      <h3 className={`mb-5 text-4xl font-bold text-gray-600 ${h3Class}`}>{subtitle}</h3>
-      <div className="text-lg">
+    <div className="p-6 text-gray-600">
+      <h2 className={`my-5 text-3xl ${h2Class}`}>{title}</h2>
+      <h3 className={`mb-5 text-4xl font-bold ${h3Class}`}>{subtitle}</h3>
+      <div className="text-lg font-medium text-gray-700">
         {paragraphs.map((text, index) => (
           <p key={index} className={`mb-8 ${pClass}`}>{text}</p>
         ))}

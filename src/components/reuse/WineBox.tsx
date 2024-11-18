@@ -64,7 +64,7 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
                 spaceBetween={20}
                 pagination={{ clickable: true }}
                 breakpoints={{
-                  540: {
+                  440: {
                     slidesPerView: 1,
                     spaceBetween: 20,
                   },
