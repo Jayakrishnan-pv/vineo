@@ -1,24 +1,7 @@
 // dialog box
 import React from 'react';
 
-type CustomerData = {
-  user: {
-    name: string;
-    email?: string;
-    phone: string;
-    address?: string;
-    country?: string;
-    zipCode?: string;
-    city?: string;
-    password?: string;
-  };
-};
-
-type ClientDetailsProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  customerData: CustomerData | null;
-};
+import type { ClientDetailsProps } from './types';
 
 const ClientDetails: React.FC<ClientDetailsProps> = ({ isOpen, onClose, customerData }) => {
   if (!isOpen || !customerData) {

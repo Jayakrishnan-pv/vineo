@@ -9,3 +9,23 @@ export type TextBoxProps = {
   pClass?: string;
   buttonClass?: string;
 };
+
+export type SubCardProps = {
+  title: string;
+  subTitle: string;
+  amount: string;
+  description: string[];
+  paymentLink: string;
+  isActive: boolean;
+  showButton: boolean;
+  renewalDate: string;
+};
+
+export type SidebarProps = {
+  name: string;
+  subscriptionStatus: number;
+};
+
+export type NavBarProps = {
+  showElements: boolean;
+};

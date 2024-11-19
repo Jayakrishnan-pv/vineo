@@ -3,13 +3,7 @@ import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { BsDownload } from 'react-icons/bs';
 import { FaCheck, FaEdit, FaEye, FaTimes, FaTruck } from 'react-icons/fa';
 
-import type { Box } from '@/types/main';
-
-type ActionButtonsProps = {
-  item: Box;
-  onDownload: (boxId: string) => void;
-  onOpenDialog: (customer: Box) => void;
-};
+import type { ActionButtonsProps } from './types';
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ item, onDownload, onOpenDialog }) => {
   return (

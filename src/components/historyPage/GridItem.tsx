@@ -1,14 +1,7 @@
 import React from 'react';
 
-import type { Box } from '@/types/main';
-
 import ActionButtons from './ActionButtons';
-
-type GridItemProps = {
-  item: Box;
-  onDownload: (boxId: string) => void;
-  onOpenDialog: (customer: Box) => void;
-};
+import type { GridItemProps } from './types';
 
 const GridItem: React.FC<GridItemProps> = ({ item, onDownload, onOpenDialog }) => {
   return (

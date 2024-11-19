@@ -10,7 +10,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-// Import the specific hooks from the respective endpoint files
 import { useLoginMutation } from '@/app/redux/endPoints/authEndpoints';
 import { useGetBoxHistoryQuery } from '@/app/redux/endPoints/boxEndpoints';
 import { useGetSubscriptionStatusQuery } from '@/app/redux/endPoints/subscriptionEndpoints';

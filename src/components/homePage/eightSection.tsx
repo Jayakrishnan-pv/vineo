@@ -60,10 +60,11 @@ const EigthSection = () => {
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-secondBg bg-no-repeat">
       <TextBox
-        title="Elige el servicio que mejor se adapta a ti"
-        subtitle="Vineo a tu medida"
-        paragraphs={[]}
+        title=""
+        subtitle="Elige el servicio que mejor se adapta a ti"
+        paragraphs={['Vineo a tu medida']}
         showButton={false}
+        pClass="text-center"
       />
       <div className="h-screen w-full">
         <Swiper

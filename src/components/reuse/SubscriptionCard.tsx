@@ -4,16 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { MdOutlineDone } from 'react-icons/md';
 
-type SubCardProps = {
-  title: string;
-  subTitle: string;
-  amount: string;
-  description: string[];
-  paymentLink: string;
-  isActive: boolean;
-  showButton: boolean;
-  renewalDate: string;
-};
+import type { SubCardProps } from './types';
 
 const SubscriptionCard: React.FC<SubCardProps> = ({
   title,

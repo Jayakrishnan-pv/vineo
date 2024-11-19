@@ -21,6 +21,8 @@ const ThirdSection = () => {
             ]}
             buttonText="Comienza"
             showButton={true}
+            h2Class=""
+            h3Class=""
           />
         </div>
       </div>

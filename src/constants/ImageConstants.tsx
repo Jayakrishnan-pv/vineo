@@ -23,4 +23,5 @@ export const IMAGES = {
   ig: '/assets/images/footer/ig.png',
   fb: '/assets/images/footer/fb.png',
   Capa_1: '/assets/images/recommendation/Capa_1.png',
+  gif: '/assets/gifs/home/vineo.gif',
 };

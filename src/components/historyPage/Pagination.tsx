@@ -1,14 +1,7 @@
 import React from 'react';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
-type PaginationProps = {
-  page: number;
-  pageSize: number;
-  totalPages: number;
-  isLoading: boolean;
-  onPageChange: (newPage: number) => void;
-  onPageSizeChange: (newPageSize: number) => void;
-};
+import type { PaginationProps } from './types';
 
 const Pagination: React.FC<PaginationProps> = ({
   page,

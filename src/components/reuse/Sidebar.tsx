@@ -8,10 +8,7 @@ import { IMAGES } from '@/constants/ImageConstants';
 import { SIDEBAR_TEXTS } from '@/constants/TextConstants';
 import { useLogout } from '@/utils/LogOut';
 
-type SidebarProps = {
-  name: string;
-  subscriptionStatus: number;
-};
+import type { SidebarProps } from './types';
 
 const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
   const logout = useLogout();
