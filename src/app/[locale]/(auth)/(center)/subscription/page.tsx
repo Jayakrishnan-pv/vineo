@@ -17,16 +17,12 @@ const SubscriptionPage = () => {
   const { data: subscriptionStatusData } = useGetSubscriptionStatusQuery();
   const activeSubscriptionType = subscriptionStatusData?.type;
   const expDate = subscriptionStatusData?.end_date;
-
   const { data: subscriptions, isLoading } = useGetSubscriptionListQuery([10, 30, 40]);
 
-  console.log('usrstatus', subscriptionStatusData);
-  console.log('list', subscriptions);
-
   return (
-    <div className="flex flex-row text-gray-800 transition-transform delay-75 duration-150 ease-in">
-      <Sidebar />
-      <div className="ml-24 mr-5 mt-6 flex w-full flex-col items-center rounded-2xl bg-white px-12 shadow-2xl md:ml-74">
+    <>
+      <Sidebar name="name" subscriptionStatus={0} />
+      <div className="ml-24 mr-5 mt-6 flex flex-col items-center rounded-2xl bg-white shadow-2xl md:ml-74">
         <h1 className="left-0 my-12 w-full text-3xl font-semibold">Gestiona tu suscripción</h1>
         <div className="flex w-90p flex-row px-12">
           <Swiper
@@ -35,11 +31,17 @@ const SubscriptionPage = () => {
             slidesPerView={1}
             pagination={{ clickable: true }}
             breakpoints={{
-              640: {
-                slidesPerView: 2,
+              440: {
+                slidesPerView: 1,
+                spaceBetween: 20,
               },
-              1024: {
+              1220: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1290: {
                 slidesPerView: 3,
+                spaceBetween: 30,
               },
             }}
             className="w-full"
@@ -69,7 +71,7 @@ const SubscriptionPage = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

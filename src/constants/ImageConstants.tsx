@@ -13,7 +13,7 @@ export const IMAGES = {
   answer2: '/assets/images/homepage/answer2.png',
   bottle2: '/assets/images/homepage/bottle2.png',
   graphGif: '/assets/images/homepage/graphGIf1.png',
-  hand: '/assets/images/homepage/hand1.png',
+  hand: '/assets/images/homepage/hand.png',
   graphDetail: '/assets/images/homepage/graphDetail.png',
   bottleImage: '/assets/images/homepage/bottleImage1.png',
   fifthBg: '/assets/images/homepage/fifthBg.png',

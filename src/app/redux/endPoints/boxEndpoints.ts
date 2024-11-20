@@ -6,7 +6,7 @@ import { baseQueryWithReauth } from '../baseQuery';
 import type { BoxHistoryAdminResponse } from '../types';
 
 export const boxEndpoints = createApi({
-  reducerPath: 'boxApi', // Unique reducerPath
+  reducerPath: 'boxApi',
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
     getBoxHistory: builder.query({

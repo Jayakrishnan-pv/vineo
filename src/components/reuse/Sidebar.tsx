@@ -14,7 +14,7 @@ const Sidebar: React.FC<SidebarProps> = ({ name, subscriptionStatus }) => {
   const logout = useLogout();
 
   return (
-    <div className="fixed mx-4 my-5 mr-5 h-90p w-16 rounded-2xl bg-white shadow-2xl transition-all duration-150 ease-in md:m-7 md:w-64">
+    <div className="fixed mx-4 mr-5 h-90p w-16 rounded-2xl border bg-white shadow-2xl transition-all duration-150 ease-in md:w-64">
       <div className="flex items-center justify-center py-4">
         <div className="mt-5 inline-flex">
           <Image

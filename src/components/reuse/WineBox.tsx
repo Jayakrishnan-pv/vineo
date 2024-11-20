@@ -1,8 +1,8 @@
+// WineBox.tsx
 import 'swiper/css';
 import 'swiper/css/pagination';
 import '@/styles/global.css';
 
-import { Rating } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
 import { Pagination } from 'swiper/modules';
@@ -10,55 +10,21 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { IMAGES } from '@/constants/ImageConstants';
 
-type Wine = {
-  wine_id: number;
-  wine_name: string;
-  image: string;
-  store: string;
-  area: string;
-  rating: number;
-};
-
-type WineBoxProps = {
-  wines: Wine[];
-  setNumber: number;
-};
-
-const WineCard = ({ wine }: { wine: Wine }) => (
-  <div className="flex grow flex-col items-center p-4">
-    <Image
-      src={wine.image}
-      alt={`${wine.wine_name} bottle`}
-      width={100}
-      height={100}
-      className="size-48 object-contain"
-    />
-    <div className="text-red-400">{wine.wine_name}</div>
-    <div className="mt-5 text-sm text-gray-400">{wine.store}</div>
-    <div className="mb-5 text-sm text-gray-400">{wine.area}</div>
-    <Rating name="read-only" value={wine.rating} readOnly className="custom-rating" />
-  </div>
-);
+import type { WineBoxProps } from './types';
+import WineCard from './WineCard';
 
 const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
   return (
-    <div className="m-5 ml-14 max-w-screen-sm-c rounded-2xl border-2 bg-white p-4 shadow-2xl sm:max-w-screen-md-c md:m-2 lg:max-w-screen-lg-c">
-      <div className="flex flex-col">
-        <div className="m-5 text-xl">
+    <div className="mb-5 ml-14 w-3/5 rounded-2xl border-2 p-4 shadow-2xl lg:w-11/12">
+      <div className="flex flex-col ">
+        <div className="m-5  text-xl">
           Your recommendations - Set
           {' '}
           {setNumber}
         </div>
-        <div className="flex flex-col lg:flex-row">
-          <div className="m-5 max-w-full grow overflow-hidden rounded-xl py-4 shadow-2xl">
-            {/* Desktop View (lg and above) */}
-            <div className="hidden lg:flex lg:flex-row">
-              {wines.map(wine => (
-                <WineCard key={wine.wine_id} wine={wine} />
-              ))}
-            </div>
-            {/* Tablet/Mobile View (below lg) */}
-            <div className="max-w-full lg:hidden">
+        <div className="flex flex-col  lg-c:flex-row">
+          <div className="m-5  rounded-xl  py-4 shadow-2xl">
+            <div className=" swiper-width flex justify-around ">
               <Swiper
                 modules={[Pagination]}
                 spaceBetween={20}
@@ -77,10 +43,10 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
                     spaceBetween: 30,
                   },
                 }}
-                className="max-w-full"
+                className=""
               >
                 {wines.map(wine => (
-                  <SwiperSlide key={wine.wine_id} className="flex justify-center">
+                  <SwiperSlide key={wine.wine_id} className="flex justify-center ">
                     <WineCard wine={wine} />
                   </SwiperSlide>
                 ))}
@@ -88,7 +54,7 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
             </div>
           </div>
 
-          <div className="m-5 flex grow flex-col items-center rounded-xl shadow-2xl">
+          <div className="m-5 flex flex-col items-center justify-center rounded-xl shadow-2xl">
             <Image
               src={IMAGES.graph}
               alt="graph"

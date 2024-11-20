@@ -58,7 +58,7 @@ const EigthSection = () => {
   const subscriptions = [freeSubscription, activeSubscription, inactiveSubscription];
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center bg-secondBg bg-no-repeat">
+    <div className="flex h-743 w-full flex-col items-center justify-center bg-secondBg bg-cover bg-no-repeat">
       <TextBox
         title=""
         subtitle="Elige el servicio que mejor se adapta a ti"
@@ -90,7 +90,7 @@ const EigthSection = () => {
           className=""
         >
           {subscriptions.map((subscription, index) => (
-            <SwiperSlide key={index} className="flex w-full items-center justify-center">
+            <SwiperSlide key={index} className="flex w-full items-center justify-center pb-5">
               <SubscriptionCard {...subscription} />
             </SwiperSlide>
           ))}

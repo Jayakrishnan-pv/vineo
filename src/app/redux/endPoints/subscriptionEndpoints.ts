@@ -6,7 +6,7 @@ import { baseQueryWithReauth } from '../baseQuery';
 import type { SubscriptionList, SubscriptionListResponse } from '../types';
 
 export const subscriptionEndpoints = createApi({
-  reducerPath: 'subscriptionApi', // Unique reducerPath
+  reducerPath: 'subscriptionApi',
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
     getSubscriptionStatus: builder.query({

@@ -9,8 +9,22 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+}
+
 * {
-  font-family: 'Domine', sans-serif;
+  font-family: 'Domine', 'Inter', sans-serif;
   box-sizing: border-box;
 }
 
@@ -61,15 +75,28 @@ body.scrolling::-webkit-scrollbar-thumb {
   display: flex !important;
   justify-content: center;
   align-items: center;
-  height: 500px;
+}
+
+.swiper-home {
+  height: 600px !important;
+}
+
+.swiper-width {
+  width: 95% !important;
+  /* justify-content: space-around !important; */
+}
+
+.swiper-element {
+  width: 70% !important;
 }
 
 .swiper-pagination {
   position: absolute !important;
   z-index: 9 !important;
+  bottom: 0 !important;
 }
 .swiper {
-  height: 500px !important;
+  /* height: 500px !important; */
 }
 .swiper-pagination-bullet-active {
   background: #f78a79 !important;

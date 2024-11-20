@@ -29,3 +29,21 @@ export type SidebarProps = {
 export type NavBarProps = {
   showElements: boolean;
 };
+
+export type Wine = {
+  wine_id: number;
+  wine_name: string;
+  image: string;
+  store: string;
+  area: string;
+  rating: number;
+};
+
+export type WineBoxProps = {
+  wines: Wine[];
+  setNumber: number;
+};
+
+export type WineCardProps = {
+  wine: Wine;
+};

@@ -1,5 +1,4 @@
 // src/components/Newsletter.tsx
-
 import Image from 'next/image';
 import React from 'react';
 
@@ -10,9 +9,9 @@ import TextBox from '../reuse/textBox';
 const Footer: React.FC = () => {
   return (
     <div className="bg-footerGrad py-12">
-      <div className="container mx-auto flex flex-col items-center px-6 md:flex-row md:justify-between md:space-x-10">
-        <div className="w-4/5 md:w-6/12">
-          <Image src={IMAGES.footer} alt="Newsletter Graphic" className="-ml-12 min-h-50p min-w-60p md:h-auto md:w-full" width={100} height={100}></Image>
+      <div className="container mx-auto flex w-full flex-col items-center px-6 md:flex-row md:justify-evenly">
+        <div className="">
+          <Image src={IMAGES.footer} alt="Newsletter Graphic" className="relative ml-12" width={1000} height={1000}></Image>
         </div>
         {/* Subscription Form */}
         <div className="flex flex-col items-center justify-center text-center md:w-1/2 md:text-center">

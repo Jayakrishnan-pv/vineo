@@ -16,7 +16,7 @@ import NavBar from '@/components/reuse/navBar';
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="">
       <NavBar showElements />
       <FirstSection />
       <SecondSection />

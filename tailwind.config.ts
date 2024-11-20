@@ -4,6 +4,10 @@ export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        domine: ['Domine', 'serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
       backgroundImage: {
         'glass-bottle': 'url(\'/assets/images/glass-bottle.png\')',
         'vineo-logo': 'url(\'/assets/images/vineo-logo.svg\')',
@@ -31,27 +35,36 @@ export default {
       },
       height: {
         '90p': '93%',
+        '742': '665px',
+        '743': '700px',
         '200p': '500px',
         '42': '420px',
+        '35': '350px',
       },
       width: {
         '2k': '2000px',
         'tab': '1000px',
+        '1k': '1724px',
         '90p': '90%',
         '30p': '300px',
         '50': '500px',
         '200p': '600px',
         '100p': '400px',
         '300p': '800px',
+        '288p': '288px',
+        '95': '96%',
       },
       maxWidth: {
         '40': '350px',
         'custom': '1000px',
+        '1k': '1535px',
         '50': '400px',
         '60': '600px',
         '50p': '500px',
+        '55p': '500px',
         '70': '800px',
         '2000': '2000px',
+        'mw': '500px',
       },
       minWidth: {
         '60p': '400px',
@@ -60,10 +73,12 @@ export default {
         '50p': '300px',
       },
       maxHeight: {
+        '742': '742px',
         '50': '700px',
         '40p': '400px',
       },
       screens: {
+        'lg-l': '1535px',
         'lg-c': '1280px',
         'md-c': '560px',
         'md-m': '700px',
@@ -71,7 +86,7 @@ export default {
         'sm-c': '300px',
       },
       spacing: {
-        74: '250px',
+        74: '290px',
         22: '70px',
         30: '800px',
       },
