@@ -9,7 +9,7 @@ const SixthSection = () => {
   return (
     <div>
       <div className="my-20 flex flex-col items-center justify-around md:flex-row">
-        <Image src={IMAGES.bottleImage} alt="vineo-logo" width={100} height={50} className="h-200p w-100p p-5"></Image>
+        <Image src={IMAGES.bottleImage} alt="vineo-logo" width={625} height={725} className="px-5"></Image>
         <div className="my-auto max-w-60">
           <TextBox
             title="Tu Aprendizaje"
@@ -19,7 +19,7 @@ const SixthSection = () => {
           />
         </div>
       </div>
-      <div className="my-20 flex h-52 flex-col items-center justify-center bg-gray-100 text-center">
+      <div className="my-20 flex h-52 flex-col items-center justify-center bg-secondBg bg-no-repeat text-center">
         <TextBox
           title="Sube de nivel con cada caja"
           subtitle=""

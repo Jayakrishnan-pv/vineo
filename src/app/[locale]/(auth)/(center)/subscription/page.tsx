@@ -22,7 +22,7 @@ const SubscriptionPage = () => {
   return (
     <>
       <Sidebar name="name" subscriptionStatus={0} />
-      <div className="ml-24 mr-5 mt-6 flex flex-col items-center rounded-2xl bg-white shadow-2xl md:ml-74">
+      <div className="ml-24 mr-5 mt-5 flex flex-col items-center rounded-2xl bg-white shadow-2xl md:ml-74">
         <h1 className="left-0 my-12 w-full text-3xl font-semibold">Gestiona tu suscripción</h1>
         <div className="flex w-90p flex-row px-12">
           <Swiper

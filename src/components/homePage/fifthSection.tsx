@@ -7,7 +7,7 @@ import TextBox from '../reuse/textBox';
 
 const FifthSection = () => {
   return (
-    <div className="my-20 flex w-full flex-col items-center justify-around md:flex-row">
+    <div className="mb-20 mt-36 flex w-full flex-col items-center justify-around md:flex-row">
       <div className="mt-10 max-w-50">
         <TextBox
           title="El Algoritmo"
@@ -17,7 +17,7 @@ const FifthSection = () => {
           showButton={true}
         />
       </div>
-      <Image src={IMAGES.graphDetail} alt="graphDetail" width={100} height={50} className="h-200p w-96 p-5"></Image>
+      <Image src={IMAGES.graphDetail} alt="graphDetail" width={325} height={425} className=""></Image>
     </div>
   );
 };

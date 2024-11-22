@@ -28,7 +28,7 @@ const NavBar: React.FC<NavBarProps> = ({ showElements }) => {
   };
 
   return (
-    <div className="fixed top-0 z-10 flex h-20 w-full items-center justify-between px-10 backdrop-blur-lg">
+    <div className="fixed top-0 z-50 flex h-20 w-full items-center justify-between px-10 backdrop-blur-lg">
       <Image src={IMAGES.vineoLogo} width={100} onClick={home} height={60} className="h-8" alt="Vineo Logo"></Image>
       <div className="flex w-3/4 items-center justify-around pl-16 md:w-200p ">
         {showElements && (

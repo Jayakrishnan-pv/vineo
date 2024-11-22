@@ -13,6 +13,8 @@ export default {
         'vineo-logo': 'url(\'/assets/images/vineo-logo.svg\')',
         'home-background': 'url(\'/assets/images/homebg.png\')',
         'custom-gradient': 'linear-gradient(174.81deg, rgba(249, 246, 239, 0) -171.89%, rgba(247, 138, 121, 0.82) 15.79%, #F78A79 53.19%, #F78A79 95.25%)',
+        'hand-gradient': 'linear-gradient(142deg, rgba(243,239,234,1) 0%, rgba(225,220,211,1) 100%);',
+        'second-gradient': 'linear-gradient(142deg, rgba(249,249,249,1) 0%, rgba(244,244,244,1) 10%, rgba(255,255,255,1) 61%, rgba(255,255,255,1) 100%);',
         'secondBg': 'url(\'/assets/images/homepage/secondbg.jpg\')',
         'fifthBg': 'url(\'/assets/images/homepage/fifthBg.png\')',
         'footerGrad': 'linear-gradient(176.41deg, #FEFDFC 52.27%, #E0DBD2 77.73%, #E0DBD2 89.52%)',
@@ -46,6 +48,7 @@ export default {
         'tab': '1000px',
         '1k': '1724px',
         '90p': '90%',
+        '60p': '65%',
         '30p': '300px',
         '50': '500px',
         '200p': '600px',
@@ -57,7 +60,7 @@ export default {
       maxWidth: {
         '40': '350px',
         'custom': '1000px',
-        '1k': '1535px',
+        '1k': '1724px',
         '50': '400px',
         '60': '600px',
         '50p': '500px',
@@ -65,17 +68,25 @@ export default {
         '70': '800px',
         '2000': '2000px',
         'mw': '500px',
+        '288p': '288px',
+        '60%': '60%',
+        '90%': '90%',
+        '30%': '30%',
       },
       minWidth: {
         '60p': '400px',
+        '288p': '288px',
+        '30%': '30%',
       },
       minHeight: {
         '50p': '300px',
+        '20%': '20%',
       },
       maxHeight: {
         '742': '742px',
         '50': '700px',
         '40p': '400px',
+        '1280p': '1280p',
       },
       screens: {
         'lg-l': '1535px',
@@ -92,8 +103,10 @@ export default {
       },
       backdropBlur: {
         xs: '1px',
+        xs2: '2px',
       },
     },
   },
-  plugins: [],
+  plugins: [
+  ],
 } satisfies Config;

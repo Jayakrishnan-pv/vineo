@@ -15,16 +15,18 @@ import WineCard from './WineCard';
 
 const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
   return (
-    <div className="mb-5 ml-14 w-3/5 rounded-2xl border-2 p-4 shadow-2xl lg:w-11/12">
-      <div className="flex flex-col ">
-        <div className="m-5  text-xl">
+    // <div className="mb-5 ml-14 w-3/5 rounded-2xl border-2 p-4 shadow-2xl lg:w-11/12">
+    <div className="mb-5 ml-14 w-90p rounded-2xl border-2 p-4 shadow-2xl ">
+      <div className="flex flex-col">
+        <div className="m-5 text-xl">
           Your recommendations - Set
           {' '}
           {setNumber}
         </div>
-        <div className="flex flex-col  lg-c:flex-row">
-          <div className="m-5  rounded-xl  py-4 shadow-2xl">
-            <div className=" swiper-width flex justify-around ">
+        <div className="flex flex-col lg-c:flex-row">
+          {/* <div className="m-5 rounded-xl py-4 shadow-2xl lg-c:w-60p"> */}
+          <div className="m-5 rounded-xl py-4 shadow-2xl lg-c:w-60p">
+            <div className="">
               <Swiper
                 modules={[Pagination]}
                 spaceBetween={20}
@@ -66,7 +68,7 @@ const WineBox: React.FC<WineBoxProps> = ({ wines, setNumber }) => {
         </div>
 
         <div className="mt-4 flex justify-center">
-          <button type="submit" className="btn my-10 rounded-xl px-10 py-4 text-white">
+          <button type="submit" className="btn my-2 rounded-xl px-4 py-2 text-white sm:px-10 sm:py-4">
             Send this box home to me!
           </button>
         </div>

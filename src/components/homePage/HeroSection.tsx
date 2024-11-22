@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const FirstSection = () => {
+const HeroSection = () => {
   const router = useRouter();
 
   const question = () => {
@@ -21,4 +21,4 @@ const FirstSection = () => {
   );
 };
 
-export default FirstSection;
+export default HeroSection;

@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useGetBoxHistoryQuery } from '@/app/redux/endPoints/boxEndpoints';
 import { useGetSubscriptionStatusQuery } from '@/app/redux/endPoints/subscriptionEndpoints';
+import LoadingSpinner from '@/components/reuse/LoadingSpinner';
 import Sidebar from '@/components/reuse/Sidebar';
 import WineBox from '@/components/reuse/WineBox';
 
@@ -93,18 +94,24 @@ const Dashboard: React.FC = () => {
       <Sidebar name={userData.name} subscriptionStatus={userData.subscriptionStatus} />
       <div className="ml-60 w-5/6">
         <div className="-ml-52 mt-5 flex flex-col transition-all duration-150 ease-in md:ml-0 md:mt-5">
-          <div className="flex flex-col">
-            {wineGroups.map((wineGroup, groupIndex) => (
-              <div key={groupIndex} ref={groupIndex === wineGroups.length - 1 ? lastWineElementRef : null}>
-                <WineBox wines={wineGroup} setNumber={groupIndex + 1} />
-              </div>
-            ))}
+          <div className="flex w-full flex-col">
+            {wineGroups.length === 0 && !boxFetching
+              ? (
+                  <div className="mt-5 text-center text-gray-500">No Wine Box Found!</div>
+                )
+              : (
+                  wineGroups.map((wineGroup, groupIndex) => (
+                    <div key={groupIndex} ref={groupIndex === wineGroups.length - 1 ? lastWineElementRef : null}>
+                      <WineBox wines={wineGroup} setNumber={groupIndex + 1} />
+                    </div>
+                  ))
+                )}
             {boxFetching && (
-              <div className="flex h-screen w-full items-center justify-center p-4">
-                <div className="size-8 animate-spin rounded-full border-b-2 border-gray-900"></div>
+              <div className="flex h-full items-center justify-center">
+                <LoadingSpinner />
               </div>
             )}
-            {!hasMore && <div className="mt-4 text-center text-gray-500">No more recommendations to load</div>}
+            {!hasMore && wineGroups.length > 0 && <div className="mt-4 text-center text-gray-500">No more recommendations to load</div>}
           </div>
         </div>
       </div>

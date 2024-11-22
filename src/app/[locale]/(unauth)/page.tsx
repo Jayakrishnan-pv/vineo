@@ -4,9 +4,9 @@ import React from 'react';
 
 import EigthSection from '@/components/homePage/eightSection';
 import FifthSection from '@/components/homePage/fifthSection';
-import FirstSection from '@/components/homePage/firstSection';
 import Footer from '@/components/homePage/footer';
 import FourthSection from '@/components/homePage/fourthSection';
+import HeroSection from '@/components/homePage/HeroSection';
 import NinthSection from '@/components/homePage/ninthSection';
 import SecondSection from '@/components/homePage/secondSection';
 import SeventhSection from '@/components/homePage/seventhSection';
@@ -16,18 +16,20 @@ import NavBar from '@/components/reuse/navBar';
 
 const HomePage = () => {
   return (
-    <div className="">
+    <div className="flex flex-col items-center justify-center">
       <NavBar showElements />
-      <FirstSection />
-      <SecondSection />
-      <ThirdSection />
-      <FourthSection />
-      <FifthSection />
-      <SixthSection />
-      <SeventhSection />
-      <EigthSection />
-      <NinthSection />
-      <Footer />
+      <div className="w-full lg-c:max-w-1k">
+        <HeroSection />
+        <SecondSection />
+        <ThirdSection />
+        <FourthSection />
+        <FifthSection />
+        <SixthSection />
+        <SeventhSection />
+        <EigthSection />
+        <NinthSection />
+        <Footer />
+      </div>
     </div>
   );
 };

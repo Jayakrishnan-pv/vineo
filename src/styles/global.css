@@ -87,7 +87,7 @@ body.scrolling::-webkit-scrollbar-thumb {
 }
 
 .swiper-element {
-  width: 70% !important;
+  width: 60% !important;
 }
 
 .swiper-pagination {
@@ -100,4 +100,8 @@ body.scrolling::-webkit-scrollbar-thumb {
 }
 .swiper-pagination-bullet-active {
   background: #f78a79 !important;
+}
+
+.swiper-wrapper {
+  /* width: 80% !important; */
 }

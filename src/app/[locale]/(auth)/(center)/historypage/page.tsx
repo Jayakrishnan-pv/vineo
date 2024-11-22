@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-// Import the specific hook from the boxEndpoints file
 import { useGetBoxHistoryAdminQuery } from '@/app/redux/endPoints/boxEndpoints';
 import ClientDetails from '@/components/historyPage/boxdetails';
 import GridHeader from '@/components/historyPage/GridHeader';
@@ -21,8 +20,6 @@ const HistoryPage: React.FC = () => {
   const { page, pageSize, setPage, setPageSize } = usePaginationHandler();
   const { isDialogOpen, selectedCustomer, handleOpenDialog, handleCloseDialog } = useDialogHandler();
   const handleDownload = useDownloadBoxWinePrintCard();
-
-  // API query
   const { data, isLoading } = useGetBoxHistoryAdminQuery({
     searchString: debouncedSearchTerm.trim() || '',
     page,
@@ -33,8 +30,8 @@ const HistoryPage: React.FC = () => {
 
   return (
     <>
-      <Sidebar />
-      <div className="h-screen bg-gray-100 p-4">
+      <div className="h-screen pt-5">
+        <Sidebar name="name" subscriptionStatus={0} />
         {isLoading
           ? (
               <div className="flex h-full items-center justify-center">
@@ -42,7 +39,7 @@ const HistoryPage: React.FC = () => {
               </div>
             )
           : (
-              <div className="my-6 ml-24 rounded-lg bg-white p-4 shadow-md md:ml-80">
+              <div className="ml-24 rounded-lg bg-white p-4 shadow-md md:ml-74">
                 <SearchBar
                   searchTerm={searchTerm}
                   isLoading={isLoading}

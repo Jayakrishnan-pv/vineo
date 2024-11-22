@@ -7,7 +7,7 @@ const GridItem: React.FC<GridItemProps> = ({ item, onDownload, onOpenDialog }) =
   return (
     <div key={item._id} className="grid grid-cols-1 items-center gap-2 border-b p-2 hover:bg-gray-50 md:grid-cols-8 md:gap-2">
       {/* Client */}
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center">
         <div className="flex size-8 items-center justify-center rounded-full bg-blue-500 text-white">
           {item.user.name.charAt(0).toUpperCase()}
         </div>

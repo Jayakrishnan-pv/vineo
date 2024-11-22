@@ -8,8 +8,8 @@ import TextBox from '../reuse/textBox';
 const ThirdSection = () => {
   return (
     <div>
-      <div className="m-20 flex flex-col items-center justify-evenly lg:flex-row">
-        <Image src={IMAGES.graphGif} alt="image" width={100} height={100} className=" size-96"></Image>
+      <div className="mb-20 mt-10 flex flex-col items-center justify-evenly lg:flex-row">
+        <Image src={IMAGES.winegif} alt="image" width={400} height={400} className=""></Image>
         <div className="max-w-96">
           <TextBox
             title="El Proceso"

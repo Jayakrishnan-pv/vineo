@@ -66,7 +66,8 @@ const EigthSection = () => {
         showButton={false}
         pClass="text-center"
       />
-      <div className="h-screen w-full">
+      {/* <div className="h-screen w-full lg-c:w-60p"> */}
+      <div className="h-screen max-w-90% lg-c:max-w-60%">
         <Swiper
           spaceBetween={0}
           slidesPerView={1}

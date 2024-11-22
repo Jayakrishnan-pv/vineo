@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { BsDownload } from 'react-icons/bs';
-import { FaCheck, FaEdit, FaEye, FaTimes, FaTruck } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 
 import type { ActionButtonsProps } from './types';
 
@@ -28,18 +28,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ item, onDownload, onOpenD
         onClick={() => window.open(`https://wa.me/${item.user.phone}`, '_blank')}
       >
         <AiOutlineWhatsApp />
-      </button>
-      <button type="submit" className="rounded-full bg-gray-200 p-2 text-gray-400 transition-colors hover:bg-gray-300">
-        <FaCheck />
-      </button>
-      <button type="submit" className="rounded-full bg-gray-200 p-2 text-gray-400 transition-colors hover:bg-gray-300">
-        <FaTimes />
-      </button>
-      <button type="submit" className="rounded-full bg-gray-200 p-2 text-gray-400 transition-colors hover:bg-gray-300">
-        <FaEdit />
-      </button>
-      <button type="submit" className="rounded-full bg-gray-200 p-2 text-gray-400 transition-colors hover:bg-gray-300">
-        <FaTruck />
       </button>
     </div>
   );

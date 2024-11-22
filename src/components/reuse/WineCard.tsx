@@ -14,7 +14,7 @@ const WineCard: React.FC<WineCardProps> = ({ wine }) => (
       height={100}
       className="size-48 object-contain"
     />
-    <div className="text-red-400">{wine.wine_name}</div>
+    <div className="text-sm text-red-400">{wine.wine_name}</div>
     <div className="mt-5 text-sm text-gray-400">{wine.store}</div>
     <div className="mb-5 text-sm text-gray-400">{wine.area}</div>
     <Rating name="read-only" value={wine.rating} readOnly className="custom-rating" />
