@@ -18,6 +18,7 @@ export default {
         'secondBg': 'url(\'/assets/images/homepage/secondbg.jpg\')',
         'fifthBg': 'url(\'/assets/images/homepage/fifthBg.png\')',
         'footerGrad': 'linear-gradient(176.41deg, #FEFDFC 52.27%, #E0DBD2 77.73%, #E0DBD2 89.52%)',
+        'cardGrad': ' linear-gradient(178.4deg, rgba(255, 255, 255, 0.5) -15.1%, rgba(246, 245, 240, 0.53) 33.55%, #F8F8F8 135.81%);',
       },
       backgroundSize: {
         'image-size': '600px',
@@ -42,6 +43,7 @@ export default {
         '200p': '500px',
         '42': '420px',
         '35': '350px',
+        '81': '21rem',
       },
       width: {
         '2k': '2000px',
@@ -56,6 +58,8 @@ export default {
         '300p': '800px',
         '288p': '288px',
         '95': '96%',
+        '30%': '30%',
+        '85%': '75%',
       },
       maxWidth: {
         '40': '350px',
@@ -67,19 +71,26 @@ export default {
         '55p': '500px',
         '70': '800px',
         '2000': '2000px',
+        'w-wrap': '1500px',
         'mw': '500px',
         '288p': '288px',
         '60%': '60%',
+        '50%': '50%',
+        '40%': '40%',
         '90%': '90%',
+        '70%': '70%',
         '30%': '30%',
       },
       minWidth: {
         '60p': '400px',
         '288p': '288px',
         '30%': '30%',
+        '50%': '50%',
+        '80%': '80%',
       },
       minHeight: {
         '50p': '300px',
+        '55p': '580px',
         '20%': '20%',
       },
       maxHeight: {
@@ -91,6 +102,8 @@ export default {
       screens: {
         'lg-l': '1535px',
         'lg-c': '1280px',
+        'w-wrap': '1480px',
+        'hand-w': '1410px',
         'md-c': '560px',
         'md-m': '700px',
         'sm-m': '420px',
@@ -100,6 +113,8 @@ export default {
         74: '290px',
         22: '70px',
         30: '800px',
+        97: '30rem',
+        98: '40rem',
       },
       backdropBlur: {
         xs: '1px',

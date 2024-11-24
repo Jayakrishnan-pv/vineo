@@ -28,7 +28,6 @@
   box-sizing: border-box;
 }
 
-/* Rating styles */
 .custom-rating .MuiRating-iconFilled {
   color: #f78a79;
 }
@@ -37,12 +36,10 @@
   color: #f78a79;
 }
 
-/* Button styles */
 .btn {
   background-color: #f78a79;
 }
 
-/* Scrollbar styles */
 body {
   scrollbar-width: thin;
   transition: padding-right 0.3s ease;
@@ -83,7 +80,6 @@ body.scrolling::-webkit-scrollbar-thumb {
 
 .swiper-width {
   width: 95% !important;
-  /* justify-content: space-around !important; */
 }
 
 .swiper-element {
@@ -95,13 +91,7 @@ body.scrolling::-webkit-scrollbar-thumb {
   z-index: 9 !important;
   bottom: 0 !important;
 }
-.swiper {
-  /* height: 500px !important; */
-}
+
 .swiper-pagination-bullet-active {
   background: #f78a79 !important;
-}
-
-.swiper-wrapper {
-  /* width: 80% !important; */
 }

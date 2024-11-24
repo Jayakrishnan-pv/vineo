@@ -15,8 +15,9 @@ const SubscriptionCard: React.FC<SubCardProps> = ({
   isActive,
   renewalDate,
   showButton,
+  isDemo,
 }) => (
-  <div className={`mx-2 flex h-42 w-288p flex-col rounded-2xl border-2 py-6 text-gray-800 shadow-xl ${isActive ? 'bg-card-bg text-white' : 'bg-white'}`}>
+  <div className={`mx-2 flex h-42 w-288p flex-col rounded-2xl border-2 py-6 text-gray-800 shadow-xl ${isActive ? 'bg-card-bg text-white' : 'bg-cardGrad'}`}>
     <h2 className={` flex h-14 items-center justify-center text-center text-xl font-bold${isActive ? 'w-full bg-gray-700 text-white' : 'bg-white'}`}>{title}</h2>
     <div className="grow overflow-y-auto px-10">
       <p className="my-4 text-3xl font-bold">
@@ -24,31 +25,51 @@ const SubscriptionCard: React.FC<SubCardProps> = ({
         {' '}
         €/mes
       </p>
-      <p className="mb-4">{subTitle}</p>
+      <p className="mb-2">{subTitle}</p>
       <ul className="text-sm">
         {description.map((feature, index) => (
           <li key={index} className="mb-2 flex">
-            <span className="mr-2 text-xl text-red-500"><MdOutlineDone /></span>
+            <span className={`mr-2 mt-1 text-sm ${isActive ? 'text-white' : 'text-red-400'}`}><MdOutlineDone /></span>
             {' '}
             {feature}
           </li>
         ))}
       </ul>
     </div>
-    {isActive && (
-      <p className="ml-20 mt-4 text-xs text-gray-500">
-        Renueva el
-        {' '}
-        {new Date(renewalDate).toLocaleDateString()}
-      </p>
-    )}
-    {showButton && (
-      <div className="mt-4 flex items-center justify-center">
-        <Link href={paymentLink} target="_blank" rel="noopener noreferrer">
-          <button type="submit" className=" rounded-xl bg-gray-800 px-10 py-2 text-white">Cambiar</button>
-        </Link>
-      </div>
-    )}
+    {isActive && !isDemo
+      ? (
+          <p className="ml-20 mt-4 text-xs text-gray-500">
+            Renueva el
+            {' '}
+            {new Date(renewalDate).toLocaleDateString()}
+          </p>
+        )
+      : ''}
+    {showButton && !isDemo
+      ? (
+          <div className="mt-4 flex items-center justify-center">
+            <Link href={paymentLink} target="_blank" rel="noopener noreferrer">
+              <button type="submit" className=" rounded-xl bg-gray-800 px-10 py-2 text-white">Cambiar</button>
+            </Link>
+          </div>
+        )
+      : showButton && isDemo && !isActive
+        ? (
+            <div className="mt-4 flex items-center justify-center">
+              <Link href={paymentLink} target="_blank" rel="noopener noreferrer">
+                <button type="submit" className=" btn rounded-xl px-10 py-2 text-white">Cambiar</button>
+              </Link>
+            </div>
+          )
+        : showButton && isDemo && isActive
+          ? (
+              <div className="mt-4 flex items-center justify-center">
+                <Link href={paymentLink} target="_blank" rel="noopener noreferrer">
+                  <button type="submit" className=" rounded-xl bg-white px-10 py-2 text-gray-800">Cambiar</button>
+                </Link>
+              </div>
+            )
+          : ''}
   </div>
 );
 

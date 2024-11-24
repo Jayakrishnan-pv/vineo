@@ -9,12 +9,12 @@ import TextBox from '../reuse/textBox';
 const Footer: React.FC = () => {
   return (
     <div className="bg-footerGrad py-12">
-      <div className="container mx-auto flex w-full flex-col items-center px-6 md:flex-row md:justify-evenly">
+      <div className="flex w-full flex-col items-center px-6 lg:flex-row">
         <div className="">
-          <Image src={IMAGES.footer} alt="Newsletter Graphic" className="relative ml-12" width={1000} height={1000}></Image>
+          <Image src={IMAGES.footer} alt="Newsletter Graphic" className="relative" width={1200} height={1200}></Image>
         </div>
         {/* Subscription Form */}
-        <div className="flex flex-col items-center justify-center text-center md:w-1/2 md:text-center">
+        <div className="flex flex-col items-center justify-center text-pretty text-center md:w-5/6">
           <TextBox
             title="No te pierdas ni una"
             subtitle=""
@@ -22,10 +22,12 @@ const Footer: React.FC = () => {
               'Apúntate a la newsletter para estar al tanto de todas las noticias, ventajas y descuentos de Vineo',
             ]}
             showButton={false}
+            h2Class="text-4xl font-bold"
+            pClass="text-3xl"
           />
-          <div className="relative w-30p sm:w-100p">
-            <input type="search" id="search" className="block w-full rounded-xl border border-gray-300 bg-gray-50 p-4 ps-10 text-sm " placeholder="Enter your email" required />
-            <button type="submit" className="absolute bottom-2.5 end-2.5 rounded-xl bg-custom-color px-4 py-2 text-sm font-medium text-white">Subscribe</button>
+          <div className="relative w-30p md:w-5/6 lg:min-w-80%">
+            <input type="search" id="search" className="block h-16 w-full rounded-xl border border-gray-300 bg-gray-50 p-4 text-xl " placeholder="Enter your email" required />
+            <button type="submit" className="absolute bottom-2.5 end-2.5 rounded-xl bg-custom-color px-4 py-2 text-xl font-medium text-white">Subscribe</button>
           </div>
         </div>
       </div>

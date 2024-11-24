@@ -23,8 +23,9 @@ const EigthSection = () => {
     ],
     paymentLink: '',
     isActive: true,
-    showButton: false,
-    renewalDate: '2024-12-01',
+    showButton: true,
+    isDemo: true,
+    renewalDate: '12-1-2014',
   };
   const inactiveSubscription = {
     title: 'VINEO BOX',
@@ -39,6 +40,7 @@ const EigthSection = () => {
     isActive: false,
     showButton: true,
     renewalDate: '',
+    isDemo: true,
   };
   const freeSubscription = {
     title: 'VINEO BOX',
@@ -53,6 +55,7 @@ const EigthSection = () => {
     isActive: false,
     showButton: true,
     renewalDate: '',
+    isDemo: true,
   };
 
   const subscriptions = [freeSubscription, activeSubscription, inactiveSubscription];
@@ -92,7 +95,7 @@ const EigthSection = () => {
         >
           {subscriptions.map((subscription, index) => (
             <SwiperSlide key={index} className="flex w-full items-center justify-center pb-5">
-              <SubscriptionCard {...subscription} />
+              <SubscriptionCard isDemo={false} {...subscription} />
             </SwiperSlide>
           ))}
         </Swiper>

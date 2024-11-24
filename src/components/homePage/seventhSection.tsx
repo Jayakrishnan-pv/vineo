@@ -7,8 +7,8 @@ import TextBox from '../reuse/textBox';
 
 const SeventhSection = () => {
   return (
-    <div className="h-full bg-fifthBg bg-contain bg-right bg-no-repeat">
-      <div className="flex w-full flex-col items-center justify-around md:flex-row">
+    <div className="min-h-98 w-full bg-fifthBg bg-contain bg-right bg-no-repeat">
+      <div className="flex flex-col items-center justify-around lg:flex-row">
         <div className="">
           <Image
             src={IMAGES.gif}
@@ -18,7 +18,7 @@ const SeventhSection = () => {
             className="mb-4 rounded-xl border backdrop-blur-sm"
           />
         </div>
-        <div className="md:max-w-60">
+        <div className="mx-5 mt-20 text-pretty lg:max-w-50%">
           <TextBox
             title="Tus Beneficios"
             subtitle="Vineo Coins"
@@ -27,6 +27,10 @@ const SeventhSection = () => {
             ]}
             buttonText="Comienza"
             showButton={true}
+            h2Class="text-4xl "
+            h3Class="text-4xl bold"
+            pClass="text-3xl"
+            buttonClass="px-20 py-4"
           />
         </div>
       </div>

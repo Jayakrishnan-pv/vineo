@@ -19,6 +19,7 @@ export type SubCardProps = {
   isActive: boolean;
   showButton: boolean;
   renewalDate: string;
+  isDemo: boolean;
 };
 
 export type SidebarProps = {

@@ -5,7 +5,7 @@ import FAQDropdown from './faqDrop';
 
 const NinthSection = () => {
   return (
-    <div className="mx-auto w-4/5 text-center md:w-7/12">
+    <div className="mx-auto w-4/5 text-balance text-center md:w-9/12">
       <TextBox
         title=""
         subtitle="Preguntas frecuentes"
@@ -13,6 +13,9 @@ const NinthSection = () => {
         ]}
         buttonText=""
         showButton={false}
+        h2Class="text-4xl"
+        h3Class="text-4xl"
+        pClass="text-3xl"
       />
       <FAQDropdown />
     </div>

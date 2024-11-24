@@ -19,11 +19,11 @@ const TextBox: React.FC<TextBoxProps> = ({
       <h3 className={`mb-5 text-4xl font-bold ${h3Class}`}>{subtitle}</h3>
       <div className="text-lg font-medium text-gray-700">
         {paragraphs.map((text, index) => (
-          <p key={index} className={`mb-8 ${pClass}`}>{text}</p>
+          <p key={index} className={`mb-10 ${pClass}`}>{text}</p>
         ))}
       </div>
       {showButton && (
-        <button type="submit" className={`btn my-10 w-64 rounded-xl px-10 py-4 text-white ${buttonClass}`}>
+        <button type="submit" className={`btn rounded-xl text-white ${buttonClass}`}>
           {buttonText}
         </button>
       )}

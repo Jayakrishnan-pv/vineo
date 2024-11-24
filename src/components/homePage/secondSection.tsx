@@ -1,3 +1,4 @@
+// SecondSection.tsx
 import React from 'react';
 
 import { secondPage } from '@/constants/TextConstants';
@@ -15,6 +16,7 @@ const SecondSection = () => {
           '5€ de descuento PARA SIEMPRE',
         ]}
         h2Class="text-center"
+        h3Class="text-center"
         pClass="text-center font-normal"
         showButton={false}
       />
@@ -22,13 +24,13 @@ const SecondSection = () => {
         <input type="search" id="search" className="block w-full rounded-xl border border-gray-300 bg-gray-50 p-4 ps-10 text-sm " placeholder="email" required />
         <button type="submit" className="absolute bottom-2.5 end-2.5 rounded-xl bg-custom-color px-4 py-2 text-sm font-medium text-white">Apúntate</button>
       </div>
-      <h1 className="text-center text-3xl text-gray-600">Cómo funciona</h1>
-      <div className="my-10 flex flex-col flex-wrap items-center justify-around text-center md:flex-row ">
+      <h1 className="text-center text-4xl text-gray-600">Cómo funciona</h1>
+      <div className="mt-20 flex w-full flex-col flex-wrap items-center justify-around text-center md:flex-row w-wrap:flex-nowrap ">
         {Object.values(secondPage).map((section, index) => (
           <SmallCard key={index} heading={section.heading} desc={section.desc} img={section.img} />
         ))}
       </div>
-      <button type="submit" className="btn my-10 w-64 rounded-xl px-10 py-4 text-white">
+      <button type="submit" className="btn my-10 rounded-xl px-24 py-4 text-white">
         Contesta el cuestinario
       </button>
     </div>
