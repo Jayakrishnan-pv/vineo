@@ -22,12 +22,12 @@ const Footer: React.FC = () => {
               'Apúntate a la newsletter para estar al tanto de todas las noticias, ventajas y descuentos de Vineo',
             ]}
             showButton={false}
-            h2Class="text-4xl font-bold"
-            pClass="text-3xl"
+            h2Class="text-3xl lg:text-3xl mb-10 font-bold text-center"
+            pClass="text-xl sm:text-xl mb-10 lg:text-2xl text-center"
           />
-          <div className="relative w-30p md:w-5/6 lg:min-w-80%">
-            <input type="search" id="search" className="block h-16 w-full rounded-xl border border-gray-300 bg-gray-50 p-4 text-xl " placeholder="Enter your email" required />
-            <button type="submit" className="absolute bottom-2.5 end-2.5 rounded-xl bg-custom-color px-4 py-2 text-xl font-medium text-white">Subscribe</button>
+          <div className="relative w-30p sm:min-w-80%">
+            <input type="search" id="search" className="block h-16 w-full rounded-xl border border-gray-300 bg-gray-50 p-4 text-lg sm:text-xl " placeholder="Enter your email" required />
+            <button type="submit" className="absolute bottom-2.5 end-2.5 rounded-xl bg-custom-color px-4 py-2 text-lg font-medium text-white sm:text-xl">Subscribe</button>
           </div>
         </div>
       </div>

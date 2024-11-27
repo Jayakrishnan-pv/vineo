@@ -9,16 +9,16 @@ const SeventhSection = () => {
   return (
     <div className="min-h-98 w-full bg-fifthBg bg-contain bg-right bg-no-repeat">
       <div className="flex flex-col items-center justify-around lg:flex-row">
-        <div className="">
+        <div className="mb-5 mt-32">
           <Image
             src={IMAGES.gif}
             alt="Vineo GIF"
             width={400}
             height={200}
-            className="mb-4 rounded-xl border backdrop-blur-sm"
+            className="rounded-xl border-2  backdrop-blur-sm"
           />
         </div>
-        <div className="mx-5 mt-20 text-pretty lg:max-w-50%">
+        <div className="text-pretty lg:max-w-40%">
           <TextBox
             title="Tus Beneficios"
             subtitle="Vineo Coins"
@@ -27,10 +27,10 @@ const SeventhSection = () => {
             ]}
             buttonText="Comienza"
             showButton={true}
-            h2Class="text-4xl "
-            h3Class="text-4xl bold"
-            pClass="text-3xl"
-            buttonClass="px-20 py-4"
+            h2Class="text-2xl lg:text-3xl mb-8 lg:text-left text-center "
+            h3Class="text-2xl lg:text-3xl mb-10 font-bold lg:max-w-70% lg:text-left text-center"
+            pClass="text-xl sm:text-xl mb-12 lg:text-2xl lg:text-left text-center"
+            buttonClass="px-20 py-4 lg:mx-0 mx-auto"
           />
         </div>
       </div>

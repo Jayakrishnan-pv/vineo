@@ -16,21 +16,21 @@ const SecondSection = () => {
           '5€ de descuento PARA SIEMPRE',
         ]}
         h2Class="text-center"
-        h3Class="text-center"
-        pClass="text-center font-normal"
+        h3Class="text-center lg:text-4xl md:text-2xl text-xl"
+        pClass="text-center font-normal sm:text-xl text-sm"
         showButton={false}
       />
       <div className="relative mb-16 w-30p md:w-2/6">
         <input type="search" id="search" className="block w-full rounded-xl border border-gray-300 bg-gray-50 p-4 ps-10 text-sm " placeholder="email" required />
         <button type="submit" className="absolute bottom-2.5 end-2.5 rounded-xl bg-custom-color px-4 py-2 text-sm font-medium text-white">Apúntate</button>
       </div>
-      <h1 className="text-center text-4xl text-gray-600">Cómo funciona</h1>
-      <div className="mt-20 flex w-full flex-col flex-wrap items-center justify-around text-center md:flex-row w-wrap:flex-nowrap ">
+      <h1 className="text-center text-3xl text-gray-600 lg:text-4xl">Cómo funciona</h1>
+      <div className="mt-20 flex w-full flex-col items-center justify-evenly text-center sm:px-10 lg:flex-row ">
         {Object.values(secondPage).map((section, index) => (
           <SmallCard key={index} heading={section.heading} desc={section.desc} img={section.img} />
         ))}
       </div>
-      <button type="submit" className="btn my-10 rounded-xl px-24 py-4 text-white">
+      <button type="submit" className="btn my-10 rounded-xl px-4 py-2 text-white md:px-24 md:py-4">
         Contesta el cuestinario
       </button>
     </div>
