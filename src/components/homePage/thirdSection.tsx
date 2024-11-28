@@ -8,7 +8,7 @@ import TextBox from '../reuse/textBox';
 const ThirdSection = () => {
   return (
     <div>
-      <div className="mb-80 flex flex-col items-center justify-evenly px-5 md:px-12 lg:flex-row">
+      <div className="flex flex-col items-center justify-evenly px-5 md:px-12 lg:flex-row lg-s:mb-32 w-wrap:mb-64">
         <Image src={IMAGES.winegif} alt="image" width={500} height={500} className="mt-14"></Image>
         <div className="mx-5 mt-10 text-pretty lg:max-w-40%">
           <TextBox

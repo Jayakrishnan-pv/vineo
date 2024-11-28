@@ -18,7 +18,7 @@ const SubscriptionCard: React.FC<SubCardProps> = ({
   isDemo,
 }) => (
   <div className={`mx-2 flex h-42 w-288p flex-col rounded-2xl border-2 py-6 text-gray-800 shadow-xl ${isActive ? 'bg-card-bg text-white' : 'bg-cardGrad'}`}>
-    <h2 className={` flex h-14 items-center justify-center text-center text-xl font-bold${isActive ? 'w-full bg-gray-700 text-white' : 'bg-white'}`}>{title}</h2>
+    <h2 className={` flex h-14 items-center justify-center text-center text-2xl font-normal ${isActive ? 'w-full bg-gray-700 text-white' : ''}`}>{title}</h2>
     <div className="grow overflow-y-auto px-10">
       <p className="my-4 text-3xl font-bold">
         {amount}

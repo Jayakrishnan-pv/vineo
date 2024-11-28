@@ -8,7 +8,7 @@ import SmallCard from './smallCards';
 
 const SecondSection = () => {
   return (
-    <div className=" flex flex-col items-center justify-around bg-secondBg bg-cover bg-no-repeat py-24">
+    <div className=" flex flex-col items-center justify-around bg-secondBg bg-cover bg-no-repeat py-5">
       <TextBox
         title=""
         subtitle="Apúntate a la lista y aprovéchate de la oferta de lanzamiento"
@@ -16,13 +16,13 @@ const SecondSection = () => {
           '5€ de descuento PARA SIEMPRE',
         ]}
         h2Class="text-center"
-        h3Class="text-center lg:text-4xl md:text-2xl text-xl"
-        pClass="text-center font-normal sm:text-xl text-sm"
+        h3Class="text-center mb-2 lg:text-4xl md:text-2xl text-xl"
+        pClass="text-center font-normal sm:text-xl text-sm mb-5"
         showButton={false}
       />
-      <div className="relative mb-16 w-30p md:w-2/6">
-        <input type="search" id="search" className="block w-full rounded-xl border border-gray-300 bg-gray-50 p-4 ps-10 text-sm " placeholder="email" required />
-        <button type="submit" className="absolute bottom-2.5 end-2.5 rounded-xl bg-custom-color px-4 py-2 text-sm font-medium text-white">Apúntate</button>
+      <div className="relative mb-16 w-30p md:w-2/5">
+        <input type="search" id="search" className="block h-16 w-full rounded-xl border p-4 ps-10 text-lg focus:outline-none" placeholder="email" required />
+        <button type="submit" className="absolute bottom-2.5 end-2.5 rounded-xl bg-custom-color px-4 py-2 text-lg font-medium text-white lg:px-10 lg-m:px-16">Apúntate</button>
       </div>
       <h1 className="text-center text-3xl text-gray-600 lg:text-4xl">Cómo funciona</h1>
       <div className="mt-20 flex w-full flex-col items-center justify-evenly text-center sm:px-10 lg:flex-row ">

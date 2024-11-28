@@ -47,7 +47,7 @@ const FAQDropdown = () => {
   };
 
   return (
-    <div className="w-full md:mx-auto">
+    <div className="m-5 w-full md:mx-auto">
       {faqs.map((faq, index) => (
         <div key={index} className="border-b border-gray-200">
           <button

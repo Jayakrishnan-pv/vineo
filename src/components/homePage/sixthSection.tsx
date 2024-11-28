@@ -8,9 +8,9 @@ import TextBox from '../reuse/textBox';
 const SixthSection = () => {
   return (
     <div>
-      <div className="mx-5 my-20 flex flex-col items-center justify-around md:flex-row">
-        <Image src={IMAGES.bottleImage} alt="vineo-logo" width={550} height={700} className="px-5"></Image>
-        <div className="my-auto text-pretty md:max-w-40%">
+      <div className="mx-5 my-10 flex flex-col items-center justify-evenly lg:flex-row">
+        <Image src={IMAGES.bottleImage} alt="vineo-logo" width={500} height={700} className="px-5"></Image>
+        <div className="my-auto text-pretty lg:max-w-40%">
           <TextBox
             title="Tu Aprendizaje"
             subtitle="Aprende sobre vinos con cada caja"
@@ -22,14 +22,14 @@ const SixthSection = () => {
           />
         </div>
       </div>
-      <div className="flex h-64 flex-col items-center justify-center bg-secondBg bg-no-repeat p-5 text-center">
+      <div className="flex h-64 flex-col items-center justify-center bg-secondBg bg-no-repeat px-5 py-0 text-center">
         <TextBox
           title="Sube de nivel con cada caja"
           subtitle=""
           paragraphs={['Invita a amigos, valora tus vinos y accede a descuentos y ventajas únicas con tus Vineo Coins']}
           showButton={false}
           h2Class="text-2xl text-gray-800 lg:text-3xl mb-5 text-center"
-          pClass="text-xl sm:text-xl lg:max-w-80% mx-auto text-center"
+          pClass="text-xl mb-0 sm:text-xl lg:max-w-80% mx-auto text-center"
         />
       </div>
     </div>

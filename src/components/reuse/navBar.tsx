@@ -29,7 +29,7 @@ const NavBar: React.FC<NavBarProps> = ({ showElements }) => {
 
   return (
     <div className="fixed top-0 z-50 flex h-20 w-full items-center justify-between px-5 backdrop-blur-lg md:px-10">
-      <Image src={IMAGES.vineoLogo} width={100} onClick={home} height={100} className="h-8" alt="Vineo Logo"></Image>
+      <Image src={IMAGES.vineoLogo} width={150} onClick={home} height={150} className="" alt="Vineo Logo"></Image>
       <div className="flex w-3/4 items-center justify-around pl-16 md:w-200p ">
         {showElements && (
           <>

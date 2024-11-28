@@ -15,7 +15,7 @@ const NinthSection = () => {
         showButton={false}
         h2Class="text-4xl"
         h3Class="text-3xl lg:text-3xl mb-11 font-bold text-center"
-        pClass="text-xl sm:text-xl mb-12 lg:text-2xl text-center"
+        pClass="text-xl sm:text-xl mb-5 lg:text-2xl text-center"
       />
       <FAQDropdown />
     </div>

@@ -7,8 +7,8 @@ import TextBox from '../reuse/textBox';
 
 const FifthSection = () => {
   return (
-    <div className="mb-20 mt-16 flex w-full flex-col items-center justify-evenly md:mt-24 md:flex-row">
-      <div className="order-2 mt-10 text-pretty md:order-1 md:max-w-40%">
+    <div className="mb-20 mt-16 flex w-full flex-col-reverse items-center justify-evenly md:mt-24 lg:flex-row">
+      <div className="text-pretty lg:mt-10 lg:max-w-40%">
         <TextBox
           title="El Algoritmo"
           subtitle="Cada vez que valoras un vino, mejora el algoritmo"
@@ -21,7 +21,7 @@ const FifthSection = () => {
           buttonClass="px-20 py-3 text-lg md:text-xl lg:mx-0 mx-auto"
         />
       </div>
-      <Image src={IMAGES.algorithmo} alt="graphDetail" width={350} height={390} className="order-1 md:order-1"></Image>
+      <Image src={IMAGES.algorithmo} alt="graphDetail" width={280} height={280} className=""></Image>
     </div>
   );
 };

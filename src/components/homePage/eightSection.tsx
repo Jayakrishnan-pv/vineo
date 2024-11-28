@@ -63,11 +63,12 @@ const EigthSection = () => {
   return (
     <div className="flex h-743 w-full flex-col items-center justify-center bg-secondBg bg-cover bg-no-repeat">
       <TextBox
-        title=""
-        subtitle="Elige el servicio que mejor se adapta a ti"
-        paragraphs={['Vineo a tu medida']}
+        title="Elige el servicio que mejor se adapta a ti"
+        subtitle="Vineo a tu medida"
+        paragraphs={['']}
         showButton={false}
-        pClass="text-center"
+        h2Class="text-2xl font-bold text-gray-700 lg:text-3xl mb-5 text-center"
+        h3Class="text-xl sm:text-xl text-center text-gray-700  lg:max-w-80% mx-auto text-center"
       />
       {/* <div className="h-screen w-full lg-c:w-60p"> */}
       <div className="h-screen max-w-90% lg-c:max-w-60%">

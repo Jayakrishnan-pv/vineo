@@ -10,9 +10,9 @@ const SmallCard: React.FC<SmallCardProps> = ({ heading, desc, img }) => {
       <div className="flex items-center justify-center">
         <Image src={img} alt="image" width={125} height={125} className="absolute"></Image>
       </div>
-      <div className="z-0 mx-auto min-h-48 flex-1 space-y-6 rounded-xl border bg-second-gradient p-5 shadow-2xl md:min-h-64 lg:min-h-96 lg-s:min-h-72 lg-l:min-h-80">
-        <h2 className="mt-5 text-lg text-gray-600 sm:text-xl lg:mt-10 lg-l:text-3xl">{heading}</h2>
-        <h2 className="text-sm sm:text-xl lg-l:text-3xl">{desc}</h2>
+      <div className="z-0 mx-auto min-h-48 flex-1 space-y-6 rounded-xl border bg-second-gradient p-5 shadow-2xl md:min-h-64 lg:max-h-73 lg:min-h-72  lg-l:min-h-80">
+        <h2 className="mt-5 text-lg font-semibold text-gray-700 sm:text-2xl lg:mt-10 lg-l:text-3xl">{heading}</h2>
+        <h2 className="text-sm sm:text-lg">{desc}</h2>
       </div>
     </div>
   );
