@@ -5,8 +5,8 @@ import { IMAGES } from '@/constants/ImageConstants';
 
 const FourthSection = () => {
   return (
-    <div className="flex w-full flex-col items-center justify-evenly bg-hand-gradient py-10 md:top-16 lg:flex-row">
-      <Image src={IMAGES.hand} alt="image" width={700} height={700} className="-mt-52 hand-w:absolute hand-w:-ml-96 "></Image>
+    <div className="flex w-full flex-col items-center justify-evenly overflow-x-clip bg-hand-gradient py-10 md:top-16 lg:flex-row">
+      <Image src={IMAGES.hand} alt="image" width={700} height={700} className="-mt-52 ml-24 hand-w:absolute hand-w:-ml-96 "></Image>
       <div className="my-10 ml-auto text-pretty hand-w:my-0 hand-w:mr-24 hand-w:max-w-40%">
         <h1 className="mb-10 text-center text-2xl font-bold text-gray-800 lg:text-4xl">
           La esencia de Vineo
