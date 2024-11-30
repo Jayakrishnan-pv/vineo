@@ -1,16 +1,16 @@
-// app/components/WinePreferenceQuestion.js
 'use client';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { GrNext, GrPrevious } from 'react-icons/gr';
 
 import NavBar from '@/components/reuse/navBar';
 import { IMAGES } from '@/constants/ImageConstants';
 
 const WinePreferenceQuestion = () => {
-  // State to track the selected card
-  const [selected, setSelected] = useState(null);
+  // const { data, error, isLoading } = useGetQuestionsQuery();
 
-  // Options data
+  // console.log('question data', data);
+  const [selected, setSelected] = useState(null);
   const options = [
     {
       id: 1,
@@ -51,14 +51,14 @@ const WinePreferenceQuestion = () => {
   return (
     <>
       <NavBar showElements={false} />
-      <div className="flex h-screen w-full flex-col items-center justify-center bg-secondBg bg-no-repeat py-8">
+      <div className="flex h-screen w-full flex-col items-center justify-center space-y-10 bg-secondBg bg-no-repeat py-8">
         {/* Question */}
-        <h2 className="mb-16 text-2xl font-semibold text-gray-800">
+        <h2 className="text-2xl font-semibold text-gray-800">
           1. ¿Cómo es tu vino preferido?
         </h2>
-        <Image src={IMAGES.Capa_1} alt=" logo" className="mb-10 size-20" width={100} height={100}></Image>
+        <Image src={IMAGES.Capa_1} alt=" logo" className="size-20" width={100} height={100}></Image>
         {/* Options */}
-        <div className="flex w-full flex-wrap justify-center gap-4">
+        <div className="flex w-full flex-wrap justify-center gap-4 ">
           {options.map(option => (
             <div
               key={option.id}
@@ -66,19 +66,23 @@ const WinePreferenceQuestion = () => {
               onKeyDown={e => handleKeyDown(e, option.id)}
               tabIndex="0"
               role="button"
-              className={`w-40 cursor-pointer rounded-lg p-4 shadow transition duration-200 ease-in-out 
+              className={`w-48 cursor-pointer rounded-xl border-2 p-4 shadow transition duration-200 ease-in-out hover:border-none hover:bg-queGrad hover:shadow-2xl 
               ${
             selected === option.id
-              ? 'bg-red-100 text-red-700'
-              : 'bg-gray-100 text-gray-700'
+              ? 'border-none bg-queGrad text-gray-800 '
+              : 'bg-white text-gray-700'
             }`}
             >
-              <h3 className="mb-2 text-lg font-bold">{option.title}</h3>
+              <h3 className="mb-2 text-center text-lg font-bold">{option.title}</h3>
               <p className="text-sm">
                 {option.description}
               </p>
             </div>
           ))}
+        </div>
+        <div className="flex space-x-5 text-4xl text-custom-color">
+          <GrPrevious />
+          <GrNext />
         </div>
       </div>
     </>

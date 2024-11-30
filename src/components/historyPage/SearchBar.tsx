@@ -9,7 +9,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, isLoading, onSearchCh
       <input
         type="text"
         placeholder="Search by name, phone, or wine"
-        className="w-1/4 rounded border p-2 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded border p-2 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-3/5 lg:w-2/5"
         value={searchTerm}
         onChange={onSearchChange}
       />

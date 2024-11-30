@@ -30,7 +30,7 @@ const SecondSection = () => {
           <SmallCard key={index} heading={section.heading} desc={section.desc} img={section.img} />
         ))}
       </div>
-      <button type="submit" className="btn my-10 rounded-xl px-4 py-2 text-white md:px-24 md:py-4">
+      <button type="submit" className="btn my-10 rounded-xl px-8 py-4 text-white md:px-24 md:py-4">
         Contesta el cuestinario
       </button>
     </div>

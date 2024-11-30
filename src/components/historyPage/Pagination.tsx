@@ -13,14 +13,18 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   return (
     <div className="mt-4 flex items-center justify-between">
+      {/* Total Clients Text */}
       <div className="text-sm text-gray-700">
         {totalPages * pageSize}
         {' '}
         Clientes
       </div>
+
+      {/* Pagination Controls */}
       <div className="flex space-x-2">
+        {/* Previous Button */}
         <button
-          type="submit"
+          type="button"
           className={`rounded border px-3 py-1 ${
             page === 1 ? 'cursor-not-allowed bg-gray-100' : 'hover:bg-gray-100'
           }`}
@@ -29,34 +33,47 @@ const Pagination: React.FC<PaginationProps> = ({
         >
           <GrFormPrevious />
         </button>
-        {Array.from({ length: Math.min(5, totalPages) }, (_, i) => (
-          <button
-            type="submit"
-            key={i + 1}
-            className={`rounded border px-3 py-1 ${
-              page === i + 1 ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
-            }`}
-            onClick={() => onPageChange(i + 1)}
-            disabled={isLoading}
-          >
-            {i + 1}
-          </button>
-        ))}
-        {totalPages > 5 && <span>...</span>}
-        {totalPages > 5 && (
-          <button
-            type="submit"
-            className={`rounded border px-3 py-1 ${
-              page === totalPages ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
-            }`}
-            onClick={() => onPageChange(totalPages)}
-            disabled={isLoading}
-          >
-            {totalPages}
-          </button>
-        )}
+
+        {/* Page Number Text (Below md) */}
+        <span className="text-sm md:hidden">
+          Page
+          {' '}
+          {page}
+        </span>
+
+        {/* Page Number Buttons (md and above) */}
+        <div className="hidden space-x-2 md:flex">
+          {Array.from({ length: Math.min(5, totalPages) }, (_, i) => (
+            <button
+              type="button"
+              key={i + 1}
+              className={`rounded border px-3 py-1 ${
+                page === i + 1 ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
+              }`}
+              onClick={() => onPageChange(i + 1)}
+              disabled={isLoading}
+            >
+              {i + 1}
+            </button>
+          ))}
+          {totalPages > 5 && <span>...</span>}
+          {totalPages > 5 && (
+            <button
+              type="button"
+              className={`rounded border px-3 py-1 ${
+                page === totalPages ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
+              }`}
+              onClick={() => onPageChange(totalPages)}
+              disabled={isLoading}
+            >
+              {totalPages}
+            </button>
+          )}
+        </div>
+
+        {/* Next Button */}
         <button
-          type="submit"
+          type="button"
           className={`rounded border px-3 py-1 ${
             page === totalPages ? 'cursor-not-allowed bg-gray-100' : 'hover:bg-gray-100'
           }`}
@@ -66,7 +83,9 @@ const Pagination: React.FC<PaginationProps> = ({
           <GrFormNext />
         </button>
       </div>
-      <div className="text-sm">
+
+      {/* Page Size Selector (md and above) */}
+      <div className="hidden text-sm md:block">
         <select
           className="rounded border p-1 hover:bg-gray-50"
           value={pageSize}

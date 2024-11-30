@@ -73,8 +73,8 @@ const LoginForm: React.FC = () => {
   }, [loggedIn, boxHistoryData, subscriptionStatusData]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-center justify-around md:w-4/5">
-      <div className="mb-8 w-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-center space-y-6">
+      <div className="w-full">
         <label htmlFor="email" className="block text-sm capitalize md:text-lg lg:text-xl lg-l:text-2xl">
           Email
         </label>
@@ -82,13 +82,13 @@ const LoginForm: React.FC = () => {
           type="text"
           id="email"
           {...register('email')}
-          className={`w-full rounded-md border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none md:text-lg lg:text-xl lg-l:text-2xl ${errors.email ? 'border-red-500' : ''}`}
+          className={`w-full rounded-md border-2 border-gray-200 px-3 py-2 text-sm focus:outline-none md:text-lg lg-l:text-2xl ${errors.email ? 'border-red-500' : ''}`}
         />
         {errors.email && (
           <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
         )}
       </div>
-      <div className="mb-4 w-full">
+      <div className="w-full">
         <label htmlFor="password" className="block text-sm capitalize md:text-lg lg:text-xl lg-l:text-2xl">
           Password
         </label>
@@ -97,7 +97,7 @@ const LoginForm: React.FC = () => {
             type={showPassword ? 'text' : 'password'}
             id="password"
             {...register('password')}
-            className={`w-full rounded-md border-2 border-gray-200 px-3 py-2 pr-10 text-sm focus:outline-none md:text-lg lg:text-xl lg-l:text-2xl ${errors.password ? 'border-red-500' : ''}`}
+            className={`w-full rounded-md border-2 border-gray-200 px-3 py-2 pr-10 text-sm focus:outline-none md:text-lg lg-l:text-2xl ${errors.password ? 'border-red-500' : ''}`}
           />
           <button
             type="button"
@@ -119,8 +119,8 @@ const LoginForm: React.FC = () => {
         </p>
       )}
       <div className="mb-10 flex w-full justify-between text-pretty text-sm text-blue-950">
-        <Link href="#" className="text-sm hover:underline lg:text-lg lg-l:text-xl">Remember Me</Link>
-        <Link href="#" className="text-sm hover:underline lg:text-lg lg-l:text-xl">Forgot Password?</Link>
+        <Link href="#" className="text-sm hover:underline">Remember Me</Link>
+        <Link href="#" className="text-sm hover:underline">Forgot Password?</Link>
       </div>
       <button
         type="submit"

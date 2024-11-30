@@ -7,6 +7,7 @@ import { MdOutlineDone } from 'react-icons/md';
 import type { SubCardProps } from './types';
 
 const SubscriptionCard: React.FC<SubCardProps> = ({
+  mainTitle,
   title,
   subTitle,
   amount,
@@ -17,14 +18,15 @@ const SubscriptionCard: React.FC<SubCardProps> = ({
   showButton,
   isDemo,
 }) => (
-  <div className={`mx-2 flex h-42 w-288p flex-col rounded-2xl border-2 py-6 text-gray-800 shadow-xl ${isActive ? 'bg-card-bg text-white' : 'bg-cardGrad'}`}>
-    <h2 className={` flex h-14 items-center justify-center text-center text-2xl font-normal ${isActive ? 'w-full bg-gray-700 text-white' : ''}`}>{title}</h2>
+  <div className={`mx-2 flex h-42 w-288p flex-col rounded-2xl border-2 py-6 text-gray-800 shadow-2xl ${isActive ? 'bg-card-bg text-white' : 'bg-cardGrad'}`}>
+    <h2 className={` flex h-14 items-center justify-center text-center text-3xl font-semibold ${isActive ? 'w-full bg-gray-700 text-white' : ''}`}>{mainTitle}</h2>
     <div className="grow overflow-y-auto px-10">
-      <p className="my-4 text-3xl font-bold">
+      <p className="my-4 text-2xl font-semibold">
         {amount}
         {' '}
         €/mes
       </p>
+      <p className="mb-2 text-lg font-semibold">{title}</p>
       <p className="mb-2">{subTitle}</p>
       <ul className="text-sm">
         {description.map((feature, index) => (

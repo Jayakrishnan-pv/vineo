@@ -11,6 +11,7 @@ export type TextBoxProps = {
 };
 
 export type SubCardProps = {
+  mainTitle: string;
   title: string;
   subTitle: string;
   amount: string;

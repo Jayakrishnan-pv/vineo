@@ -13,7 +13,7 @@ import TextBox from '../reuse/textBox';
 
 const EigthSection = () => {
   const activeSubscription = {
-    title: 'VINEO IA',
+    mainTitle: 'VINEO IA',
     subTitle: 'Suscripción a la IA de Vineo',
     amount: '5',
     description: [
@@ -28,7 +28,7 @@ const EigthSection = () => {
     renewalDate: '12-1-2014',
   };
   const inactiveSubscription = {
-    title: 'VINEO BOX',
+    mainTitle: 'VINEO BOX',
     subTitle: 'Suscripción con caja mensual',
     amount: '55',
     description: [
@@ -43,7 +43,7 @@ const EigthSection = () => {
     isDemo: true,
   };
   const freeSubscription = {
-    title: 'VINEO BOX',
+    mainTitle: 'VINEO BOX',
     subTitle: 'Suscripción con caja mensual',
     amount: '0',
     description: [

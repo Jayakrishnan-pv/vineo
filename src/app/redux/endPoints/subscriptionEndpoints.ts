@@ -15,7 +15,7 @@ export const subscriptionEndpoints = createApi({
         method: 'POST',
         body: {
           query: `
-            mutation getSubscriptionStatus {
+            mutation getSubscriptionStatus { 
               getSubscriptionStatus {
                 status
                 subscription_id
