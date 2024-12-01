@@ -39,7 +39,7 @@ const HistoryPage: React.FC = () => {
               </div>
             )
           : (
-              <div className="ml-24 mr-5 rounded-xl border bg-white p-4 shadow-md md:ml-74">
+              <div className="ml-24 mr-5 overflow-scroll rounded-xl border bg-white p-4 shadow-md md:ml-74">
                 <SearchBar
                   searchTerm={searchTerm}
                   isLoading={isLoading}

@@ -5,7 +5,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from './baseQuery';
 import { authEndpoints } from './endPoints/authEndpoints';
 import { boxEndpoints } from './endPoints/boxEndpoints';
-import { questionEndpoints } from './endPoints/questionEndpoints'; // Add this import
+import { questionEndpoints } from './endPoints/questionEndpoints';
 import { subscriptionEndpoints } from './endPoints/subscriptionEndpoints';
 
 export const api = createApi({

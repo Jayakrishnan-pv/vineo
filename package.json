@@ -1,7 +1,7 @@
 {
-  "name": "next-js-boilerplate",
-  "version": "3.58.0",
-  "author": "Ixartz (https://github.com/ixartz)",
+  "name": "my-app",
+  "version": "1.0.0",
+  "homepage": "https://jayakrishnan-pv.github.io/vineo/",
   "scripts": {
     "dev:spotlight": "spotlight-sidecar",
     "dev:next": "next dev",
@@ -24,7 +24,8 @@
     "storybook:serve": "http-server storybook-static --port 6006 --silent",
     "serve-storybook": "run-s storybook:*",
     "test-storybook:ci": "start-server-and-test serve-storybook http://127.0.0.1:6006 test-storybook",
-    "prepare": "husky"
+    "prepare": "husky",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@clerk/localizations": "^2.8.1",
@@ -121,6 +122,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "eslint-plugin-testing-library": "^6.3.0",
+    "gh-pages": "^6.2.0",
     "http-server": "^14.1.1",
     "husky": "^9.1.5",
     "jiti": "^1.21.6",
